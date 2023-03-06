@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SettingsActivity">
+
+    <RelativeLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="@string/str_settings"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp" />
+
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTaxesSettings"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="@string/str_tax_settings"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPaymentModeSettings"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="@string/str_payment_mode_settings"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUnitSettings"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="@string/str_unit_settings"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvWareHouseSettings"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="@string/str_warehouse_settings"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"/>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.playplelx">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/applogo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/applogo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.pos.NewPosSaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.pos.PosSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddEditPurchaseListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PurchaseListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.saleList.AddEditSaleListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.saleList.SaleListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adapter.PaymentOutAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddEditPaymentOutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PaymentOutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddEditPaymentInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PaymentInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fragment.partylist.CustomerFragment"
+            android:exported="false" />
+        <activity
+            android:name=".activity.partylist.AddEditSupplierActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.partylist.SupplierActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.partylist.AddEditCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.partylist.CustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PartyListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.AddEditWareHouseSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.AddEditUnitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.UnitSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.AddEditPaymentModeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.AddEditTaxActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.WareHouseSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.UnitSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.PaymentModeSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.settings.TaxesSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.itemlist.AddEditProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.itemlist.AddEditBrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.itemlist.AddEditCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ItemListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashScreenActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

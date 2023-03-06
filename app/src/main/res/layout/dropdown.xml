@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvAutocomplete"
+    android:layout_width="fill_parent"
+    android:textSize="@dimen/_13sdp"
+    android:textColor="@color/black"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="@dimen/_5sdp" />

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="false">
+
+        <LinearLayout
+            android:id="@+id/first_layer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtcamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_camera"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/str_camera"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtGallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:drawableTop="@drawable/ic_gallery"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="@string/str_galery"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_background"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:text="@string/str_cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

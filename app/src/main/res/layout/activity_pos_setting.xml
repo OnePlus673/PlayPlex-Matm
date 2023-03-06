@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.pos.PosSettingActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="@string/str_pos"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/barcode"
+            android:contentDescription="@string/app_name"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:tint="@color/white"
+            android:paddingEnd="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llMain"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_user"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+
+        <RelativeLayout
+            android:id="@+id/rrUser"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_below="@id/tvUser"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@drawable/rectangle_grey"
+            android:orientation="horizontal">
+
+            <AutoCompleteTextView
+                android:id="@+id/acUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/str_user"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_product"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/llSave"
+            android:layout_below="@id/rrUser"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <RelativeLayout
+                android:id="@+id/rrCategory"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_lightblue">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_toRightOf="@id/rrCategory">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/rectangle_grey"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <AutoCompleteTextView
+                android:id="@+id/acProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/str_product"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+        </RelativeLayout>
+
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone" />
+
+
+        <RelativeLayout
+            android:id="@+id/llSave"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rectangle_white"
+            android:padding="@dimen/_10sdp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/tvDetails"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Total:-"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="0.0"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/_12sdp" />
+
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDetails"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_background"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="Details"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

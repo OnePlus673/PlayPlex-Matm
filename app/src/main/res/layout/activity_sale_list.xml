@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.saleList.SaleListActivity">
+
+    <RelativeLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="Sale List"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp" />
+
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSaleList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tvNewSaleList"
+        android:layout_below="@id/llMain"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:padding="@dimen/_10sdp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNoSaleList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tvNewSaleList"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="No Sale List Found"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp"
+        android:visibility="gone" />
+
+
+    <ProgressBar
+        android:id="@+id/pbLoadData"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:theme="@style/CircularProgress"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNewSaleList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/btn_background"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="New Bill/Invoice"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11sdp" />
+
+
+    <ProgressBar
+        android:id="@+id/pbBottomLoadData"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

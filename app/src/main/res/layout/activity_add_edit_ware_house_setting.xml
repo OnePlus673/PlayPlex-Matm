@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.settings.AddEditWareHouseSettingActivity">
+
+    <RelativeLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="@string/str_add_warehouse"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="@string/str_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="100"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_new_email"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="@string/str_new_email"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="50"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_phonenumber"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="@string/str_phonenumber"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_address"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtAddress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="@string/str_address"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="50"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/str_logo"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+        <FrameLayout
+            android:id="@+id/frameImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivUploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_camera_alt_24" />
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbLoadData"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:theme="@style/CircularProgress"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/btn_background"
+        android:gravity="center"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingStart="@dimen/_50sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_50sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/str_save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13sdp" />
+
+</RelativeLayout>

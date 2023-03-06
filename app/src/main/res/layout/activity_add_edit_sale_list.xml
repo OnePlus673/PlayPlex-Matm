@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.saleList.AddEditSaleListActivity">
+
+    <RelativeLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="Add Bill/Invoice"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp" />
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvSave"
+        android:layout_below="@id/llMain"
+        android:layout_margin="@dimen/_8sdp"
+        android:padding="@dimen/_8sdp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Invoice Number"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtInvoiceNumber"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rectangle_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Invoice Number"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="100"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/str_user"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/rectangle_grey"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="@string/str_user"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/str_warehouse"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/rectangle_grey"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acWareHouse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="@string/str_warehouse"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Date"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtDate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rectangle_grey"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Date"
+                android:imeOptions="actionNone"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/str_product"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/rectangle_grey"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="@string/str_product"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:nestedScrollingEnabled="false" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Order Tax"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/rectangle_grey"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acOrderTax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="Order Tax"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Discount"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rectangle_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Discount"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Shipping"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtShipping"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rectangle_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Shipping"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Notes"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtNotes"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rectangle_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="start"
+                android:hint="Notes"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="300"
+                android:maxLines="3"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Terms &amp; Conditions"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtTerms"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rectangle_grey"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="start"
+                android:hint="Terms &amp; Conditions"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="300"
+                android:maxLines="3"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible"
+                tools:ignore="HardcodedText" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Discount Total:- "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="0.0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Shipping Total:- "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvShippping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="0.0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Grand Total:- "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="0.0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <ProgressBar
+        android:id="@+id/pbLoadData"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:theme="@style/CircularProgress"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:paddingStart="@dimen/_50sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_50sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/str_save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13sdp" />
+
+</RelativeLayout>

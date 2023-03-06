@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_80sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:elevation="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_8sdp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@id/tvDate"
+            android:fontFamily="@font/roboto_medium"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@id/tvPaymentMode"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPaymentMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_baseline_delete_24" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

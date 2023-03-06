@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_90sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:elevation="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_8sdp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_8sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:textSize="@dimen/_11sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toRightOf="@id/ivImage"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:visibility="invisible"
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:src="@drawable/ic_baseline_delete_24" />
+
+        <LinearLayout
+            android:id="@+id/rrQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivDelete"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="+"
+                android:textSize="@dimen/_15sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="–"
+                android:textSize="@dimen/_15sdp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toRightOf="@id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rrQuantity"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="SubTotal:- "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSubTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSuppliers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tvNewCustomer"
+        android:layout_marginBottom="16dp"
+        android:padding="@dimen/_10sdp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNoSuppliers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tvNewCustomer"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:gravity="center"
+        android:text="No Suppliers Found"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp"
+        android:visibility="gone" />
+
+
+    <ProgressBar
+        android:id="@+id/pbLoadData"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:theme="@style/CircularProgress"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNewSuppliers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/btn_background"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/str_new_suppliers"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11sdp" />
+
+    <ProgressBar
+        android:id="@+id/pbBottomLoadData"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:visibility="gone" />
+
+</RelativeLayout>
