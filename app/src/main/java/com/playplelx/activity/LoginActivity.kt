@@ -1,8 +1,8 @@
 package com.playplelx.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
@@ -21,7 +21,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -31,6 +30,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var tvLogin: TextView
     lateinit var pbLoadData: ProgressBar
     lateinit var apiInterface: ApiInterface
+    lateinit var tvSignUp: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +47,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         edtPassword = findViewById(R.id.edtPassword)
         tvLogin = findViewById(R.id.tvLogin)
         pbLoadData = findViewById(R.id.pbLoadData)
+        tvSignUp = findViewById(R.id.tvSignUp)
     }
 
     private fun addListner() {
         tvLogin.setOnClickListener(this)
+        tvSignUp.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -71,7 +73,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     ).show()
                 }
             }
+            R.id.tvSignUp->{
+              setLinkData()
+            }
         }
+    }
+
+    private fun setLinkData(){
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://pospayplex.com/register"))
+        startActivity(browserIntent)
     }
 
     private fun isValidate(): Boolean {
@@ -109,7 +119,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
 
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     pbLoadData.visibility = View.GONE
                     if (response.code() == 200) {
                         val jsonobject = JSONObject(response.body().toString())
@@ -131,10 +141,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
 
-                }else{
-                    pbLoadData.visibility=View.GONE
-                    Toast.makeText(mContext,mContext.resources.getString(R.string.str_something_went_wrong_on_server),
-                    Toast.LENGTH_SHORT).show()
+                } else {
+                    pbLoadData.visibility = View.GONE
+                    Toast.makeText(
+                        mContext,
+                        mContext.resources.getString(R.string.str_something_went_wrong_on_server),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
