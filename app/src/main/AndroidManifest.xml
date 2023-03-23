@@ -20,101 +20,98 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.onlineorder.OnlineOrderActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.pos.NewPosSaleActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.ReportActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.pos.PosSettingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.AddEditPurchaseListActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.PurchaseListActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
-            android:name=".activity.saleList.AddEditSaleListActivity"
-            android:exported="false" />
+            android:name=".activity.pos.saleList.AddEditSaleListActivity"
+            android:exported="true" />
         <activity
-            android:name=".activity.saleList.SaleListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".adapter.PaymentOutAdapter"
-            android:exported="false" />
+            android:name=".activity.pos.saleList.SaleListActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.AddEditPaymentOutActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.PaymentOutActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.AddEditPaymentInActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.PaymentInActivity"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.partylist.CustomerFragment"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.partylist.AddEditSupplierActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.partylist.SupplierActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.partylist.AddEditCustomerActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.partylist.CustomerActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.PartyListActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.AddEditWareHouseSettingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.AddEditUnitActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.UnitSettingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.AddEditPaymentModeActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.AddEditTaxActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.WareHouseSettingsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.UnitSettingsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.PaymentModeSettingsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.settings.TaxesSettingsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.SettingsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.itemlist.AddEditProductActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.itemlist.AddEditBrandActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.itemlist.AddEditCategoryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.ItemListActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.SplashScreenActivity"
             android:exported="true"

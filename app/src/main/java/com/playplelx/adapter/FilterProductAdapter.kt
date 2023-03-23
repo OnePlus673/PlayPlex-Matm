@@ -12,7 +12,7 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.playplelx.R
-import com.playplelx.activity.saleList.AddEditSaleListActivity
+import com.playplelx.activity.pos.saleList.AddEditSaleListActivity
 import com.playplelx.model.product.ProductModel
 import com.playplelx.model.productfilter.ProductFilterModel
 

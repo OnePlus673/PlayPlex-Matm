@@ -1,28 +1,21 @@
-package com.playplelx.fragment.dashboard
+package com.playplelx.activity.onlineorder
 
-import android.app.Activity
-import android.content.DialogInterface
-import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.playplelx.R
-import com.playplelx.activity.pos.saleList.AddEditSaleListActivity
-import com.playplelx.adapter.DashboardSaleListAdapter
-import com.playplelx.adapter.SaleListAdapter
-import com.playplelx.model.saleList.SaleListModel
+import com.playplelx.adapter.OrderDetailsAdapter
+import com.playplelx.model.onlineorder.OrderResponse
 import com.playplelx.network.ApiInterface
 import com.playplelx.network.Apiclient
 import com.playplelx.util.InternetConnection
@@ -34,16 +27,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
+class OnlineOrderActivity : AppCompatActivity(), View.OnClickListener,OrderDetailsAdapter.onItemclick {
 
-class SaleFragment : Fragment() {
-
-    lateinit var rvSaleList: RecyclerView
+    lateinit var mContext: OnlineOrderActivity
+    lateinit var ivBack: ImageView
+    lateinit var apiInterface: ApiInterface
     lateinit var pbLoadData: ProgressBar
     lateinit var pbBottomLoadData: ProgressBar
-    lateinit var apiInterface: ApiInterface
-    private var salesArrayList: ArrayList<SaleListModel> = arrayListOf()
-    lateinit var saleListAdapter: DashboardSaleListAdapter
-
+    lateinit var rvOrderList: RecyclerView
+    lateinit var tvNoOrder: TextView
+    private var orderList: ArrayList<OrderResponse> = arrayListOf()
+    lateinit var orderDetailsAdapter: OrderDetailsAdapter
     private var isloading: Boolean = false
     private var islastpage: Boolean = false
     private var currentPage = 1
@@ -51,47 +45,50 @@ class SaleFragment : Fragment() {
     private var offset: Int = 0
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_sale, container, false)
-        initUI(view)
-        return view
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_online_order)
+        mContext = this
+        initUI()
+        addListner()
     }
 
+    private fun initUI() {
+        supportActionBar!!.hide()
+        ivBack = findViewById(R.id.ivBack)
+        pbLoadData = findViewById(R.id.pbLoadData)
+        pbBottomLoadData = findViewById(R.id.pbBottomLoadData)
+        rvOrderList = findViewById(R.id.rvOrderList)
+        tvNoOrder = findViewById(R.id.tvNoOrder)
+        apiInterface = Apiclient(mContext).getClient()!!.create(ApiInterface::class.java)
 
-    private fun initUI(view: View) {
-        apiInterface = Apiclient(requireContext()).getClient()!!.create(ApiInterface::class.java)
-        pbLoadData = view.findViewById(R.id.pbLoadData)
-        rvSaleList = view.findViewById(R.id.rvSaleList)
-        pbBottomLoadData = view.findViewById(R.id.pbBottomLoadData)
-
-        if (InternetConnection.checkConnection(requireContext())) {
-            mNetworkCallSaleListAPI(currentPage)
+        if (InternetConnection.checkConnection(mContext)) {
+            mNetworkCallOnlineOrderAPI(currentPage)
         } else {
             Toast.makeText(
-                requireContext(),
-                requireContext().resources.getString(R.string.str_check_internet_connections),
+                mContext, mContext.resources.getString(R.string.str_check_internet_connections),
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        setAdapter(salesArrayList)
+        setAdapter(orderList)
 
         setPaginationData()
     }
 
+    private fun addListner() {
+        ivBack.setOnClickListener(this)
+    }
+
 
     private fun setPaginationData() {
-        rvSaleList.addOnScrollListener(object :
-            PaginationScrollListener(rvSaleList.layoutManager as LinearLayoutManager) {
+        rvOrderList.addOnScrollListener(object :
+            PaginationScrollListener(rvOrderList.layoutManager as LinearLayoutManager) {
             override fun loadMoreItems() {
                 if (currentPage < lastPage) {
                     currentPage += 1
                     isloading = true
-                    mNetworkCallSaleListAPI(currentPage)
+                    mNetworkCallOnlineOrderAPI(currentPage)
                 }
             }
 
@@ -107,7 +104,7 @@ class SaleFragment : Fragment() {
     }
 
 
-    private fun mNetworkCallSaleListAPI(newcurrentPage: Int) {
+    private fun mNetworkCallOnlineOrderAPI(newcurrentPage: Int) {
 
         if (newcurrentPage > 1) {
             offset = (newcurrentPage - 1) * 10
@@ -115,11 +112,12 @@ class SaleFragment : Fragment() {
         }
         if (newcurrentPage == 1) {
             offset = (newcurrentPage - 1) * 10
-            salesArrayList.clear()
+            pbLoadData.visibility = View.VISIBLE
+            orderList.clear()
         }
 
 
-        val call = apiInterface.getSales("id", "", offset, 10)
+        val call = apiInterface.getOnlineOrders("id", "", offset, 10)
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
@@ -130,11 +128,11 @@ class SaleFragment : Fragment() {
                         if (jsonObject.optBoolean("status")) {
                             isloading = false
                             val data = jsonObject.optJSONArray("data")
-                            salesArrayList.addAll(
+                            orderList.addAll(
                                 Gson().fromJson(
                                     data.toString(),
                                     object :
-                                        TypeToken<java.util.ArrayList<SaleListModel?>?>() {}.type
+                                        TypeToken<java.util.ArrayList<OrderResponse?>?>() {}.type
                                 )
                             )
 
@@ -153,13 +151,15 @@ class SaleFragment : Fragment() {
                             }
 
 
-                            if (salesArrayList.size > 0) {
-                                rvSaleList.visibility = View.VISIBLE
-                                saleListAdapter.notifyDataSetChanged()
+                            if (orderList.size > 0) {
+                                rvOrderList.visibility = View.VISIBLE
+                                tvNoOrder.visibility = View.GONE
+                                orderDetailsAdapter.notifyDataSetChanged()
                             } else {
 
                                 if (currentPage == 1) {
-                                    rvSaleList.visibility = View.GONE
+                                    rvOrderList.visibility = View.GONE
+                                    tvNoOrder.visibility = View.VISIBLE
                                 }
 
 
@@ -167,9 +167,10 @@ class SaleFragment : Fragment() {
 
                         } else {
                             if (currentPage == 1) {
-                                rvSaleList.visibility = View.GONE
+                                rvOrderList.visibility = View.GONE
+                                tvNoOrder.visibility = View.VISIBLE
                                 Toast.makeText(
-                                    context!!,
+                                    mContext,
                                     jsonObject.optString("message"),
                                     Toast.LENGTH_SHORT
                                 ).show()
@@ -178,42 +179,48 @@ class SaleFragment : Fragment() {
                         }
                     } else {
                         Toast.makeText(
-                            context!!,
-                            context!!.resources.getString(R.string.str_something_went_wrong_on_server),
+                            mContext,
+                            mContext.resources.getString(R.string.str_something_went_wrong_on_server),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } /*else if (response.code() == 401) {
+                }else if (response.code() == 401) {
                     try {
                         pbLoadData.visibility = View.GONE
-                        val JsonObject = JSONObject(response.errorBody()!!.string())
-                        Util(context!! as Activity).logOutAlertDialog(
-                            context!!,
-                            JsonObject.optString("message")
-                        )
-                    } catch (e: Exception) {
+                        val JsonObject= JSONObject(response.errorBody()!!.string())
+                        Util(mContext).logOutAlertDialog(mContext,JsonObject.optString("message"))
+                    }catch (e: Exception){
 
                     }
-                }*/
+                }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 pbLoadData.visibility = View.GONE
                 pbBottomLoadData.visibility = View.GONE
-                Toast.makeText(context!!, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
             }
 
         })
     }
 
-    private fun setAdapter(saleList: ArrayList<SaleListModel>) {
+    private fun setAdapter(orderList: ArrayList<OrderResponse>) {
 
-        rvSaleList.layoutManager = LinearLayoutManager(requireContext())
-        rvSaleList.setHasFixedSize(true)
-        saleListAdapter = DashboardSaleListAdapter(requireContext(), saleList)
-        rvSaleList.adapter = saleListAdapter
-        saleListAdapter.notifyDataSetChanged()
+        rvOrderList.layoutManager = LinearLayoutManager(mContext)
+        rvOrderList.setHasFixedSize(true)
+        orderDetailsAdapter = OrderDetailsAdapter(mContext, orderList, this)
+        rvOrderList.adapter = orderDetailsAdapter
+        orderDetailsAdapter.notifyDataSetChanged()
+    }
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.ivBack -> {
+                onBackPressed()
+            }
+        }
     }
 
+    override fun onClick(orderResponse: OrderResponse, position: Int) {
 
+    }
 }

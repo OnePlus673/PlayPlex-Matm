@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.playplelx.R
 import com.playplelx.activity.PurchaseListActivity
-import com.playplelx.activity.saleList.SaleListActivity
+import com.playplelx.activity.pos.saleList.SaleListActivity
 import com.playplelx.model.purchasemodel.PurchaseModel
 import com.playplelx.model.saleList.SaleListModel
 

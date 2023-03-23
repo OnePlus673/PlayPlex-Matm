@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.pos.saleList.SaleListActivity">
+    android:orientation="vertical"
+    tools:context=".activity.onlineorder.OnlineOrderActivity">
+
 
     <RelativeLayout
         android:id="@+id/llMain"
@@ -33,7 +35,7 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
-            android:text="Sale List"
+            android:text="Online Order"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp" />
 
@@ -42,7 +44,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSaleList"
+        android:id="@+id/rvOrderList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/tvNewSaleList"
@@ -51,17 +53,16 @@
         android:padding="@dimen/_10sdp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvNoSaleList"
+        android:id="@+id/tvNoOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/tvNewSaleList"
         android:layout_marginBottom="@dimen/_5sdp"
         android:gravity="center"
-        android:text="No Sale List Found"
+        android:text="No Order Found"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_14sdp"
         android:visibility="gone" />
-
 
     <ProgressBar
         android:id="@+id/pbLoadData"
@@ -74,25 +75,6 @@
         android:visibility="gone" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvNewSaleList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/btn_background"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        android:text="New Bill/Invoice"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_11sdp" />
-
-
     <ProgressBar
         android:id="@+id/pbBottomLoadData"
         style="?android:attr/progressBarStyle"
@@ -102,6 +84,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_8sdp"
         android:visibility="gone" />
-
 
 </RelativeLayout>

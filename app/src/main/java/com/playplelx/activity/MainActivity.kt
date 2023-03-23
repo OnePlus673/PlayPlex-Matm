@@ -19,8 +19,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.gson.JsonObject
 import com.playplelx.R
 import com.playplelx.activity.itemlist.AddEditProductActivity
+import com.playplelx.activity.onlineorder.OnlineOrderActivity
 import com.playplelx.activity.pos.PosSettingActivity
-import com.playplelx.activity.saleList.SaleListActivity
+import com.playplelx.activity.pos.saleList.SaleListActivity
 import com.playplelx.adapter.DashBoardAdapter
 import com.playplelx.adapter.DrawerAdapter
 import com.playplelx.adapter.PartyListPagerAdapter
@@ -216,7 +217,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
 
             }
             R.id.llOnlineOrder -> {
-
+                startActivity(Intent(mContext, OnlineOrderActivity::class.java))
             }
             R.id.llStock -> {
                 startActivity(Intent(mContext, ReportActivity::class.java))

@@ -19,7 +19,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.playplelx.R
-import com.playplelx.activity.saleList.AddEditSaleListActivity
+import com.playplelx.activity.pos.saleList.AddEditSaleListActivity
 import com.playplelx.adapter.PurchaseAdapter
 import com.playplelx.adapter.SaleListAdapter
 import com.playplelx.model.purchasemodel.PurchaseModel

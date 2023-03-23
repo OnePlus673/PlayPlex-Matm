@@ -1,4 +1,4 @@
-package com.playplelx.activity.saleList
+package com.playplelx.activity.pos.saleList
 
 import android.app.Activity
 import android.app.DatePickerDialog

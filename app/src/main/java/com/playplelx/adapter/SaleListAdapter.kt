@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.playplelx.R
-import com.playplelx.activity.saleList.SaleListActivity
+import com.playplelx.activity.pos.saleList.SaleListActivity
 import com.playplelx.model.saleList.SaleListModel
 
 class SaleListAdapter(
