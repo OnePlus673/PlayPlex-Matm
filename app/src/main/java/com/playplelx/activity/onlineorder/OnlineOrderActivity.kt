@@ -1,5 +1,7 @@
 package com.playplelx.activity.onlineorder
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +20,7 @@ import com.playplelx.adapter.OrderDetailsAdapter
 import com.playplelx.model.onlineorder.OrderResponse
 import com.playplelx.network.ApiInterface
 import com.playplelx.network.Apiclient
+import com.playplelx.util.Constants
 import com.playplelx.util.InternetConnection
 import com.playplelx.util.PaginationScrollListener
 import com.playplelx.util.Util
@@ -27,7 +30,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class OnlineOrderActivity : AppCompatActivity(), View.OnClickListener,OrderDetailsAdapter.onItemclick {
+class OnlineOrderActivity : AppCompatActivity(), View.OnClickListener,
+    OrderDetailsAdapter.onItemclick {
 
     lateinit var mContext: OnlineOrderActivity
     lateinit var ivBack: ImageView
@@ -184,12 +188,12 @@ class OnlineOrderActivity : AppCompatActivity(), View.OnClickListener,OrderDetai
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                }else if (response.code() == 401) {
+                } else if (response.code() == 401) {
                     try {
                         pbLoadData.visibility = View.GONE
-                        val JsonObject= JSONObject(response.errorBody()!!.string())
-                        Util(mContext).logOutAlertDialog(mContext,JsonObject.optString("message"))
-                    }catch (e: Exception){
+                        val JsonObject = JSONObject(response.errorBody()!!.string())
+                        Util(mContext).logOutAlertDialog(mContext, JsonObject.optString("message"))
+                    } catch (e: Exception) {
 
                     }
                 }
@@ -212,6 +216,7 @@ class OnlineOrderActivity : AppCompatActivity(), View.OnClickListener,OrderDetai
         rvOrderList.adapter = orderDetailsAdapter
         orderDetailsAdapter.notifyDataSetChanged()
     }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.ivBack -> {
@@ -221,6 +226,19 @@ class OnlineOrderActivity : AppCompatActivity(), View.OnClickListener,OrderDetai
     }
 
     override fun onClick(orderResponse: OrderResponse, position: Int) {
+        startActivityForResult(
+            Intent(mContext, OrderDetailActivity::class.java)
+                .putExtra(Constants.orderModel, Gson().toJson(orderResponse)),201
+        )
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 201) {
+            if (resultCode == Activity.RESULT_OK) {
+                currentPage = 1
+                mNetworkCallOnlineOrderAPI(currentPage)
+            }
+        }
     }
 }

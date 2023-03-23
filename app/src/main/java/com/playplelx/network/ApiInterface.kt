@@ -596,4 +596,12 @@ interface ApiInterface {
         @Query("limit") limit: Int
     ): Call<JsonObject>
 
+    @POST("rest/online-orders/confirm/{id}")
+    fun confirmOrders(@Path("id") id: String): Call<JsonObject>
+
+    @POST("rest/online-orders/delivered/{id}")
+    fun deliveredOrders(@Path("id") id: String): Call<JsonObject>
+
+    @POST("rest/online-orders/cancel/{id}")
+    fun canceledOrders(@Path("id") id: String): Call<JsonObject>
 }

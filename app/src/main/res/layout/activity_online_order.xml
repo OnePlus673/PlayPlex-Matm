@@ -56,7 +56,6 @@
         android:id="@+id/tvNoOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tvNewSaleList"
         android:layout_marginBottom="@dimen/_5sdp"
         android:gravity="center"
         android:text="No Order Found"

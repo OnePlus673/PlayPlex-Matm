@@ -24,5 +24,6 @@ class Constants {
         const val paymentModel = "paymentModel"
         const val unitModel = "unitModel"
         const val wareHouseModel = "wareHouseModel"
+        const val orderModel = "orderModel"
     }
 }
