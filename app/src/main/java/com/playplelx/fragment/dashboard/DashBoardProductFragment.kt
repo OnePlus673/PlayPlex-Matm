@@ -19,13 +19,13 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.playplelx.R
-import com.playplelx.activity.AddEditPurchaseListActivity
-import com.playplelx.activity.PurchaseListActivity
-import com.playplelx.adapter.DashboardPurchaseAdapter
-import com.playplelx.adapter.PurchaseAdapter
-import com.playplelx.model.purchasemodel.PurchaseModel
+import com.playplelx.activity.itemlist.AddEditProductActivity
+import com.playplelx.adapter.DashBoardProductListAdapter
+import com.playplelx.adapter.ProductAdapter
+import com.playplelx.model.product.ProductModel
 import com.playplelx.network.ApiInterface
 import com.playplelx.network.Apiclient
+import com.playplelx.util.Constants
 import com.playplelx.util.InternetConnection
 import com.playplelx.util.PaginationScrollListener
 import com.playplelx.util.Util
@@ -33,47 +33,43 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 
-class PurchaseFragment : Fragment(),View.OnClickListener {
-
-
-    lateinit var rvPurchase: RecyclerView
+class DashBoardProductFragment : Fragment(), View.OnClickListener {
     lateinit var pbLoadData: ProgressBar
+    lateinit var rvProducts: RecyclerView
+    lateinit var tvNoProducts: TextView
     lateinit var apiInterface: ApiInterface
-    private var purchaseAraryList: ArrayList<PurchaseModel> = arrayListOf()
-    lateinit var purchaseAdapter: DashboardPurchaseAdapter
-    lateinit var tvNoPurchaseList: TextView
+    lateinit var dashBoardProductListAdapter: DashBoardProductListAdapter
+    lateinit var tvNewProducts: TextView
+    private var productArrayList: ArrayList<ProductModel> = arrayListOf()
+
     lateinit var pbBottomLoadData: ProgressBar
     private var isloading: Boolean = false
     private var islastpage: Boolean = false
     private var currentPage = 1
     private var lastPage = 1
     private var offset: Int = 0
-    lateinit var tvNewPurchaseList: TextView
-
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_purchase, container, false)
+        val view = inflater.inflate(R.layout.fragment_dash_board_product, container, false)
         initUI(view)
-        return view
+        return view;
     }
 
     private fun initUI(view: View) {
         apiInterface = Apiclient(requireContext()).getClient()!!.create(ApiInterface::class.java)
         pbLoadData = view.findViewById(R.id.pbLoadData)
-        rvPurchase = view.findViewById(R.id.rvPurchase)
+        rvProducts = view.findViewById(R.id.rvProducts)
+        tvNewProducts = view.findViewById(R.id.tvNewProducts)
+        tvNoProducts = view.findViewById(R.id.tvNoProducts)
         pbBottomLoadData = view.findViewById(R.id.pbBottomLoadData)
-        tvNoPurchaseList = view.findViewById(R.id.tvNoPurchaseList)
-        tvNewPurchaseList = view.findViewById(R.id.tvNewPurchaseList)
 
         if (InternetConnection.checkConnection(requireContext())) {
-            mNetworkCallPurchaseListAPI(currentPage)
+            mNetworkCallProductsAPI(currentPage)
         } else {
             Toast.makeText(
                 requireContext(),
@@ -83,24 +79,23 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
         }
 
         addListner()
-        setAdapter(purchaseAraryList)
 
+        setAdapter(productArrayList)
         setPaginationData()
-
-    }
-    private fun addListner(){
-        tvNewPurchaseList.setOnClickListener(this)
     }
 
+    private fun addListner() {
+        tvNewProducts.setOnClickListener(this)
+    }
 
     private fun setPaginationData() {
-        rvPurchase.addOnScrollListener(object :
-            PaginationScrollListener(rvPurchase.layoutManager as LinearLayoutManager) {
+        rvProducts.addOnScrollListener(object :
+            PaginationScrollListener(rvProducts.layoutManager as LinearLayoutManager) {
             override fun loadMoreItems() {
                 if (currentPage < lastPage) {
                     currentPage += 1
                     isloading = true
-                    mNetworkCallPurchaseListAPI(currentPage)
+                    mNetworkCallProductsAPI(currentPage)
                 }
             }
 
@@ -116,7 +111,30 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
     }
 
 
-    private fun mNetworkCallPurchaseListAPI(newcurrentPage: Int) {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.tvNewProducts -> {
+                startActivityForResult(
+                    Intent(
+                        requireContext(),
+                        AddEditProductActivity::class.java
+                    ).putExtra(Constants.mFrom, Constants.isAdd), 201
+                )
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 201) {
+            if (resultCode == Activity.RESULT_OK) {
+                currentPage = 1
+                mNetworkCallProductsAPI(currentPage)
+            }
+        }
+    }
+
+    private fun mNetworkCallProductsAPI(newcurrentPage: Int) {
         if (newcurrentPage > 1) {
             offset = (newcurrentPage - 1) * 10
             pbBottomLoadData.visibility = View.VISIBLE
@@ -124,9 +142,9 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
         if (newcurrentPage == 1) {
             offset = (newcurrentPage - 1) * 10
             pbLoadData.visibility = View.VISIBLE
-            purchaseAraryList.clear()
+            productArrayList.clear()
         }
-        val call = apiInterface.getPurchase()
+        val call = apiInterface.getProducts("id", "", offset, 10)
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
@@ -137,11 +155,11 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
                         if (jsonObject.optBoolean("status")) {
                             isloading = false
                             val data = jsonObject.optJSONArray("data")
-                            purchaseAraryList.addAll(
+                            productArrayList.addAll(
                                 Gson().fromJson(
                                     data.toString(),
                                     object :
-                                        TypeToken<java.util.ArrayList<PurchaseModel?>?>() {}.type
+                                        TypeToken<java.util.ArrayList<ProductModel?>?>() {}.type
                                 )
                             )
 
@@ -157,31 +175,29 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
                                 islastpage = true
                             }
 
-                            if (purchaseAraryList.size > 0) {
-                                rvPurchase.visibility = View.VISIBLE
-                                tvNoPurchaseList.visibility = View.GONE
-                                setAdapter(purchaseAraryList)
+                            if (productArrayList.size > 0) {
+                                rvProducts.visibility = View.VISIBLE
+                                tvNoProducts.visibility = View.GONE
+                                setAdapter(productArrayList)
                             } else {
                                 if (currentPage == 1) {
-                                    rvPurchase.visibility = View.GONE
-                                    tvNoPurchaseList.visibility = View.VISIBLE
-
+                                    rvProducts.visibility = View.GONE
+                                    tvNoProducts.visibility = View.VISIBLE
                                 }
 
                             }
 
                         } else {
                             if (currentPage == 1) {
-                                rvPurchase.visibility = View.GONE
-                                tvNoPurchaseList.visibility = View.VISIBLE
-
-                                Toast.makeText(
-                                    requireContext(),
-                                    jsonObject.optString("message"),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                rvProducts.visibility = View.GONE
+                                tvNoProducts.visibility = View.VISIBLE
                             }
 
+                            Toast.makeText(
+                                requireContext(),
+                                jsonObject.optString("message"),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
                         Toast.makeText(
@@ -194,11 +210,10 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
                     try {
                         pbLoadData.visibility = View.GONE
                         val JsonObject = JSONObject(response.errorBody()!!.string())
-                        Util(requireContext() as Activity).logOutAlertDialog(
-                            requireContext(),
-                            JsonObject.optString("message")
+                        Util(context!! as Activity).logOutAlertDialog(
+                            context!!, JsonObject.optString("message")
                         )
-                    } catch (e: Exception) {
+                    } catch (e: java.lang.Exception) {
 
                     }
                 }
@@ -206,41 +221,22 @@ class PurchaseFragment : Fragment(),View.OnClickListener {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 pbLoadData.visibility = View.GONE
+                pbBottomLoadData.visibility = View.GONE
                 Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
             }
 
         })
     }
 
-    private fun setAdapter(purchaseAraryList: ArrayList<PurchaseModel>) {
-
-        rvPurchase.layoutManager = LinearLayoutManager(requireContext())
-        rvPurchase.setHasFixedSize(true)
-        purchaseAdapter = DashboardPurchaseAdapter(requireContext(), purchaseAraryList)
-        rvPurchase.adapter = purchaseAdapter
-        purchaseAdapter.notifyDataSetChanged()
+    private fun setAdapter(productArrayList: ArrayList<ProductModel>) {
+        rvProducts.layoutManager = LinearLayoutManager(requireContext())
+        rvProducts.setHasFixedSize(true)
+        dashBoardProductListAdapter =
+            DashBoardProductListAdapter(requireContext(), productArrayList)
+        rvProducts.adapter = dashBoardProductListAdapter
+        dashBoardProductListAdapter!!.notifyDataSetChanged()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 201) {
-            if (resultCode == Activity.RESULT_OK) {
-                currentPage = 1
-                mNetworkCallPurchaseListAPI(currentPage)
-            }
-        }
-    }
-
-    override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.tvNewPurchaseList->{
-                startActivityForResult(
-                    Intent(context, AddEditPurchaseListActivity::class.java),
-                    201
-                )
-
-            }
-        }
-    }
 
 }
+

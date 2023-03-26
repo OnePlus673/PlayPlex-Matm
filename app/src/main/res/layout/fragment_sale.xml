@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.dashboard.SaleFragment">
+    tools:context=".activity.pos.saleList.SaleListActivity">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSaleList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/tvNewSaleList"
         android:layout_marginBottom="@dimen/_5sdp"
         android:padding="@dimen/_10sdp" />
 
@@ -16,6 +20,7 @@
         android:id="@+id/tvNoSaleList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/tvNewSaleList"
         android:layout_marginBottom="@dimen/_5sdp"
         android:gravity="center"
         android:text="No Sale List Found"
@@ -33,6 +38,25 @@
         android:layout_gravity="center"
         android:theme="@style/CircularProgress"
         android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNewSaleList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/btn_background"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Add New"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp" />
 
 
     <ProgressBar

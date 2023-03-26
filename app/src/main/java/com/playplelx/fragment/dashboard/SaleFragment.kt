@@ -35,7 +35,7 @@ import retrofit2.Response
 import java.lang.Exception
 
 
-class SaleFragment : Fragment() {
+class SaleFragment : Fragment(), View.OnClickListener {
 
     lateinit var rvSaleList: RecyclerView
     lateinit var pbLoadData: ProgressBar
@@ -49,6 +49,7 @@ class SaleFragment : Fragment() {
     private var currentPage = 1
     private var lastPage = 1
     private var offset: Int = 0
+    lateinit var tvNewSaleList: TextView
 
 
     override fun onCreateView(
@@ -67,6 +68,7 @@ class SaleFragment : Fragment() {
         pbLoadData = view.findViewById(R.id.pbLoadData)
         rvSaleList = view.findViewById(R.id.rvSaleList)
         pbBottomLoadData = view.findViewById(R.id.pbBottomLoadData)
+        tvNewSaleList = view.findViewById(R.id.tvNewSaleList)
 
         if (InternetConnection.checkConnection(requireContext())) {
             mNetworkCallSaleListAPI(currentPage)
@@ -78,9 +80,15 @@ class SaleFragment : Fragment() {
             ).show()
         }
 
+        addListner()
+
         setAdapter(salesArrayList)
 
         setPaginationData()
+    }
+
+    private fun addListner() {
+        tvNewSaleList.setOnClickListener(this)
     }
 
 
@@ -213,6 +221,25 @@ class SaleFragment : Fragment() {
         saleListAdapter = DashboardSaleListAdapter(requireContext(), saleList)
         rvSaleList.adapter = saleListAdapter
         saleListAdapter.notifyDataSetChanged()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.tvNewSaleList -> {
+                startActivityForResult(Intent(context, AddEditSaleListActivity::class.java), 201)
+
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 201) {
+            if (resultCode == Activity.RESULT_OK) {
+                currentPage = 1;
+                mNetworkCallSaleListAPI(currentPage)
+            }
+        }
     }
 
 

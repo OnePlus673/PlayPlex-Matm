@@ -2,15 +2,15 @@ package com.playplelx.activity
 
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -24,7 +24,6 @@ import com.playplelx.activity.pos.PosSettingActivity
 import com.playplelx.activity.pos.saleList.SaleListActivity
 import com.playplelx.adapter.DashBoardAdapter
 import com.playplelx.adapter.DrawerAdapter
-import com.playplelx.adapter.PartyListPagerAdapter
 import com.playplelx.model.drawer.DrawerModel
 import com.playplelx.network.ApiInterface
 import com.playplelx.network.Apiclient
@@ -37,9 +36,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 import java.text.DecimalFormat
-import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.onItemClick {
 
@@ -56,24 +53,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
     private var drawerModelList: ArrayList<DrawerModel> = arrayListOf()
     lateinit var drawerAdapter: DrawerAdapter
     lateinit var apiInterface: ApiInterface
-    lateinit var rrSaleList: RelativeLayout
-    lateinit var rrMoneyIn: RelativeLayout
-    lateinit var rrReports: RelativeLayout
-    lateinit var rrReceivableReports: RelativeLayout
-    lateinit var llShellList: LinearLayout
-    lateinit var llProduct: LinearLayout
-    lateinit var llSettings: LinearLayout
+
+
     lateinit var llOrder: LinearLayout
     lateinit var llStock: LinearLayout
-    lateinit var llContact: LinearLayout
-    lateinit var llWallet: LinearLayout
-    lateinit var llWalletReport: LinearLayout
+
     lateinit var llBillInvoice: LinearLayout
-    lateinit var tvSales: TextView
-    lateinit var tvPaymentReceived: TextView
+
+
+    lateinit var tvOrderUrl: TextView
+    lateinit var ivShare: ImageView
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
+    private var wareHouse_url: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,27 +83,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
         navigationView = findViewById(R.id.navigationview)
         ivMenu = findViewById(R.id.ivMenu)
         pbLoadData = findViewById(R.id.pbLoadData)
-        rrSaleList = findViewById(R.id.rrSaleList)
-        rrMoneyIn = findViewById(R.id.rrMoneyIn)
-        rrReports = findViewById(R.id.rrReports)
-        rrReceivableReports = findViewById(R.id.rrReceivableReports)
-        llShellList = findViewById(R.id.llShellList)
-        llProduct = findViewById(R.id.llProduct)
-        llSettings = findViewById(R.id.llSettings)
-        llOrder = findViewById(R.id.llOnlineOrder)
+
+        llOrder = findViewById(R.id.llUrl)
         llStock = findViewById(R.id.llStock)
-        llContact = findViewById(R.id.llContact)
-        llWallet = findViewById(R.id.llWallet)
-        llWalletReport = findViewById(R.id.llWalletReport)
+
         llBillInvoice = findViewById(R.id.llBillInvoice)
-        tvSales = findViewById(R.id.tvSales)
-        tvPaymentReceived = findViewById(R.id.tvPaymentReceived)
+
 
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
+        tvOrderUrl = findViewById(R.id.tvOrderUrl)
+        ivShare = findViewById(R.id.ivShare)
 
-        setTabLayOut()
         setupViewPager()
+        setTabLayOut()
+
 
         navigationView.bringToFront()
 
@@ -136,6 +123,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
         actionBarDrawerToggle.syncState()
 
 
+/*
         if (InternetConnection.checkConnection(mContext)) {
             mNetworkCallDashboardApi()
         } else {
@@ -144,24 +132,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
                 Toast.LENGTH_SHORT
             ).show()
         }
+*/
 
     }
 
     private fun addListner() {
         ivMenu.setOnClickListener(this)
-        rrSaleList.setOnClickListener(this)
-        rrMoneyIn.setOnClickListener(this)
-        rrReports.setOnClickListener(this)
-        rrReceivableReports.setOnClickListener(this)
-        llShellList.setOnClickListener(this)
-        llProduct.setOnClickListener(this)
+
         llOrder.setOnClickListener(this)
         llStock.setOnClickListener(this)
-        llContact.setOnClickListener(this)
-        llWallet.setOnClickListener(this)
-        llWalletReport.setOnClickListener(this)
-        llSettings.setOnClickListener(this)
         llBillInvoice.setOnClickListener(this)
+        tvOrderUrl.setOnClickListener(this)
+        ivShare.setOnClickListener(this)
     }
 
     private fun setHeaderData() {
@@ -192,57 +174,43 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
             R.id.ivMenu -> {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
-            R.id.rrSaleList -> {
-                startActivity(Intent(mContext, SaleListActivity::class.java))
-            }
-            R.id.rrMoneyIn -> {
-                startActivity(Intent(mContext, PaymentInActivity::class.java))
 
-            }
-            R.id.rrReports -> {
-                startActivity(Intent(mContext, ReportActivity::class.java))
-            }
-            R.id.rrReceivableReports -> {
-                startActivity(Intent(mContext, ReportActivity::class.java))
-            }
-            R.id.llShellList -> {
-                startActivity(Intent(mContext, PosSettingActivity::class.java))
-
-            }
-            R.id.llProduct -> {
-                startActivity(
-                    Intent(mContext, AddEditProductActivity::class.java)
-                        .putExtra(Constants.mFrom, Constants.isAdd)
-                )
-
-            }
-            R.id.llOnlineOrder -> {
+            R.id.llUrl -> {
                 startActivity(Intent(mContext, OnlineOrderActivity::class.java))
             }
             R.id.llStock -> {
                 startActivity(Intent(mContext, ReportActivity::class.java))
 
             }
-            R.id.llContact -> {
-                startActivity(Intent(mContext, PartyListActivity::class.java))
 
-            }
             R.id.llWallet -> {
                 Toast.makeText(mContext, "comming soon", Toast.LENGTH_SHORT).show()
             }
-            R.id.llWalletReport -> {
-                Toast.makeText(mContext, "comming soon", Toast.LENGTH_SHORT).show()
 
-            }
-            R.id.llSettings -> {
-                startActivity(Intent(mContext, SettingsActivity::class.java))
-
-            }
             R.id.llBillInvoice -> {
-                startActivity(Intent(mContext, PosSettingActivity::class.java))
+            //    startActivity(Intent(mContext, PosSettingActivity::class.java))
 
+            }
+            R.id.tvOrderUrl -> {
+                setLinkData()
+            }
+            R.id.ivShare -> {
+                shareData()
             }
         }
+    }
+
+    private fun setLinkData() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(wareHouse_url))
+        startActivity(browserIntent)
+    }
+
+    private fun shareData() {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        val shareBody = "Please purchase order in below url"
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody + "\n" + wareHouse_url)
+        startActivity(Intent.createChooser(sharingIntent, "Share via"))
     }
 
     private fun setupViewPager() {
@@ -254,10 +222,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
 
     private fun setTabLayOut() {
         tabLayout.apply {
+            addTab(this.newTab().setText(mContext.resources.getString(R.string.str_product)))
             addTab(this.newTab().setText(mContext.resources.getString(R.string.str_sell)))
             addTab(this.newTab().setText(mContext.resources.getString(R.string.str_purchase)))
-            addTab(this.newTab().setText(mContext.resources.getString(R.string.str_sellreturn)))
-            addTab(this.newTab().setText(mContext.resources.getString(R.string.str_purchasereturn)))
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -277,6 +244,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        mNetworkCallDashboardApi()
+    }
 
     private fun setDrawerData() {
 
@@ -366,21 +337,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
         when (position) {
             0 -> {
                 drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, MainActivity::class.java))
+
             }
             1 -> {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             2 -> {
-                drawerLayout.closeDrawer(GravityCompat.START)
-                startActivity(Intent(mContext, SaleListActivity::class.java))
+             /*   drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, SaleListActivity::class.java))*/
             }
             3 -> {
-                drawerLayout.closeDrawer(GravityCompat.START)
-                startActivity(Intent(mContext, PurchaseListActivity::class.java))
+              /*  drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, PurchaseListActivity::class.java))*/
             }
             4 -> {
-                drawerLayout.closeDrawer(GravityCompat.START)
-                startActivity(Intent(mContext, PosSettingActivity::class.java))
+            /*    drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, PosSettingActivity::class.java))*/
             }
             5 -> {
                 drawerLayout.closeDrawer(GravityCompat.START)
@@ -496,9 +469,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
                             val stateData = data.optJSONObject("stateData")
                             val sales =
                                 (DecimalFormat("##.#").format(stateData.optDouble("totalSales"))).toString()
-                            tvSales.text = "₹" + sales.toString()
-                            tvPaymentReceived.text =
-                                "₹" + stateData.optInt("paymentReceived").toString()
+
+                            wareHouse_url = data.optString("warehouse_url")
+                            tvOrderUrl.text = wareHouse_url
 
                         } else {
                             Toast.makeText(
