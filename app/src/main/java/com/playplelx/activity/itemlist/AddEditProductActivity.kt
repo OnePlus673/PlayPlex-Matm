@@ -204,13 +204,16 @@ class AddEditProductActivity : AppCompatActivity(), View.OnClickListener {
         fileUrl = productModel.image_url
         edtProductName.setText(productModel.name)
         acCategory.setText(productModel.category.name)
-        acBrand.setText(productModel.brand.name)
+        if (productModel.brand!= null){
+            acBrand.setText(productModel.brand.name)
+            brandId=productModel.brand.xid
+
+        }
         acWareHouse.setText(productModel.details.warehouse.name)
         acUnit.setText(productModel.unit.name)
         acTax.setText(productModel.details.tax.name)
 
         categoryId=productModel.category.xid
-        brandId=productModel.brand.xid
         wareHouseId=productModel.details.warehouse.xid
         unitId=productModel.unit.xid
         taxId=productModel.details.tax.xid
@@ -223,8 +226,13 @@ class AddEditProductActivity : AppCompatActivity(), View.OnClickListener {
         edtSalePrice.setText(productModel.details.sales_price.toString())
         edtOpeningStock.setText(productModel.details.opening_stock.toString())
         edtOpeningStockDate.setText(productModel.details.opening_stock_date)
-        edtWholesalePrice.setText(productModel.details.wholesale_price.toString())
-        edtWholesaleQuantity.setText(productModel.details.wholesale_quantity.toString())
+        if (productModel.details.wholesale_price!= null){
+            edtWholesalePrice.setText(productModel.details.wholesale_price.toString())
+        }
+        if (productModel.details.wholesale_quantity!= null){
+            edtWholesaleQuantity.setText(productModel.details.wholesale_quantity.toString())
+        }
+
 
     }
 

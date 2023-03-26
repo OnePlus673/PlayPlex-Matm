@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.playplelx.R
 import com.playplelx.activity.pos.NewPosSaleActivity
+import com.playplelx.model.categoryofproducts.Items
 import com.playplelx.model.posproducts.PosProductFilterModel
 import com.playplelx.model.posproducts.ProductData
 import com.playplelx.model.productfilter.ProductFilterModel
 
 class PosSaleAdapter(
     val mContext: NewPosSaleActivity,
-    val posProductModelArrayList: ArrayList<ProductData>,
+    val posProductModelArrayList: ArrayList<Items>,
     val onclick: onClick
 ) : RecyclerView.Adapter<PosSaleAdapter.Myviewholder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosSaleAdapter.Myviewholder {
@@ -29,9 +30,12 @@ class PosSaleAdapter(
         Glide.with(mContext).load(posProductFilterModel.image_url).into(holder.ivImage)
         holder.tvName.text = posProductFilterModel.name.toLowerCase()
         holder.tvQuantity.text = posProductFilterModel.quantity.toString()
-        holder.tvSubTotal.text = posProductFilterModel.single_unit_price.toString()
+        holder.tvSubTotal.text = posProductFilterModel.subtotal.toString()
 
-        holder.tvAdd.setOnClickListener {
+
+
+
+   /*     holder.tvAdd.setOnClickListener {
             onclick.onAddClick(
                 posProductFilterModel,
                 position,
@@ -50,7 +54,7 @@ class PosSaleAdapter(
         holder.ivDelete.setOnClickListener {
             onclick.onDeleteClick(posProductFilterModel, position)
 
-        }
+        }*/
 
 
     }

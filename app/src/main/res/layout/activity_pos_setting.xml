@@ -40,14 +40,14 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/barcode"
-            android:contentDescription="@string/app_name"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:tint="@color/white"
-            android:paddingEnd="@dimen/_5sdp"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"/>
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:paddingEnd="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/barcode"
+            android:tint="@color/white" />
 
 
     </RelativeLayout>
@@ -127,14 +127,15 @@
 
             <RelativeLayout
                 android:id="@+id/rrCategory"
-                android:layout_width="@dimen/_80sdp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rectangle_lightblue">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategory"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_10sdp" />
 
 
             </RelativeLayout>
@@ -144,7 +145,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_toRightOf="@id/rrCategory">
+                android:layout_toRightOf="@id/rrCategory"
+                android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvProducts"

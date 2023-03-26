@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken
 import com.playplelx.R
 import com.playplelx.activity.MainActivity
 import com.playplelx.adapter.possale.PosSaleAdapter
+import com.playplelx.model.categoryofproducts.Items
 import com.playplelx.model.paymentmode.PaymentModeModel
 import com.playplelx.model.posproducts.PosProductFilterModel
 import com.playplelx.model.posproducts.ProductData
@@ -42,8 +43,8 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
     lateinit var rvProducts: RecyclerView
     lateinit var edtDiscount: EditText
     lateinit var edtShipping: EditText
-    private var posProductModelArrayList: ArrayList<ProductData> = arrayListOf()
-    private var posProductFilterModelArrayList: ArrayList<ProductData> = arrayListOf()
+    private var posProductModelArrayList: ArrayList<Items> = arrayListOf()
+    private var posProductFilterModelArrayList: ArrayList<Items> = arrayListOf()
     lateinit var posSaleAdapter: PosSaleAdapter
     lateinit var tvGrandTotalValue: TextView
     lateinit var tvDiscountValue: TextView
@@ -88,7 +89,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
 
         if (intent.extras != null) {
             posProductModelArrayList =
-                (intent.getSerializableExtra("posProductModel") as ArrayList<ProductData>?)!!
+                (intent.getSerializableExtra("posProductModel") as ArrayList<Items>?)!!
             grandTotal = intent.getDoubleExtra("totalvalue", 0.0)
             userId = intent.getStringExtra("userId")!!
             posProductFilterModelArrayList = posProductModelArrayList
@@ -96,18 +97,16 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
         }
 
 
-        if (InternetConnection.checkConnection(mContext)) {
-            mNetworkCallGetPaymentModeAPI()
-        } else {
-            Toast.makeText(
-                mContext,
-                mContext.resources.getString(R.string.str_check_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-
-
+        /*  if (InternetConnection.checkConnection(mContext)) {
+              mNetworkCallGetPaymentModeAPI()
+          } else {
+              Toast.makeText(
+                  mContext,
+                  mContext.resources.getString(R.string.str_check_internet_connections),
+                  Toast.LENGTH_SHORT
+              ).show()
+          }
+  */
         setData()
 
     }
@@ -269,7 +268,10 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
 
             }
             R.id.tvSave -> {
-                if (InternetConnection.checkConnection(mContext)) {
+
+                startActivity(Intent(mContext, PaymentModeActivity::class.java))
+
+                /*if (InternetConnection.checkConnection(mContext)) {
                     if (isValidate()) {
                         mNetworkCallPosSaveAPI()
                     }
@@ -279,7 +281,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
                         mContext.resources.getString(R.string.str_check_internet_connections),
                         Toast.LENGTH_SHORT
                     ).show()
-                }
+                }*/
             }
         }
     }
@@ -357,16 +359,16 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
         val detailsArray = JSONObject()
         detailsArray.put("discount_type", "percentage")
         detailsArray.put("discount_value", 0.0)
-        if (edtDiscount.text.toString().trim().isEmpty()){
-            detailsArray.put("discount",0.0)
-        }else{
+        if (edtDiscount.text.toString().trim().isEmpty()) {
+            detailsArray.put("discount", 0.0)
+        } else {
             detailsArray.put("discount", edtDiscount.text.toString().trim().toFloat())
         }
 
-        if (edtShipping.text.toString().trim().isEmpty()){
+        if (edtShipping.text.toString().trim().isEmpty()) {
             detailsArray.put("shipping", 0.0)
 
-        }else{
+        } else {
             detailsArray.put("shipping", edtShipping.text.toString().trim().toFloat())
 
         }
@@ -398,16 +400,19 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
             val element = JSONObject()
             element.put("item_id", posProductFilterModelArrayList.get(i).item_id)
             element.put("xid", posProductFilterModelArrayList.get(i).xid)
-            if (edtDiscount.text.toString().trim().isEmpty()){
-                element.put("discount_rate",0.0)
-            }else{
+            if (edtDiscount.text.toString().trim().isEmpty()) {
+                element.put("discount_rate", 0.0)
+            } else {
                 element.put("discount_rate", edtDiscount.text.toString().trim().toFloat())
             }
 
-            if (edtDiscount.text.toString().trim().isEmpty()){
-                element.put("total_discount",0.0)
-            }else{
-                element.put("total_discount", posProductFilterModelArrayList.get(i).total_discount.toFloat())
+            if (edtDiscount.text.toString().trim().isEmpty()) {
+                element.put("total_discount", 0.0)
+            } else {
+                element.put(
+                    "total_discount",
+                    posProductFilterModelArrayList.get(i).total_discount.toFloat()
+                )
             }
 
             element.put("x_tax_id", "")
@@ -477,10 +482,10 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
         if (posProductModelArrayList.size == 0) {
             Toast.makeText(mContext, "please select products", Toast.LENGTH_SHORT).show()
             isValid = false
-        } else if (PaymentModeName.isEmpty()) {
+        } /*else if (PaymentModeName.isEmpty()) {
             Toast.makeText(mContext, "Please select payment Mode", Toast.LENGTH_SHORT).show()
             isValid = false
-        }
+        }*/
         return isValid
     }
 }

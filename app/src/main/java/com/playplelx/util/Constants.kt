@@ -25,5 +25,8 @@ class Constants {
         const val unitModel = "unitModel"
         const val wareHouseModel = "wareHouseModel"
         const val orderModel = "orderModel"
+        const val KEY_Orderqty = "listqty"
+        const val KEY_Ordervid = "listvid"
+        const val KEY_Ordername = "listname"
     }
 }

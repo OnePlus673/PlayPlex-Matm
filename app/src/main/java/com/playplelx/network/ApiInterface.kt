@@ -604,4 +604,7 @@ interface ApiInterface {
 
     @POST("rest/online-orders/cancel/{id}")
     fun canceledOrders(@Path("id") id: String): Call<JsonObject>
+
+    @POST("rest/pos/categories")
+    fun getAllCategories(): Call<JsonObject>
 }

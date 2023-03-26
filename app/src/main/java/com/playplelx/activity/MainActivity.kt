@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
             }
 
             R.id.llBillInvoice -> {
-            //    startActivity(Intent(mContext, PosSettingActivity::class.java))
+                startActivity(Intent(mContext, PosSettingActivity::class.java))
 
             }
             R.id.tvOrderUrl -> {
@@ -344,16 +344,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             2 -> {
-             /*   drawerLayout.closeDrawer(GravityCompat.START)
-                startActivity(Intent(mContext, SaleListActivity::class.java))*/
+                drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, SaleListActivity::class.java))
             }
             3 -> {
-              /*  drawerLayout.closeDrawer(GravityCompat.START)
-                startActivity(Intent(mContext, PurchaseListActivity::class.java))*/
+                drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, PurchaseListActivity::class.java))
             }
             4 -> {
-            /*    drawerLayout.closeDrawer(GravityCompat.START)
-                startActivity(Intent(mContext, PosSettingActivity::class.java))*/
+                drawerLayout.closeDrawer(GravityCompat.START)
+                startActivity(Intent(mContext, PosSettingActivity::class.java))
             }
             5 -> {
                 drawerLayout.closeDrawer(GravityCompat.START)
