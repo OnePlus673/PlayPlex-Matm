@@ -254,8 +254,17 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
 
                 startActivity(
                     Intent(mContext, PaymentModeActivity::class.java)
-                        .putExtra("PaymontModeAmount", grandTotal)
-                        .putExtra("dueAmount",grandTotal)
+                        .putExtra(
+                            "PaymontModeAmount",
+                            tvGrandTotalValue.text.toString().trim().toDouble()
+                        )
+                        .putExtra(
+                            "posProductModel", posProductModelArrayList
+                        )
+                        .putExtra("dueAmount", tvGrandTotalValue.text.toString().trim().toDouble())
+                        .putExtra("userId", userId)
+                        .putExtra("discount", edtDiscount.text.toString().trim())
+                        .putExtra("shipping", edtShipping.text.toString().trim())
                 )
 
                 /*if (InternetConnection.checkConnection(mContext)) {

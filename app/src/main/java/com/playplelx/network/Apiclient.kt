@@ -2,6 +2,8 @@ package com.playplelx.network
 
 import android.content.Context
 import android.util.Log
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
 import com.playplelx.util.Constants
 import com.playplelx.util.PrefManager
@@ -48,14 +50,10 @@ class Apiclient {
                 "=" + PrefManager(context!!).getValue(Constants.ACCESS_TOKEN)
             )
             chain.proceed(newRequest)
-        }
-            /*.addInterceptor(
-                ChuckerInterceptor.Builder(context!!)
-                    .collector(ChuckerCollector(context!!))
-                    .maxContentLength(250000L)
-                    .redactHeaders("Auth-Token", "Bearer")
-                    .alwaysReadResponseBody(true)
-                    .build()
+        }/*.addInterceptor(
+                ChuckerInterceptor.Builder(context!!).collector(ChuckerCollector(context!!))
+                    .maxContentLength(250000L).redactHeaders("Auth-Token", "Bearer")
+                    .alwaysReadResponseBody(true).build()
             )*/
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS).build()
