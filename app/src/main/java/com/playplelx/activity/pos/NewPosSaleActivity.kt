@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.playplelx.R
@@ -19,22 +18,18 @@ import com.playplelx.activity.MainActivity
 import com.playplelx.adapter.possale.PosSaleAdapter
 import com.playplelx.model.categoryofproducts.Items
 import com.playplelx.model.paymentmode.PaymentModeModel
-import com.playplelx.model.posproducts.PosProductFilterModel
 import com.playplelx.model.posproducts.ProductData
-import com.playplelx.model.productfilter.ProductFilterModel
 import com.playplelx.network.ApiInterface
 import com.playplelx.network.Apiclient
-import com.playplelx.util.InternetConnection
+import com.playplelx.util.DatabaseHelper
+import com.playplelx.util.PrefManager
 import com.playplelx.util.Util
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAdapter.onClick {
 
@@ -59,6 +54,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
     lateinit var tvSave: TextView
 
     private var grandTotal: Double = 0.0
+    lateinit var dataBaseHelper: DatabaseHelper
 
     private var discountTotal = 0.0
     private var discountNewTotal = 0.0
@@ -75,6 +71,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
 
     private fun initUI() {
         supportActionBar!!.hide()
+        dataBaseHelper = DatabaseHelper(mContext)
         apiInterface = Apiclient(mContext).getClient()!!.create(ApiInterface::class.java)
         ivBack = findViewById(R.id.ivBack)
         rvProducts = findViewById(R.id.rvProducts)
@@ -95,20 +92,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
             posProductFilterModelArrayList = posProductModelArrayList
             tvGrandTotalValue.text = grandTotal.toString()
         }
-
-
-        /*  if (InternetConnection.checkConnection(mContext)) {
-              mNetworkCallGetPaymentModeAPI()
-          } else {
-              Toast.makeText(
-                  mContext,
-                  mContext.resources.getString(R.string.str_check_internet_connections),
-                  Toast.LENGTH_SHORT
-              ).show()
-          }
-  */
         setData()
-
     }
 
     private fun setData() {
@@ -208,9 +192,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
                             setPaymentAdapter(paymentModeList)
                         } else {
                             Toast.makeText(
-                                mContext,
-                                jsonObject.optString("message"),
-                                Toast.LENGTH_SHORT
+                                mContext, jsonObject.optString("message"), Toast.LENGTH_SHORT
                             ).show()
                         }
 
@@ -261,15 +243,20 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
         when (v?.id) {
             R.id.ivBack -> {
                 startActivity(
-                    Intent(mContext, PosSettingActivity::class.java)
-                        .putExtra("posProductModel", posProductModelArrayList)
-                        .putExtra("totalvalue", grandTotal)
+                    Intent(mContext, PosSettingActivity::class.java).putExtra(
+                        "posProductModel",
+                        posProductModelArrayList
+                    ).putExtra("totalvalue", grandTotal)
                 )
 
             }
             R.id.tvSave -> {
 
-                startActivity(Intent(mContext, PaymentModeActivity::class.java))
+                startActivity(
+                    Intent(mContext, PaymentModeActivity::class.java)
+                        .putExtra("PaymontModeAmount", grandTotal)
+                        .putExtra("dueAmount",grandTotal)
+                )
 
                 /*if (InternetConnection.checkConnection(mContext)) {
                     if (isValidate()) {
@@ -286,6 +273,70 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
         }
     }
 
+    override fun onAddClick(
+        productData: Items, position: Int, tvQuantity: TextView, tvSubTotal: TextView
+    ) {
+        if (dataBaseHelper.CheckOrderExists(productData.xid, productData.x_unit_id)
+                .toDouble() < productData.stock_quantity.toDouble()
+        ) {
+            productData.quantity++
+            tvQuantity.text = dataBaseHelper.AddUpdateOrder(
+                productData.xid,
+                productData.x_unit_id,
+                true,
+                this,
+                false,
+                productData.single_unit_price.toDouble(),
+                productData.name
+            )
+            productData.subtotal = productData.quantity * productData.single_unit_price
+            val displaytotal: Double = dataBaseHelper.getTotalCartAmt(PrefManager(mContext))
+            val sumTotal = DatabaseHelper.decimalformatData.format(displaytotal)
+            grandTotal = sumTotal.toDouble()
+            tvGrandTotalValue.text = grandTotal.toString()
+
+
+            posSaleAdapter.notifyDataSetChanged()
+
+        } else Toast.makeText(
+            this, "Stock limit alert", Toast.LENGTH_SHORT
+        ).show()
+
+    }
+
+    override fun onMinusClick(
+        filterModel: Items, position: Int, tvQuantity: TextView, tvSubTotal: TextView
+    ) {
+        if (filterModel.quantity > 1) {
+
+            filterModel.quantity--
+
+            tvQuantity.setText(
+                dataBaseHelper.AddUpdateOrder(
+                    filterModel.xid,
+                    filterModel.x_unit_id,
+                    false,
+                    this,
+                    false,
+                    filterModel.single_unit_price.toDouble(),
+                    filterModel.name
+                )
+            )
+
+            filterModel.subtotal = filterModel.quantity * filterModel.single_unit_price
+            val displaytotal: Double = dataBaseHelper.getTotalCartAmt(PrefManager(mContext))
+            val sumTotal = DatabaseHelper.decimalformatData.format(displaytotal)
+            grandTotal = sumTotal.toDouble()
+            tvGrandTotalValue.text = grandTotal.toString()
+
+
+            posSaleAdapter.notifyDataSetChanged()
+        }
+
+
+    }
+
+/*
     override fun onAddClick(
         filterModel: ProductData,
         position: Int,
@@ -305,8 +356,9 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
             Toast.makeText(mContext, "item stock is finished", Toast.LENGTH_SHORT).show()
         }
     }
+*/
 
-    override fun onMinusClick(
+/*    override fun onMinusClick(
         filterModel: ProductData,
         position: Int,
         tvQuantity: TextView,
@@ -325,7 +377,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
             val disTotal = ((shippingTotal + grandTotal) - discountTotal)
             tvGrandTotalValue.text = disTotal.toString()
         }
-    }
+    }*/
 
     override fun onDeleteClick(filterModel: ProductData, position: Int) {
         grandTotal = 0.0
@@ -344,15 +396,6 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(
-            Intent(mContext, PosSettingActivity::class.java)
-                .putExtra("posProductModel", posProductModelArrayList)
-                .putExtra("totalvalue", grandTotal)
-        )
-        Log.e("PosProductModelList", "=" + posProductModelArrayList.size)
-    }
 
     private fun mNetworkCallPosSaveAPI() {
         val paymentArray = JSONArray()
@@ -410,8 +453,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
                 element.put("total_discount", 0.0)
             } else {
                 element.put(
-                    "total_discount",
-                    posProductFilterModelArrayList.get(i).total_discount.toFloat()
+                    "total_discount", posProductFilterModelArrayList.get(i).total_discount.toFloat()
                 )
             }
 
@@ -426,8 +468,7 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
                 posProductFilterModelArrayList.get(i).single_unit_price.toFloat()
             )
             element.put(
-                "subtotal",
-                posProductFilterModelArrayList.get(i).single_unit_price.toFloat()
+                "subtotal", posProductFilterModelArrayList.get(i).single_unit_price.toFloat()
             )
             element.put("quantity", posProductFilterModelArrayList.get(i).quantity.toFloat())
             jsonArray.put(element)
@@ -445,17 +486,13 @@ class NewPosSaleActivity : AppCompatActivity(), View.OnClickListener, PosSaleAda
                         val jsonObject = JSONObject(response.body().toString())
                         if (jsonObject.optBoolean("status")) {
                             Toast.makeText(
-                                mContext,
-                                jsonObject.optString("message"),
-                                Toast.LENGTH_SHORT
+                                mContext, jsonObject.optString("message"), Toast.LENGTH_SHORT
                             ).show()
                             startActivity(Intent(mContext, MainActivity::class.java))
                             finish()
                         } else {
                             Toast.makeText(
-                                mContext,
-                                jsonObject.optString("message"),
-                                Toast.LENGTH_SHORT
+                                mContext, jsonObject.optString("message"), Toast.LENGTH_SHORT
                             ).show()
                         }
                     } else {

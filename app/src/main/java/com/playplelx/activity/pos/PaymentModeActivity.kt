@@ -32,7 +32,13 @@ class PaymentModeActivity : AppCompatActivity(), View.OnClickListener {
     private var paymentModeStringList: ArrayList<String> = arrayListOf()
     lateinit var apiInterface: ApiInterface
     private var PaymentModeName: String = ""
+    lateinit var tvPayingAmountValue: TextView
+    lateinit var tvPaybleAmountValue: TextView
+    lateinit var tvDueAmountValue: TextView
+    lateinit var tvSave: TextView
     lateinit var rvPaymentMode: RecyclerView
+    private var paymentModeAmount: Double = 0.0
+    private var grandAmount: Double = 0.0
     lateinit var paymentListAdapter: PaymentListAdapter
     private var paymentList: ArrayList<PaymentModel> = arrayListOf()
 
@@ -51,6 +57,18 @@ class PaymentModeActivity : AppCompatActivity(), View.OnClickListener {
         acPaymentMode = findViewById(R.id.acPaymentMode)
         pbLoadData = findViewById(R.id.pbLoadData)
         rvPaymentMode = findViewById(R.id.rvPaymentMode)
+        tvPayingAmountValue = findViewById(R.id.tvPayingAmountValue)
+        tvPaybleAmountValue = findViewById(R.id.tvPaybleAmountValue)
+        tvDueAmountValue = findViewById(R.id.tvDueAmountValue)
+        tvSave = findViewById(R.id.tvSave)
+
+
+        if (intent.extras != null) {
+            paymentModeAmount = intent.getDoubleExtra("PaymontModeAmount", 0.0)
+            grandAmount = intent.getDoubleExtra("dueAmount", 0.0)
+            tvPaybleAmountValue.text = paymentModeAmount.toString()
+            tvDueAmountValue.text = grandAmount.toString()
+        }
 
         if (InternetConnection.checkConnection(mContext)) {
             mNetworkCallGetPaymentModeAPI()
@@ -65,6 +83,7 @@ class PaymentModeActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun addListner() {
         ivBack.setOnClickListener(this)
+        tvSave.setOnClickListener(this)
 
         acPaymentMode.setOnTouchListener { v, event ->
             acPaymentMode.showDropDown()

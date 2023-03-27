@@ -14,12 +14,17 @@ import com.playplelx.model.categoryofproducts.Items
 import com.playplelx.model.posproducts.PosProductFilterModel
 import com.playplelx.model.posproducts.ProductData
 import com.playplelx.model.productfilter.ProductFilterModel
+import com.playplelx.util.DatabaseHelper
+import java.text.DecimalFormat
 
 class PosSaleAdapter(
     val mContext: NewPosSaleActivity,
     val posProductModelArrayList: ArrayList<Items>,
     val onclick: onClick
 ) : RecyclerView.Adapter<PosSaleAdapter.Myviewholder>() {
+
+    private var dataBaseHelper = DatabaseHelper(mContext)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosSaleAdapter.Myviewholder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.adp_possale, parent, false)
         return Myviewholder(view)
@@ -29,20 +34,28 @@ class PosSaleAdapter(
         val posProductFilterModel = posProductModelArrayList.get(position)
         Glide.with(mContext).load(posProductFilterModel.image_url).into(holder.ivImage)
         holder.tvName.text = posProductFilterModel.name.toLowerCase()
-        holder.tvQuantity.text = posProductFilterModel.quantity.toString()
-        holder.tvSubTotal.text = posProductFilterModel.subtotal.toString()
+        holder.tvQuantity.text = dataBaseHelper.CheckOrderExists(
+            posProductFilterModel.xid,
+            posProductFilterModel.x_unit_id
+        ).toString()
+        holder.tvSubTotal.text = (DecimalFormat("##.#").format(
+            dataBaseHelper.CheckItemsTotal(
+                posProductFilterModel.xid,
+                posProductFilterModel.x_unit_id,
+                posProductFilterModel.single_unit_price,
+                posProductFilterModel.quantity
+            )
+        ).toDouble()).toString()
 
 
-
-
-   /*     holder.tvAdd.setOnClickListener {
+        holder.tvAdd.setOnClickListener {
             onclick.onAddClick(
-                posProductFilterModel,
-                position,
+                posProductFilterModel, position,
                 holder.tvQuantity,
                 holder.tvSubTotal
             )
         }
+
         holder.tvMinus.setOnClickListener {
             onclick.onMinusClick(
                 posProductFilterModel,
@@ -51,10 +64,28 @@ class PosSaleAdapter(
                 holder.tvSubTotal
             )
         }
-        holder.ivDelete.setOnClickListener {
-            onclick.onDeleteClick(posProductFilterModel, position)
 
-        }*/
+
+        /*     holder.tvAdd.setOnClickListener {
+                 onclick.onAddClick(
+                     posProductFilterModel,
+                     position,
+                     holder.tvQuantity,
+                     holder.tvSubTotal
+                 )
+             }
+             holder.tvMinus.setOnClickListener {
+                 onclick.onMinusClick(
+                     posProductFilterModel,
+                     position,
+                     holder.tvQuantity,
+                     holder.tvSubTotal
+                 )
+             }
+             holder.ivDelete.setOnClickListener {
+                 onclick.onDeleteClick(posProductFilterModel, position)
+
+             }*/
 
 
     }
@@ -63,7 +94,6 @@ class PosSaleAdapter(
         return posProductModelArrayList.size
 
     }
-
 
 
     class Myviewholder(view: View) : RecyclerView.ViewHolder(view) {
@@ -78,14 +108,14 @@ class PosSaleAdapter(
 
     interface onClick {
         fun onAddClick(
-            filterModel: ProductData,
+            filterModel: Items,
             position: Int,
             tvQuantity: TextView,
             tvSubTotal: TextView
         )
 
         fun onMinusClick(
-            filterModel: ProductData,
+            filterModel: Items,
             position: Int,
             tvQuantity: TextView,
             tvSubTotal: TextView

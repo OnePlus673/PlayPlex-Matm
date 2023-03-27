@@ -1,9 +1,7 @@
 package com.playplelx.activity.pos
 
-import android.content.ClipData.Item
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +55,6 @@ class PosSettingActivity : AppCompatActivity(), View.OnClickListener, PosProduct
     private var categoryStringList: ArrayList<String> = arrayListOf()
     private var posProductModelList: ArrayList<ProductData> = arrayListOf()
     lateinit var posProductAdapter: PosProductAdapter
-    lateinit var posCategoryAdapter: PosCategoryAdapter
     private var posProdctMainArrayList: ArrayList<PosProductFilterModel> = arrayListOf()
     private var posProdctFilterArrayList: ArrayList<ProductData> = arrayListOf()
     private var total = 0.0
@@ -68,6 +65,10 @@ class PosSettingActivity : AppCompatActivity(), View.OnClickListener, PosProduct
     private var categoryPassFilterProdcuctList: ArrayList<Products> = arrayListOf()
     private var ItemList: ArrayList<Items> = arrayListOf()
     lateinit var databaseHelper: DatabaseHelper
+
+    private var posCategoryAdapter: PosCategoryAdapter =
+        PosCategoryAdapter(this, categoryFilterProdcuctList)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -441,6 +442,7 @@ class PosSettingActivity : AppCompatActivity(), View.OnClickListener, PosProduct
 
        }*/
 
+/*
     override fun onResume() {
         super.onResume()
         if (intent.extras != null) {
@@ -464,6 +466,22 @@ class PosSettingActivity : AppCompatActivity(), View.OnClickListener, PosProduct
         }
 
     }
+*/
+
+    override fun onResume() {
+        super.onResume()
+
+
+        val displaytotal: Double = databaseHelper.getTotalCartAmt(PrefManager(mContext))
+        val sumTotal = DatabaseHelper.decimalformatData.format(displaytotal)
+        total = sumTotal.toDouble()
+        tvTotalValue.text = total.toString()
+
+        if (posCategoryAdapter != null) {
+            posCategoryAdapter.notifyDataSetChanged()
+        }
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -493,12 +511,6 @@ class PosSettingActivity : AppCompatActivity(), View.OnClickListener, PosProduct
             val sumTotal = DatabaseHelper.decimalformatData.format(displaytotal)
             total = sumTotal.toDouble()
             tvTotalValue.text = total.toString()
-
-
-            categoryFilterProdcuctList
-
-
-
 
             posCategoryAdapter.notifyDataSetChanged()
 
