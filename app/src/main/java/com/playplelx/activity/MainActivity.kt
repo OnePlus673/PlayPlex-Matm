@@ -21,6 +21,7 @@ import com.playplelx.R
 import com.playplelx.activity.itemlist.AddEditProductActivity
 import com.playplelx.activity.onlineorder.OnlineOrderActivity
 import com.playplelx.activity.pos.PosSettingActivity
+import com.playplelx.activity.pos.saleList.AddEditSaleListActivity
 import com.playplelx.activity.pos.saleList.SaleListActivity
 import com.playplelx.adapter.DashBoardAdapter
 import com.playplelx.adapter.DrawerAdapter
@@ -58,7 +59,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
     lateinit var llOrder: LinearLayout
     lateinit var llStock: LinearLayout
 
-    lateinit var llBillInvoice: LinearLayout
+    lateinit var llSell: LinearLayout
+    lateinit var llPurchase: LinearLayout
 
 
     lateinit var tvOrderUrl: TextView
@@ -83,11 +85,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
         navigationView = findViewById(R.id.navigationview)
         ivMenu = findViewById(R.id.ivMenu)
         pbLoadData = findViewById(R.id.pbLoadData)
-
+        llSell = findViewById(R.id.llAddSell)
+        llPurchase = findViewById(R.id.llPurchase)
         llOrder = findViewById(R.id.llUrl)
         llStock = findViewById(R.id.llStock)
 
-        llBillInvoice = findViewById(R.id.llBillInvoice)
 
 
         tabLayout = findViewById(R.id.tabLayout)
@@ -141,9 +143,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
 
         llOrder.setOnClickListener(this)
         llStock.setOnClickListener(this)
-        llBillInvoice.setOnClickListener(this)
         tvOrderUrl.setOnClickListener(this)
         ivShare.setOnClickListener(this)
+        llSell.setOnClickListener(this)
+        llPurchase.setOnClickListener(this)
     }
 
     private fun setHeaderData() {
@@ -186,11 +189,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DrawerAdapter.on
             R.id.llWallet -> {
                 Toast.makeText(mContext, "comming soon", Toast.LENGTH_SHORT).show()
             }
-
-            R.id.llBillInvoice -> {
-                startActivity(Intent(mContext, PosSettingActivity::class.java))
-
+            R.id.llAddSell -> {
+                startActivity(Intent(mContext, AddEditSaleListActivity::class.java))
             }
+            R.id.llPurchase -> {
+                startActivity(Intent(mContext, AddEditPurchaseListActivity::class.java))
+            }
+
+
             R.id.tvOrderUrl -> {
                 setLinkData()
             }

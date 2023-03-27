@@ -209,26 +209,57 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-
     <LinearLayout
-        android:id="@+id/llBillInvoice"
-        android:layout_width="@dimen/_160sdp"
-        android:layout_height="@dimen/_40sdp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rectangle_blue"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <LinearLayout
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:id="@+id/llAddSell"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rectangle_blue"
             android:gravity="center"
-            android:text="+ BILL/INVOICE"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16sdp" />
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Sell"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:id="@+id/llPurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_purchase"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Purchase"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
 </RelativeLayout>

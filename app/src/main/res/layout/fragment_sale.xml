@@ -54,6 +54,7 @@
         android:paddingEnd="@dimen/_20sdp"
         android:paddingBottom="@dimen/_10sdp"
         android:text="Add New"
+        android:visibility="gone"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="@dimen/_10sdp" />
