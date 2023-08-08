@@ -1,125 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.playplelx">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.playplexmatm">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CLOUDPOS_MSR" />
+
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <permission android:name="${applicationId}.permission.QUERY_ALL_PACKAGES" />
+
+    <queries>
+        <package android:name="com.whatsapp" />
+    </queries>
 
     <application
+        android:name="com.playplexmatm.aeps.main_controller.VolleySingleton"
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
         android:icon="@drawable/applogo"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
+        android:extractNativeLibs="false"
         android:roundIcon="@drawable/applogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/App"
+        android:usesCleartextTraffic="true"
+        tools:node="replace"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        tools:replace="android:icon,android:theme,android:allowBackup,label">
         <activity
-            android:name=".activity.pos.PaymentModeActivity"
+            android:name=".activity.pos_reports.PosHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".activity.pos_reports.PosCommissionSlabActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.playplexmatm.microatm.MATMTestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.playplexmatm.microatm.MatmDocumentUploadActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.microatm.MatmBankDetailsActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.microatm.MatmPersonalDetailsActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.microatm.MatmOnboardingActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.activity.PurchasePaymentModeActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.activity.pos.DirectPosSettingActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.aeps.authentication.ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".activity.onlineorder.OrderDetailActivity"
+            android:name="com.playplexmatm.activity.User.SupportActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.onlineorder.OnlineOrderActivity"
+            android:name="com.playplexmatm.aeps.activities_aeps.PaysprintsOnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.CashWithdrawalSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.BalanceCheckResponseActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.AepsTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.DashboardActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.aeps.authentication.AepsLoginActivity"
+            android:exported="false"
+            android:theme="@style/App"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.ProfitandLossActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.introfragment.IntroSliderActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.RateListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.StockSummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.SalesSummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.ProductReportActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.PaymentReportsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.reports.SelectReportActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.pos.saleList.AddSaleActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.aepshistory.AepsHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.aepshistory.AepsLedgerHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.AddProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name="in.credopay.payment.sdk.PaymentActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.MinistatementActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.aepsfinger.MantraDeviceActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.aeps.activities_aeps.InvoiceViewActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.AddPurchaseListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.OrderDetailsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.playplexmatm.activity.pos.BarcodeScannerActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.playplexmatm.activity.WebviewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.playplexmatm.activity.pos.PaymentModeActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.onlineorder.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.playplexmatm.activity.onlineorder.OnlineOrderActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.pos.NewPosSaleActivity"
+            android:name="com.playplexmatm.activity.pos.NewPosSaleActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ReportActivity"
+            android:name="com.playplexmatm.activity.ReportActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.pos.PosSettingActivity"
+            android:name="com.playplexmatm.activities_aeps.AepsCommissionActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.AddEditPurchaseListActivity"
+            android:name="com.playplexmatm.activities_aeps.AepsCommissionSlabActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.PurchaseListActivity"
+            android:name="com.playplexmatm.microatm.MicroAtmCommissionSlabActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.pos.saleList.AddEditSaleListActivity"
+            android:name="com.playplexmatm.microatm.MicroAtmHistoryActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.pos.saleList.SaleListActivity"
+            android:name="com.playplexmatm.activity.pos.PosSettingActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.AddEditPaymentOutActivity"
+            android:name="com.playplexmatm.activity.AddEditPurchaseListActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.PaymentOutActivity"
+            android:name="com.playplexmatm.activity.PurchaseListActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.AddEditPaymentInActivity"
+            android:name="com.playplexmatm.activity.pos.saleList.AddEditSaleListActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.PaymentInActivity"
+            android:name="com.playplexmatm.activity.pos.saleList.SaleListActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.partylist.AddEditSupplierActivity"
+            android:name="com.playplexmatm.activity.AddEditPaymentOutActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.partylist.SupplierActivity"
+            android:name="com.playplexmatm.activity.PaymentOutActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.partylist.AddEditCustomerActivity"
+            android:name="com.playplexmatm.activity.AddEditPaymentInActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.partylist.CustomerActivity"
+            android:name="com.playplexmatm.activity.PaymentInActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.PartyListActivity"
+            android:name="com.playplexmatm.activity.partylist.AddEditSupplierActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.AddEditWareHouseSettingActivity"
+            android:name="com.playplexmatm.activity.partylist.SupplierActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.AddEditUnitActivity"
+            android:name="com.playplexmatm.activity.partylist.AddEditCustomerActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.UnitSettingActivity"
+            android:name="com.playplexmatm.activity.partylist.CustomerActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.AddEditPaymentModeActivity"
+            android:name="com.playplexmatm.activity.PartyListActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.AddEditTaxActivity"
+            android:name="com.playplexmatm.activity.settings.AddEditWareHouseSettingActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.WareHouseSettingsActivity"
+            android:name="com.playplexmatm.activity.settings.AddEditUnitActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.UnitSettingsActivity"
+            android:name="com.playplexmatm.activity.settings.UnitSettingActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.PaymentModeSettingsActivity"
+            android:name="com.playplexmatm.activity.settings.AddEditPaymentModeActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.TaxesSettingsActivity"
+            android:name="com.playplexmatm.activity.settings.AddEditTaxActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name="com.playplexmatm.activity.settings.WareHouseSettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.itemlist.AddEditProductActivity"
+            android:name="com.playplexmatm.activity.settings.UnitSettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.itemlist.AddEditBrandActivity"
+            android:name="com.playplexmatm.activity.settings.PaymentModeSettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.itemlist.AddEditCategoryActivity"
+            android:name="com.playplexmatm.activity.settings.TaxesSettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ItemListActivity"
+            android:name="com.playplexmatm.activity.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name="com.playplexmatm.activity.itemlist.AddEditProductActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.playplexmatm.activity.itemlist.AddEditBrandActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.playplexmatm.activity.itemlist.AddEditCategoryActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.playplexmatm.activity.ItemListActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.playplexmatm.activity.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -128,15 +319,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.playplexmatm.activity.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.playplexmatm.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="in.credopay.payment.sdk.HomeActivity"
+            android:theme="@style/CredopayTheme" />
+        <activity
+            android:name="in.credopay.payment.sdk.LoginActivity"
+            android:theme="@style/CredopayTheme" />
     </application>
 
 </manifest>

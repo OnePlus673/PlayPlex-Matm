@@ -1,0 +1,38 @@
+package com.sg.swapnapay.model
+
+import java.io.Serializable
+
+class MicroAtmHistoryModel (
+    val aadhar_number: String,
+    val aeps_bank_id: String,
+    val aeps_date_time: String,
+    val aeps_id: String,
+    val amount: String,
+    val apiclid: String,
+    val device: String,
+    val ma_id : String,
+    val transactionRefNo : String,
+    val response : String,
+    val transAmount : String,
+    val bankRrn : String,
+    val cardNum : String,
+    val bankNm : String,
+    val cardType : String,
+    val terminalId : String,
+    val fpId : String,
+    val transId : String,
+    val transType : String,
+    val transactionStatus : String,
+    val three_way_response : String,
+    val ma_date_time : String,
+    val distributor_commission: String,
+    val dmt_dispute_status: String,
+    val master_commission: String,
+    val pidData: String,
+    val retailer_commission: String,
+    val status: String,
+    val transactionType: String,
+    val transaction_ref_id: String,
+    val txn_ip: String,
+    val utr: String,
+) : Serializable

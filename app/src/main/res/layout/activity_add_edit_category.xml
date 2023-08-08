@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="@string/str_category_image"
+            android:text="@string/category_logo"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_13sdp" />
 
@@ -89,6 +89,35 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/roboto_medium"
+            android:text="Parent Category"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtParentCategoryName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint=""
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="100"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/str_category_name"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_13sdp" />
@@ -114,6 +143,37 @@
             android:visibility="visible" />
 
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Slug*"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSlug"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Enter Slug Name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="100"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+
+
     </LinearLayout>
 
     <ProgressBar
@@ -136,8 +196,8 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/btn_background"
-        android:gravity="center"
         android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
         android:paddingStart="@dimen/_50sdp"
         android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_50sdp"

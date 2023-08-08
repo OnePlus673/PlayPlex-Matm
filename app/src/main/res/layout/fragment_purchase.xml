@@ -6,12 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".activity.pos.saleList.SaleListActivity">
 
-
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/rectangle_grey"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Search Name or Invoice Number"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:maxLength="100"
+        android:paddingStart="@dimen/_10sdp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPurchase"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/edtSearch"
         android:layout_above="@id/tvNewPurchaseList"
         android:layout_marginBottom="@dimen/_5sdp"
         android:padding="@dimen/_10sdp" />

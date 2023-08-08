@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.itemlist.StockFragment">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     android:layout_marginHorizontal="@dimen/_10sdp">
+
+
+
+     <androidx.appcompat.widget.AppCompatTextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/_10sdp"
+         android:fontFamily="@font/roboto_medium"
+         android:text="Opening Stock"
+         android:textColor="@color/colorPrimary"
+         android:textSize="@dimen/_13sdp" />
+
+
+     <androidx.appcompat.widget.AppCompatEditText
+         android:id="@+id/edtOpeningStock"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_35sdp"
+         android:layout_gravity="center"
+         android:layout_marginTop="@dimen/_10sdp"
+         android:background="@drawable/rectangle_grey"
+         android:fontFamily="@font/roboto_regular"
+         android:hint="Opening Stock"
+         android:imeOptions="actionNext"
+         android:inputType="number"
+         android:maxLength="8"
+         android:paddingStart="@dimen/_10sdp"
+         android:textColor="@color/black"
+         android:textColorHint="@color/black"
+         android:textSize="@dimen/_12sdp"
+         android:visibility="visible" />
+
+
+     <androidx.appcompat.widget.AppCompatTextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/_10sdp"
+         android:fontFamily="@font/roboto_medium"
+         android:text="Opening Stock Date"
+         android:textColor="@color/colorPrimary"
+         android:textSize="@dimen/_13sdp" />
+
+
+     <androidx.appcompat.widget.AppCompatEditText
+         android:id="@+id/edtOpeningStockDate"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_35sdp"
+         android:layout_gravity="center"
+         android:layout_marginTop="@dimen/_10sdp"
+         android:background="@drawable/rectangle_grey"
+         android:focusable="false"
+         android:focusableInTouchMode="false"
+         android:fontFamily="@font/roboto_regular"
+         android:hint="Opening Stock Date"
+         android:imeOptions="actionNone"
+         android:inputType="none"
+         android:paddingStart="@dimen/_10sdp"
+         android:textColor="@color/black"
+         android:textColorHint="@color/black"
+         android:textSize="@dimen/_12sdp"
+         android:visibility="visible" />
+
+
+ </LinearLayout>
+
+</FrameLayout>

@@ -7,14 +7,13 @@
     android:elevation="@dimen/_8sdp"
     app:cardCornerRadius="@dimen/_8sdp">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp">
 
         <LinearLayout
-            android:layout_toStartOf="@id/ivDelete"
+            android:layout_toStartOf="@id/ivMore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -65,13 +64,15 @@
                 android:textSize="@dimen/_11sdp" />
 
         </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivDelete"
+            android:id="@+id/ivMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_delete_24" />
+            android:src="@drawable/ic_baseline_more_vert_24"
+            app:tint="@color/black" />
 
 
     </RelativeLayout>

@@ -53,100 +53,21 @@
         android:padding="@dimen/_10sdp"
         android:scrollbars="none">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/_10sdp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_profile_image"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-            <FrameLayout
-                android:id="@+id/frameImage"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivProfileImage"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_camera_alt_24" />
-
-
-            </FrameLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_warehouse_name"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/rectangle_grey"
-                android:orientation="horizontal">
-
-                <AutoCompleteTextView
-                    android:layout_centerVertical="true"
-                    android:id="@+id/acWareHouseName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:hint="@string/str_warehouse_name"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@id/image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-            </RelativeLayout>
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/str_name"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_13sdp" />
-
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edtName"
@@ -167,34 +88,14 @@
                 android:textSize="@dimen/_12sdp"
                 android:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_email"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
+        <LinearLayout
+            android:id="@+id/llAddForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            >
 
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="@string/str_email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:maxLength="100"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -204,7 +105,6 @@
                 android:text="@string/str_phonenumber"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_13sdp" />
-
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edtPhoneNumber"
@@ -225,67 +125,98 @@
                 android:textSize="@dimen/_12sdp"
                 android:visibility="visible" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/str_warehouse_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_toLeftOf="@+id/ivAddWareHouse"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/acWareHouseCustomer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:hint="@string/str_warehouse"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/ivAddWareHouse"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/bg_add_cat"
+                    android:padding="@dimen/_3sdp"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:tint="@color/material_grey_700" />
+
+            </RelativeLayout>
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_address"
+                android:text="@string/str_email"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_13sdp" />
 
-
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_gravity="start"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="start"
-                android:hint="@string/str_address"
-                android:imeOptions="actionDone"
-                android:inputType="textMultiLine"
-                android:maxLength="150"
-                android:maxLines="4"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_tax_number"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtTaxNumber"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/rectangle_grey"
                 android:fontFamily="@font/roboto_regular"
-                android:hint="@string/str_tax_number"
+                android:hint="@string/str_email"
                 android:imeOptions="actionNext"
-                android:inputType="text"
-                android:maxLength="50"
+                android:inputType="textEmailAddress"
+                android:maxLength="100"
                 android:paddingStart="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="visible" />
+
+
+
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -297,159 +228,33 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_13sdp" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtOpeningBalance"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
+                android:layout_height="@dimen/_25sdp"
+                app:tabTextColor="#AEA4A4"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="@string/str_opening_balance"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="20"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
+                app:tabSelectedTextColor="@color/white"
+                app:tabIndicatorColor="@color/white"
+                android:background="@color/blue">
+            </com.google.android.material.tabs.TabLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_balance_type"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/rectangle_grey"
-                android:orientation="horizontal">
-
-                <AutoCompleteTextView
-                    android:id="@+id/acBalanceType"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:layout_centerVertical="true"
-                    android:hint="@string/str_balance_type"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@id/image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-            </RelativeLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_credit_period"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtCreditPeriod"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="@string/str_credit_period"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="5"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_credit_limit"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtCreditLimit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="@string/str_credit_limit"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="10"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/str_billing_address"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13sdp" />
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtBillingAddress"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_gravity="start"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="start"
-                android:hint="@string/str_billing_address"
-                android:imeOptions="actionDone"
-                android:inputType="textMultiLine"
-                android:maxLength="150"
-                android:maxLines="4"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
+                android:layout_height="@dimen/_400sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                tools:layout_editor_absoluteX="8dp" />
 
         </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
 
     </androidx.core.widget.NestedScrollView>
 

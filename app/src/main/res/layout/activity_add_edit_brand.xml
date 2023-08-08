@@ -37,7 +37,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp" />
 
-
     </RelativeLayout>
 
 
@@ -93,7 +92,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_13sdp" />
 
-
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtBrandName"
             android:layout_width="match_parent"
@@ -103,6 +101,35 @@
             android:background="@drawable/rectangle_grey"
             android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_brand_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="100"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Slug"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSlug"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
+            android:hint=""
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLength="100"

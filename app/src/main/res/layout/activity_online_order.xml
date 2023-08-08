@@ -47,7 +47,6 @@
         android:id="@+id/rvOrderList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tvNewSaleList"
         android:layout_below="@id/llMain"
         android:layout_marginBottom="@dimen/_5sdp"
         android:padding="@dimen/_10sdp" />

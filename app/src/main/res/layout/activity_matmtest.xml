@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_light"
+    tools:context=".microatm.MATMTestActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/colorPrimary"
+        android:elevation="1dp"
+        android:visibility="gone"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_light"
+        android:layout_below="@id/custToolbar"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_navigation">
+
+            </FrameLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                app:itemIconSize="30dp"
+                app:labelVisibilityMode="labeled"
+                android:background="@color/white"
+                app:itemIconTint="@color/bnv_tab_item_foreground"
+                app:itemTextColor="@color/bnv_tab_item_foreground"
+                app:menu="@menu/bottom_navigation_menu" />
+
+        </RelativeLayout>
+        <!-- Main content -->
+    </FrameLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/custToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:padding="@dimen/_2sdp"
+            android:visibility="invisible"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+        <TextView
+           android:id="@+id/tvTitle"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingRight="@dimen/_5sdp"
+            android:text="PayPlex Dashboard"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="@dimen/_14sdp" />
+
+        <ImageView
+            android:id="@+id/ivLogout"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_baseline_power_settings_new_24" />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvTodaySale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@id/custToolbar"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_purple"
+
+            >
+            <TextView
+                android:id="@+id/tvTodaySaleTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:gravity="left"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/cvTodaySale"
+                android:text="Today Sale"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp" />
+            <TextView
+                android:id="@+id/tvTodaySale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:gravity="left"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/cvTodaySale"
+                android:text="\u20B9 0"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1">
+
+
+
+
+                    <LinearLayout
+                        android:id="@id/ll_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_success"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@id/ivMicreo"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:padding="@dimen/_1sdp"
+                                android:src="@drawable/success" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivMicreo"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="Successful"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/_10sdp"
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@id/rl_dmt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@id/imgDmt"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:padding="@dimen/_1sdp"
+                                android:src="@drawable/fail"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/imgDmt"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="Void"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/_10sdp"
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tvBankingServices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/cvTodaySale"
+        android:text="Payment Type"
+        android:textColor="@color/material_grey_800"
+        android:textStyle="bold"
+        android:textSize="@dimen/_13sdp"
+        android:visibility="gone"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvBanking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/tvBankingServices"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:background="@drawable/bg_purple"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="#F7F9FF"
+                android:layout_weight="1">
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:weightSum="3">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_microatm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_image_white"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ivMicreo"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_centerHorizontal="true"
+                            android:padding="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:src="@drawable/ic_atm_machine" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_below="@+id/ivMicreo"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:padding="@dimen/_1sdp"
+                            android:text="@string/micro_natm"
+                            android:textAlignment="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:textColor="@color/black" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_aeps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:background="@drawable/bg_image_white"
+
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imgDmt"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_centerHorizontal="true"
+                            android:padding="@dimen/_1sdp"
+                            android:src="@drawable/aeps"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            app:tint="@color/black"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_below="@+id/imgDmt"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:padding="@dimen/_1sdp"
+                            android:text="AEPS"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_pos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:background="@drawable/bg_image_white"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imgFlight"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:src="@drawable/pos_terminal" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_below="@+id/imgFlight"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_1sdp"
+                            android:text="POS"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </RelativeLayout>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llMicroAtm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/ll_1"
+                    android:background="@drawable/bg_tv"
+                    android:layout_marginHorizontal="@dimen/_30sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:visibility="gone"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/ll_Matm_CW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_cash_withdraw"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cash Withdrawl"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/material_grey_500"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/ll_Matm_BE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_balance_enq"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Balance Enquiry"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAEPS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/ll_1"
+                    android:background="@drawable/bg_tv"
+                    android:layout_marginHorizontal="@dimen/_30sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:visibility="gone"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/ll_AEPS_CW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_cash_withdraw"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="AEPS Cash Withdrawl"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/material_grey_500"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/ll_AEPS_BE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_balance_enq"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="AEPS Balance Enquiry"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llPOS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/ll_1"
+                    android:background="@drawable/bg_tv"
+                    android:layout_marginHorizontal="@dimen/_30sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:visibility="gone"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/ll_POS_PURCHASE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_cash_withdraw"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Purchase"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/material_grey_500"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/ll_POS_VOID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_balance_enq"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Void"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/material_grey_500"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/ll_POS_CASH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_cash_withdraw"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cash At POS"
+                            android:textColor="@color/material_grey_700"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/btnOnboardMerchant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Onboard Merchant"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/cvBanking"
+        android:background="@drawable/bg_button"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="gone"
+        />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

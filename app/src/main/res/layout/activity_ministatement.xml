@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ccc">
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_centerInParent="true"
+        android:elevation="1dp"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/custToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_loginpage"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:text="Ministatement"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp" />
+        <TextView
+            android:id="@+id/tvPrintReceipt"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@drawable/bg_kyc_verified"
+            android:layout_gravity="right"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="Print Reciept"
+            android:textColor="@color/material_green_500"
+            android:textStyle="bold" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/ll_dates"
+        android:weightSum="4"
+        android:background="@drawable/bg_loginpage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/custToolbar"
+        android:orientation="horizontal">
+
+
+        <TextView
+
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:id="@+id/tvTransDate"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_3sdp"
+            android:text="Date"
+            android:textColor="@color/white" />
+
+
+        <TextView
+            android:id="@+id/tvTransType"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:padding="@dimen/_3sdp"
+            android:text="Trans Type"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_3sdp"
+            android:text="Amount"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvNarration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/_3sdp"
+            android:text="Narration"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMiniStatement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_dates"
+
+        android:layout_marginTop="@dimen/_5sdp" />
+
+
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "261184476796",
+    "project_id": "payplex-pos",
+    "storage_bucket": "payplex-pos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261184476796:android:55caa29b4ea901af6edbf9",
+        "android_client_info": {
+          "package_name": "com.playplematm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261184476796-q3mbklooev4abjuto4mncubuctlbm8j4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBuwrzbpKHMcrjsz_2fopXe_OCweC3a_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261184476796-q3mbklooev4abjuto4mncubuctlbm8j4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

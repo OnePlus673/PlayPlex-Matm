@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.fragments.AccountFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerInParent="true"
+            android:elevation="@dimen/_10sdp"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_profiledetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp">
+
+
+            <ImageView
+                android:id="@+id/ivProfileImage"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_circle_upi"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/applogo" />
+
+            <TextView
+                android:id="@+id/tvProfileUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivProfileImage"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/user_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvProfileMobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvProfileUserName"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="Mobile number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/tvProfileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvProfileMobileNumber"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/tvMerchantId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvProfileEmail"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="Merchant ID"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/tvTerminalID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvMerchantId"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="Terminal ID"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_kyc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTerminalID"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/bg_kyc_verified">
+
+                <TextView
+                    android:id="@+id/tvKycNotVerified"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:gravity="center"
+                    android:text="@string/verify_kyc"
+                    android:textColor="@color/material_red_500"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvKycVerified"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:gravity="center"
+                    android:text="Kyc Verified"
+                    android:textColor="@color/material_green_500"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvUtilities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_kyc"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardElevation="@dimen/_5sdp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/utilities"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/rl_moneytransfers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_changepassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/ivChangePassword"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_money_transfer"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/icon_changepassword" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivChangePassword"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="@string/change_npassword"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/divider1"
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="@dimen/_50sdp"
+
+                            android:layout_gravity="center_vertical"
+                            android:background="#575757" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_changepin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/ivChangePin"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_landline"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/icon_change_pin" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivChangePin"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="@string/change_npin"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/divider3"
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="#575757" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_forgotpin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/ivForgotPin"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_gas"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/icon_forgotpin" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivForgotPin"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="@string/forgot_pin"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider9"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:layout_weight="1"
+                        android:background="@color/material_grey_700" />
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvUtilities"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardElevation="@dimen/_5sdp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="More"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_AboutUs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@id/ivChangePassword"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_mobile"
+                                android:padding="@dimen/_8sdp"
+
+                                android:src="@drawable/info"
+                                app:tint="@color/white"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivChangePassword"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="About Us"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@id/divider1"
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="@dimen/_50sdp"
+
+                            android:layout_gravity="center_vertical"
+                            android:background="#575757" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_privacypolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@id/ivChangePin"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_electricity"
+                                android:padding="@dimen/_8sdp"
+                                android:src="@drawable/privacypolicy"
+                                app:tint="@color/white"
+
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivChangePin"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="Privacy Policy"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@id/divider3"
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="#575757" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_get_support"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@id/ivForgotPin"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_landline"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/icon_call"
+                                app:tint="@color/white"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivForgotPin"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="Get Support"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>

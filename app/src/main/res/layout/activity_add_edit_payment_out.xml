@@ -235,26 +235,48 @@
         android:theme="@style/CircularProgress"
         android:visibility="gone" />
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvSave"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/btn_background"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:paddingStart="@dimen/_50sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_50sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        android:text="@string/str_save"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_13sdp" />
+        android:orientation="horizontal"
+        android:weightSum="2">
 
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="@string/str_save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvViewPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="@string/str_view_pdf"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
