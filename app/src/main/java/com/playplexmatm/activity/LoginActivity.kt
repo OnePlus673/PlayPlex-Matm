@@ -12,6 +12,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.playplexmatm.R
@@ -37,8 +39,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnAPICallCompleteListener
-{
+class LoginActivity : AppCompatActivity(), View.OnClickListener,
+    AppApiCalls.OnAPICallCompleteListener {
 
     lateinit var mContext: LoginActivity
     lateinit var etLoginMobile: EditText
@@ -49,6 +51,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnA
     private lateinit var otp: String
     lateinit var userModel: UserModel
     var token = ""
+    val auth = FirebaseAuth.getInstance()
 
     //    lateinit var tvSignUp: TextView
     var remember = false
@@ -60,12 +63,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnA
         initUI()
         addListner()
 
-        remember = AppPrefs.getBooleanPref("remember",this)
+        remember = AppPrefs.getBooleanPref("remember", this)
 
-        if(remember)
-        {
-            etLoginMobile.setText(AppPrefs.getStringPref("email",this))
-            etLoginPassword.setText(AppPrefs.getStringPref("password",this))
+        if (remember) {
+            etLoginMobile.setText(AppPrefs.getStringPref("email", this))
+            etLoginPassword.setText(AppPrefs.getStringPref("password", this))
 
             etLoginPassword.setTransformationMethod(PasswordTransformationMethod())
         }
@@ -100,40 +102,82 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnA
                     etLoginPassword.requestFocus()
                     etLoginPassword.error = "Invalid Password"
                 } else {
-                    val r = Random()
-                    otp = java.lang.String.format("%06d", r.nextInt(999999))
-                    Log.d("OTP", otp)
-                    loginApi(
-                        etLoginMobile.text.toString(), etLoginPassword.text.toString(),
-                        AppCommonMethods.getDeviceId(this),
-                        AppCommonMethods.getDeviceName(),
-                        otp
-                    )
+                    loginOrRegister(etLoginPassword.text.toString(),etLoginPassword.text.toString())
                 }
-/*
-                val email = etLoginMobile.text.toString()
-                val password = etLoginPassword.text.toString()
+                /*
+                                val email = etLoginMobile.text.toString()
+                                val password = etLoginPassword.text.toString()
 
-                AppPrefs.putStringPref("email",email,this)
-                AppPrefs.putStringPref("password",password,this)
-                if(cbRemember.isChecked)
-                {
-                    AppPrefs.putBooleanPref("remember",true,this)
-                }
-                else
-                {
-                    AppPrefs.putBooleanPref("remember",false,this)
-                }
+                                AppPrefs.putStringPref("email",email,this)
+                                AppPrefs.putStringPref("password",password,this)
+                                if(cbRemember.isChecked)
+                                {
+                                    AppPrefs.putBooleanPref("remember",true,this)
+                                }
+                                else
+                                {
+                                    AppPrefs.putBooleanPref("remember",false,this)
+                                }
 
-                val intent = Intent(this,MATMTestActivity::class.java)
-                startActivity(intent)
-                */
+                                val intent = Intent(this,MATMTestActivity::class.java)
+                                startActivity(intent)
+                                */
             }
 //            R.id.tvSignUp->{
 //              setLinkData()
 //            }
         }
     }
+    private fun loginOrRegister(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Login successful
+                    val user = auth.currentUser
+                    if (user != null) {
+                        // User is logged in
+                        Toast.makeText(this,"Signed in",Toast.LENGTH_SHORT).show()
+
+                    } else {
+                        // User data not found (should not happen in normal flow)
+                        Toast.makeText(this,"Signed in data not found",Toast.LENGTH_SHORT).show()
+
+                    }
+                } else {
+                    // Login failed
+                    val exception = task.exception
+                    if (exception is FirebaseAuthInvalidUserException) {
+                        // User with this email doesn't exist, so let's register them
+                        register(email, password)
+                    } else {
+                        // Other login errors
+                    }
+                }
+                val r = Random()
+                otp = java.lang.String.format("%06d", r.nextInt(999999))
+                Log.d("OTP", otp)
+                loginApi(
+                    etLoginMobile.text.toString(), etLoginPassword.text.toString(),
+                    AppCommonMethods.getDeviceId(this),
+                    AppCommonMethods.getDeviceName(),
+                    otp
+                )
+            }
+    }
+
+    private fun register(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this,"New user registered",Toast.LENGTH_SHORT).show()
+                    // Registration successful after login attempt
+                } else {
+                    Toast.makeText(this,"Registered failed",Toast.LENGTH_SHORT).show()
+                    // Registration failed after login attempt
+                }
+            }
+    }
+
 
     //API CALL FUNCTION DEFINITION
     private fun loginApi(
@@ -153,7 +197,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnA
             toast(getString(R.string.error_internet))
         }
     }
-
 
 
     private fun setPrefData(data: JSONObject, app: JSONObject) {
@@ -191,15 +234,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnA
 //                confirmOtp(otp,userModel,token)
                 val email = etLoginMobile.text.toString()
                 val password = etLoginPassword.text.toString()
-                AppPrefs.putStringPref("email",email,this)
-                AppPrefs.putStringPref("password",password,this)
-                if(cbRemember.isChecked)
-                {
-                    AppPrefs.putBooleanPref("remember",true,this)
-                }
-                else
-                {
-                    AppPrefs.putBooleanPref("remember",false,this)
+                AppPrefs.putStringPref("email", email, this)
+                AppPrefs.putStringPref("password", password, this)
+                if (cbRemember.isChecked) {
+                    AppPrefs.putBooleanPref("remember", true, this)
+                } else {
+                    AppPrefs.putBooleanPref("remember", false, this)
                 }
 //                confirmPinDialog()
                 val gson = Gson()
@@ -239,7 +279,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, AppApiCalls.OnA
             } else {
 
                 progress_bar.visibility = View.GONE
-                toast( message)
+                toast(message)
 
             }
         }

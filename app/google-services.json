@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "261184476796",
-    "project_id": "payplex-pos",
-    "storage_bucket": "payplex-pos.appspot.com"
+    "project_number": "803052979081",
+    "project_id": "payplex-matm",
+    "storage_bucket": "payplex-matm.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:261184476796:android:55caa29b4ea901af6edbf9",
+        "mobilesdk_app_id": "1:803052979081:android:b03bce9d807af0d63e1758",
         "android_client_info": {
           "package_name": "com.playplematm"
         }
       },
       "oauth_client": [
         {
-          "client_id": "261184476796-q3mbklooev4abjuto4mncubuctlbm8j4.apps.googleusercontent.com",
+          "client_id": "803052979081-qtt78is1tqd9ffo70328tb60caqm1dfk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDBuwrzbpKHMcrjsz_2fopXe_OCweC3a_Q"
+          "current_key": "AIzaSyBOfqIAJzGc18xK4A_DsNc-GY6WyY3_s6E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "261184476796-q3mbklooev4abjuto4mncubuctlbm8j4.apps.googleusercontent.com",
+              "client_id": "803052979081-qtt78is1tqd9ffo70328tb60caqm1dfk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
