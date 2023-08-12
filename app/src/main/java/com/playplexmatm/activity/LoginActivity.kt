@@ -102,7 +102,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
                     etLoginPassword.requestFocus()
                     etLoginPassword.error = "Invalid Password"
                 } else {
-                    loginOrRegister(etLoginPassword.text.toString(),etLoginPassword.text.toString())
+                    loginOrRegister("${etLoginMobile.text}@gmail.com","${etLoginPassword.text}1234")
                 }
                 /*
                                 val email = etLoginMobile.text.toString()
@@ -169,7 +169,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this,"New user registered",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Registered",Toast.LENGTH_SHORT).show()
                     // Registration successful after login attempt
                 } else {
                     Toast.makeText(this,"Registered failed",Toast.LENGTH_SHORT).show()

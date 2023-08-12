@@ -18,12 +18,13 @@
         android:title="Reports"
         />
 
-
-
     <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/ic_person_black_24dp"
-        android:title="Account"
-        app:tint="@color/black"/>
-
+        android:title="Account"/>
+    <item
+        android:id="@+id/navigation_bills"
+        android:icon="@drawable/ic_bills"
+        android:title="Bills"
+        />
 </menu>

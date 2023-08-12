@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchParties"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableTint="@color/black"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Search for parties"
+            android:imeOptions="actionNone"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/addIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_add"
+            app:layout_constraintStart_toStartOf="@+id/searchParties"
+            app:layout_constraintTop_toBottomOf="@+id/searchParties"
+            app:tint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/addNewParty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD NEW PARTY"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/addIcon"
+            app:layout_constraintStart_toEndOf="@+id/addIcon"
+            app:layout_constraintTop_toTopOf="@+id/addIcon"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp"
+            android:id="@+id/partiesRv"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addNewParty" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

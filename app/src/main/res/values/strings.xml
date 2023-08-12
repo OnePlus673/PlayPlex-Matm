@@ -261,6 +261,13 @@
     <string name="new_pin">New Pin</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
 
+    <string name="sale">Sale</string>
+    <string name="paymeny">Payment</string>
+    <string name="ledger">Ledger</string>
+    <string name="add_sale">Add Sale</string>
+    <string name="add_customer">Add Customer</string>
+
+
     <string-array name="arrayFingerCount">
 
         <item>1</item>

@@ -18,8 +18,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.playplexmatm.R
+import com.playplexmatm.activity.fragments.BillsFragment
 import com.playplexmatm.activity.fragments.ReportsFragment
 import com.playplexmatm.activity.fragments.SalesFragment
 import com.playplexmatm.aeps.model.UserModel
@@ -51,6 +53,7 @@ class MATMTestActivity : AppCompatActivity(), AppApiCalls.OnAPICallCompleteListe
     private val USER_LOGOUT: String = "USER_LOGOUT"
 
     var merchant_ref_id = ""
+    val auth = FirebaseAuth.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +100,10 @@ class MATMTestActivity : AppCompatActivity(), AppApiCalls.OnAPICallCompleteListe
                 }
                 R.id.navigation_account -> {
                     fragment = com.playplexmatm.activity.fragments.AccountFragment()
+                    openFragment(fragment)
+                }
+                R.id.navigation_bills -> {
+                    fragment = BillsFragment()
                     openFragment(fragment)
                 }
                 else -> null
@@ -313,14 +320,12 @@ class MATMTestActivity : AppCompatActivity(), AppApiCalls.OnAPICallCompleteListe
             val gson = Gson()
             val json = AppPrefs.getStringPref(AppConstants.USER_MODEL, this)
             userModel = gson.fromJson(json, UserModel::class.java)
-
+            auth.signOut()
             userLogout(
                 userModel.cus_id, AppCommonMethods.getDeviceId(this), AppCommonMethods.getDeviceName(),
                 userModel.cus_pin, userModel.cus_pass,
                 userModel.cus_mobile, userModel.cus_type
             )
-
-
             dialog.cancel()
         }
         builder1.setNegativeButton(

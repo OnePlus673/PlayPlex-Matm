@@ -83,12 +83,22 @@
 
     <color name="whiteTextColor">#fff</color>
 
-    <style name="ThemeOverlay.MaterialComponents.Dialog" parent="Base.ThemeOverlay.MaterialComponents.Dialog"/>
+    <style name="ThemeOverlay.MaterialComponents.Dialog" parent="Base.ThemeOverlay.MaterialComponents.Dialog" />
 
-<style name="Widget.MaterialComponents.MaterialCalendar.Fullscreen" parent="Widget.MaterialComponents.MaterialCalendar">
-<item name="android:windowFullscreen">true</item>
-<item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Window.Fullscreen</item>
-</style>
+    <style name="Widget.MaterialComponents.MaterialCalendar.Fullscreen" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Window.Fullscreen
+        </item>
+    </style>
+    <!-- bottom sheet style-->
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_bg</item>
+    </style>
 
 
 </resources>
