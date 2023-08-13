@@ -5,7 +5,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_15sdp">
+
+        <ImageView
+            android:id="@+id/cross"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/credopay_ic_close_primary"
+            tools:ignore="MissingConstraints"
+            app:tint="@color/black" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/searchParties"
@@ -26,7 +37,7 @@
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cross"
             tools:ignore="MissingConstraints" />
 
         <ImageView
@@ -53,9 +64,9 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/partiesRv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_350sdp"
-            android:id="@+id/partiesRv"
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

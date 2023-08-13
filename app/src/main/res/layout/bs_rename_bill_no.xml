@@ -22,28 +22,30 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/set_ringtone_group"
+            app:layout_constraintBottom_toTopOf="@+id/etName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/set_ringtone_group"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/roboto_regular"
             android:hint="Enter the bill number"
+            android:imeOptions="actionNone"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/cancel_button"
             app:layout_constraintTop_toBottomOf="@+id/bs_title"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+            tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancel_button"
@@ -59,7 +61,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/divider"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/set_ringtone_group" />
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
 
         <View
             android:id="@+id/divider"
@@ -69,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/save_button"
             app:layout_constraintStart_toEndOf="@+id/cancel_button"
-            app:layout_constraintTop_toBottomOf="@+id/set_ringtone_group" />
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_button"
@@ -84,7 +86,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/set_ringtone_group" />
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

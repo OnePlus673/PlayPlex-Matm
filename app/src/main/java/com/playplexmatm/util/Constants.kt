@@ -28,6 +28,5 @@ class Constants {
         const val KEY_Orderqty = "listqty"
         const val KEY_Ordervid = "listvid"
         const val KEY_Ordername = "listname"
-        const val ADDNEWPARTY = "add_new_party"
     }
 }

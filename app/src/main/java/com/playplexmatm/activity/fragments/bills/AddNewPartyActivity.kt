@@ -1,5 +1,7 @@
 package com.playplexmatm.activity.fragments.bills
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.databinding.DataBindingUtil
@@ -7,6 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.playplexmatm.R
 import com.playplexmatm.databinding.ActivityAddNewPartyBinding
+import com.playplexmatm.extentions.CUSTOMER_NAME
+import com.playplexmatm.extentions.CUSTOMER_PHONE
 import com.playplexmatm.util.toast
 
 class AddNewPartyActivity : BaseActivity() {
@@ -44,11 +48,21 @@ class AddNewPartyActivity : BaseActivity() {
         val userUid = user?.uid
         if (userUid != null) {
             val userRef = database.reference.child("customers").child(userUid)
-            userRef.child("name").setValue(partyName)
-            userRef.child("phone").setValue(phoneNumber)
+            val newCustomerRef = userRef.push()
+            newCustomerRef.child("name").setValue(partyName)
+            newCustomerRef.child("phone").setValue(phoneNumber)
             toast("Customer added")
-        }else {
+            sendCustomerData(partyName, phoneNumber)
+        } else {
             toast("user is not logged in")
         }
+    }
+
+    private fun sendCustomerData(name: String, phone: String) {
+        val returnIntent = Intent()
+        returnIntent.putExtra(CUSTOMER_NAME, name)
+        returnIntent.putExtra(CUSTOMER_PHONE, phone)
+        setResult(Activity.RESULT_OK, returnIntent)
+        finish()
     }
 }

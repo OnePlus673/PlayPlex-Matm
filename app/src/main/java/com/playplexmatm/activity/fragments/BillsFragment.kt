@@ -9,6 +9,9 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.playplexmatm.R
 import com.playplexmatm.adapter.BillsViewPagerAdapter
+import com.playplexmatm.microatm.MATMTestActivity
+import kotlinx.android.synthetic.main.activity_matmtest.custToolbar
+import kotlinx.android.synthetic.main.activity_matmtest.view.tvTitle
 
 class BillsFragment : Fragment() {
 
@@ -20,6 +23,7 @@ class BillsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_bills, container, false)
+        (activity as MATMTestActivity).custToolbar.tvTitle.text = "Bills"
         tabs = view.findViewById(R.id.tabs)
         viewPager = view.findViewById(R.id.view_pager)
         setUpViewPager()
