@@ -165,7 +165,7 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
     }
 
     private fun paymentMode() {
-        val options = arrayOf("Cash", "Debit Card", "Credit Card", "AEPS", "UPI", "Unpaid")
+        val options = arrayOf("Unpaid", "Cash", "Debit Card", "Credit Card", "AEPS", "UPI")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.paymentModeSpinner.adapter = adapter
@@ -178,7 +178,9 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                     id: Long
                 ) {
                     val selectedItem = options[position]
-                    // Do something with the selected item
+                    if (selectedItem != "Unpaid") {
+                        binding.receivedContainer.beVisible()
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {

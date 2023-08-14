@@ -319,11 +319,11 @@
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:inputType="number"
                 android:background="@drawable/rectangle_grey"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="Enter Amount"
                 android:imeOptions="actionNone"
+                android:inputType="number"
                 android:paddingStart="@dimen/_20sdp"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -336,33 +336,12 @@
                 app:layout_constraintTop_toTopOf="@+id/saleBillAmount"
                 tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/paymentMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:text="Select payment mode"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/saleBillAmount"
-                tools:ignore="MissingConstraints" />
-
-            <Spinner
-                android:id="@+id/paymentModeSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paymentMode" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notesContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/notesContainer"
                 android:layout_marginTop="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@+id/paymentModeSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/saleBillAmount"
                 tools:ignore="MissingConstraints">
 
                 <ImageView
@@ -371,9 +350,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_note"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/colorPrimary" />
 
                 <TextView
@@ -399,11 +378,103 @@
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/notesIcon"
                     app:layout_constraintTop_toBottomOf="@+id/addNotesTitle"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/paymentMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="Select payment mode"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/notesContainer"
+                tools:ignore="MissingConstraints" />
+
+            <Spinner
+                android:id="@+id/paymentModeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paymentMode" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/receivedContainer"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/paymentModeSpinner">
+
+                <TextView
+                    android:id="@+id/receivedTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Received"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/balanceDueTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/receivedAmount"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rectangle_grey"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="Received Amount"
+                    android:imeOptions="actionNone"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/receivedTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintTop_toTopOf="@+id/receivedTv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/balanceDueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Balance Due"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/receivedTv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/balanceDue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/balanceDueTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/balanceDueTv"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <Button
                 android:id="@+id/generateSaleBill"
                 android:layout_width="match_parent"
