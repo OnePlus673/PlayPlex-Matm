@@ -3,7 +3,9 @@ package com.playplexmatm.activity.fragments.bills
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -23,6 +25,7 @@ import com.playplexmatm.extentions.CUSTOMER_PHONE
 import com.playplexmatm.extentions.beGone
 import com.playplexmatm.extentions.beInvisible
 import com.playplexmatm.extentions.beVisible
+import com.playplexmatm.extentions.generateUniqueRandom
 import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.model.bills.SaleBillRecord
 import com.playplexmatm.util.*
@@ -32,6 +35,11 @@ import java.util.Locale
 
 class AddNewSaleActivity : BaseActivity(), CustomerClick {
     private lateinit var binding: ActivityAddNewSaleBinding
+
+    companion object {
+        var customerClick: CustomerClick? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_sale)
@@ -41,6 +49,8 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
     private fun setUpViews() {
         defaultDate()
         paymentMode()
+        paymentDue()
+        binding.billNumber.text = generateUniqueRandom().toString()
         binding.billNumberIcon.setOnClickListener {
             bsRenameBillNumber {
                 binding.billNumber.text = it
@@ -52,27 +62,24 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
             }
         }
         binding.searchParties.setOnClickListener {
-            binding.loadingBar.beVisible()
-            fetchCustomerData(
-                onDataLoaded = { customerList ->
-                    binding.loadingBar.beGone()
-                    val adapter = CustomerAdapter(this, customerList, this)
-                    bsShowPartiesList(adapter) { callback ->
-                        when (callback) {
-                            ADD_NEW_PARTY -> {
-                                startActivityForResult(
-                                    Intent(this, AddNewPartyActivity::class.java),
-                                    ADD_NEW_PARTY_REQUEST
-                                )
-                            }
-                        }
+//            fetchCustomerData(
+//                onDataLoaded = { customerList ->
+
+            bsShowPartiesList(this@AddNewSaleActivity) { callback ->
+                when (callback) {
+                    ADD_NEW_PARTY -> {
+                        startActivityForResult(
+                            Intent(this, AddNewPartyActivity::class.java),
+                            ADD_NEW_PARTY_REQUEST
+                        )
                     }
-                },
-                onError = { error ->
-                    binding.loadingBar.beGone()
-                    Log.wtf("Customer fetch error", error.toString())
                 }
-            )
+            }
+//                },
+//                onError = { error ->
+//                    Log.wtf("Customer fetch error", error.toString())
+//                }
+//            )
         }
         binding.addNewParty.setOnClickListener {
             startActivityForResult(
@@ -87,10 +94,32 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
         }
         binding.generateSaleBill.setOnClickListener {
             saveSaleBillRecord()
-            Log.wtf("customer detail", "${binding.customerName.text}${binding.customerPhone.text}")
-            Log.wtf("amount", binding.amount.text.toString())
         }
         binding.ivBack.setOnClickListener { finish() }
+    }
+
+    private fun paymentDue() {
+        binding.receivedAmount.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(text: Editable?) {
+                val totalSaleAmount = binding.amount.text.toString().trim().toIntOrNull() ?: 0
+                val receivedAmount =
+                    binding.receivedAmount.text.toString().trim().toIntOrNull() ?: 0
+                if (totalSaleAmount > 0) {
+                    if (receivedAmount <= totalSaleAmount) {
+                        val remainingAmount = totalSaleAmount - receivedAmount
+                        binding.balanceDue.text = remainingAmount.toString()
+                    } else {
+                        binding.receivedAmount.error = "Should be smaller than sale bill"
+                    }
+                } else {
+                    binding.receivedAmount.error = "Enter sale bill amount first"
+                }
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
     }
 
     private fun saveSaleBillRecord() {
@@ -102,6 +131,13 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
             binding.amount.error = "Amount is required."
             return
         }
+        if (binding.paymentModeSpinner.selectedItem != "Unpaid") {
+            if (TextUtils.isEmpty(binding.receivedAmount.text.toString().trim())) {
+                binding.receivedAmount.error = "Amount is required."
+                return
+            }
+        }
+
         if (currentUser != null) {
             val userId = currentUser.uid
             val saleBillRef: DatabaseReference = database.reference.child("sales").child(userId)
@@ -117,6 +153,8 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                 binding.date.text.toString().trim(),
                 customer,
                 binding.amount.text.toString().trim(),
+                binding.receivedAmount.text.toString().trim(),
+                binding.balanceDue.text.toString().trim(),
                 binding.paymentModeSpinner.selectedItem.toString(),
                 binding.notesHere.text.toString().trim()
             )
@@ -180,6 +218,8 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                     val selectedItem = options[position]
                     if (selectedItem != "Unpaid") {
                         binding.receivedContainer.beVisible()
+                    } else {
+                        binding.receivedContainer.beGone()
                     }
                 }
 

@@ -1,9 +1,14 @@
 package com.playplexmatm.activity.fragments.bills
 
 import android.app.DatePickerDialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -13,17 +18,23 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.playplexmatm.R
+import com.playplexmatm.activity.fragments.bills.AddNewSaleActivity.Companion.customerClick
 import com.playplexmatm.adapter.bills.CustomerAdapter
+import com.playplexmatm.adapter.holder.CustomerClick
 import com.playplexmatm.databinding.BsAddNotesBinding
 import com.playplexmatm.databinding.BsRenameBillNoBinding
 import com.playplexmatm.databinding.BsShowPartiesBinding
 import com.playplexmatm.extentions.ADD_NEW_PARTY
+import com.playplexmatm.extentions.beGone
+import com.playplexmatm.extentions.beVisible
 import com.playplexmatm.model.bills.Customer
+import com.playplexmatm.util.toast
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-abstract class BaseActivity : AppCompatActivity() {
+
+abstract class BaseActivity : AppCompatActivity(), CustomerClick {
     private var setRenameBillNoCallBack: (String) -> Unit = {}
     private var setShowPartiesCallBack: (String) -> Unit = {}
     private var setDateCallBack: (String) -> Unit = {}
@@ -31,33 +42,68 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
+    lateinit var adapter:CustomerAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
     }
 
-    fun bsShowPartiesList(adapter: CustomerAdapter, setShowPartiesCallBack: (String) -> Unit) {
+    fun bsShowPartiesList(context: Context, setShowPartiesCallBack: (String) -> Unit) {
         this.setShowPartiesCallBack = setShowPartiesCallBack
-        val setRingtoneBottomSheet: BottomSheetDialog?
-        setRingtoneBottomSheet = BottomSheetDialog(this, R.style.BottomSheetDialog)
+        val bsShowParties = BottomSheetDialog(this, R.style.BottomSheetDialog)
         val binding = BsShowPartiesBinding.inflate(LayoutInflater.from(this))
-        setRingtoneBottomSheet.setContentView(binding.root)
-        binding.partiesRv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        binding.partiesRv.adapter = adapter
-
+        bsShowParties.setContentView(binding.root)
+        binding.loadingBar.beVisible()
+        fetchCustomerData(
+            onDataLoaded = { customerList ->
+                binding.loadingBar.beGone()
+                adapter = CustomerAdapter(context, customerList, this@BaseActivity)
+                binding.partiesRv.layoutManager =
+                    LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+                binding.partiesRv.adapter = adapter
+                searchParties(binding.searchParties,customerList)
+            },
+            onError = { error ->
+                binding.loadingBar.beGone()
+                Log.wtf("Customer fetch error", error.toString())
+            }
+        )
         binding.addNewParty.setOnClickListener {
             setShowPartiesCallBack(ADD_NEW_PARTY)
-            if (setRingtoneBottomSheet.isShowing) {
-                setRingtoneBottomSheet.dismiss()
+            if (bsShowParties.isShowing) {
+                bsShowParties.dismiss()
             }
         }
         binding.cross.setOnClickListener {
-            setRingtoneBottomSheet.dismiss()
+            bsShowParties.dismiss()
         }
-        setRingtoneBottomSheet.show()
+        bsShowParties.show()
     }
 
+    private fun searchParties(searchParties:EditText,customerList:List<Customer>) {
+        searchParties.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString().trim()
+                filterCustomers(query,customerList)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+    }
+    private fun filterCustomers(query: String,customerList:List<Customer>) {
+        val filteredList: ArrayList<Customer> = ArrayList()
+        for (list in customerList) {
+            if (list.name.toLowerCase().contains(query)) {
+                filteredList.add(list)
+            }
+        }
+        adapter.updateList(filteredList)
+    }
     fun bsRenameBillNumber(setRenameBillNoCallBack: (String) -> Unit) {
         this.setRenameBillNoCallBack = setRenameBillNoCallBack
         val setRingtoneBottomSheet: BottomSheetDialog?
@@ -77,6 +123,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         setRingtoneBottomSheet.show()
     }
+
     fun bsAddNotes(setNotesCallBack: (String) -> Unit) {
         this.setNotesCallBack = setNotesCallBack
         val setRingtoneBottomSheet: BottomSheetDialog?
@@ -122,7 +169,7 @@ abstract class BaseActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    fun fetchCustomerData(
+    private fun fetchCustomerData(
         onDataLoaded: (List<Customer>) -> Unit,
         onError: (DatabaseError) -> Unit
     ) {
@@ -151,5 +198,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun customerClick(customer: Customer) {
+        customerClick?.customerClick(customer)
+    }
 }

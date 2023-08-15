@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playplexmatm.adapter.holder.SalesViewHolder
 import com.playplexmatm.databinding.SalesItemBinding
+import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.model.bills.SaleBillRecord
 
 class SalesAdapter(
     private val context: Context,
-    private val data: List<SaleBillRecord>
+    private var data: List<SaleBillRecord>
 ) :
     RecyclerView.Adapter<SalesViewHolder>() {
 
@@ -27,6 +28,10 @@ class SalesAdapter(
         val binding =
             SalesItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         return SalesViewHolder(binding, context)
+    }
+    fun updateList(files: ArrayList<SaleBillRecord>) {
+        data = files
+        notifyDataSetChanged()
     }
 
 }

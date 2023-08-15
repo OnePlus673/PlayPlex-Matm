@@ -136,7 +136,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
                     val user = auth.currentUser
                     if (user != null) {
                         // User is logged in
-                        Toast.makeText(this,"Signed in",Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this,"Signed in",Toast.LENGTH_SHORT).show()
 
                     } else {
                         // User data not found (should not happen in normal flow)
@@ -169,7 +169,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this,"Registered",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this,"Registered",Toast.LENGTH_SHORT).show()
                     // Registration successful after login attempt
                 } else {
                     Toast.makeText(this,"Registered failed",Toast.LENGTH_SHORT).show()

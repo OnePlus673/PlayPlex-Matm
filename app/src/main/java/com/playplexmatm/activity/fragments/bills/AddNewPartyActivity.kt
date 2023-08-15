@@ -11,6 +11,8 @@ import com.playplexmatm.R
 import com.playplexmatm.databinding.ActivityAddNewPartyBinding
 import com.playplexmatm.extentions.CUSTOMER_NAME
 import com.playplexmatm.extentions.CUSTOMER_PHONE
+import com.playplexmatm.extentions.beVisible
+import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.util.toast
 
 class AddNewPartyActivity : BaseActivity() {
@@ -28,6 +30,9 @@ class AddNewPartyActivity : BaseActivity() {
         database = FirebaseDatabase.getInstance()
         binding.addCustomer.setOnClickListener {
             saveNewCustomer()
+        }
+        binding.addGstinAddress.setOnClickListener {
+            binding.gstinContainer.beVisible()
         }
         binding.ivBack.setOnClickListener { finish() }
     }
@@ -51,6 +56,12 @@ class AddNewPartyActivity : BaseActivity() {
             val newCustomerRef = userRef.push()
             newCustomerRef.child("name").setValue(partyName)
             newCustomerRef.child("phone").setValue(phoneNumber)
+            newCustomerRef.child("gstin").setValue(binding.gstin.text.toString().trim())
+            newCustomerRef.child("buildingNumber").setValue(binding.buildingNumber.text.toString().trim())
+            newCustomerRef.child("area").setValue(binding.area.text.toString().trim())
+            newCustomerRef.child("pinCode").setValue(binding.pinCode.text.toString().trim())
+            newCustomerRef.child("city").setValue(binding.city.text.toString().trim())
+            newCustomerRef.child("state").setValue(binding.state.text.toString().trim())
             toast("Customer added")
             sendCustomerData(partyName, phoneNumber)
         } else {

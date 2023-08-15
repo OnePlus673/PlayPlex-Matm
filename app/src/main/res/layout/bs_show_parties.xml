@@ -26,14 +26,12 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/rectangle_grey"
             android:drawableStart="@drawable/ic_baseline_search_24"
-            android:drawableTint="@color/black"
+            android:drawableTint="@color/gray"
             android:fontFamily="@font/roboto_regular"
             android:hint="Search for parties"
             android:imeOptions="actionNone"
             android:paddingStart="@dimen/_10sdp"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +60,15 @@
             app:layout_constraintStart_toEndOf="@+id/addIcon"
             app:layout_constraintTop_toTopOf="@+id/addIcon"
             tools:ignore="MissingConstraints" />
-
+        <ProgressBar
+            android:id="@+id/loadingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/partiesRv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/partiesRv" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/partiesRv"
             android:layout_width="match_parent"
