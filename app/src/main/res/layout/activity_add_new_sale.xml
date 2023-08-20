@@ -43,388 +43,225 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/generateSaleBill"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-            <TextView
-                android:id="@+id/tvBillNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sale Bill Number"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/billNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/tvBillNumber"
-                tools:ignore="MissingConstraints" />
-
-            <ImageView
-                android:id="@+id/billNumberIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:src="@drawable/ic_edit"
-                app:layout_constraintBottom_toBottomOf="@+id/billNumber"
-                app:layout_constraintStart_toEndOf="@+id/billNumber"
-                app:layout_constraintTop_toTopOf="@+id/billNumber" />
-
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_date"
-                app:layout_constraintBottom_toBottomOf="@+id/date"
-                app:layout_constraintEnd_toStartOf="@+id/date"
-                app:layout_constraintTop_toTopOf="@+id/date" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="11 Aug 23"
-                android:textColor="@color/black"
-                android:textSize="19sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDate"
-                tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:ignore="MissingConstraints">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/selectedCustomer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/saleBillAmount"
-                app:layout_constraintTop_toBottomOf="@+id/billNumber">
-
-                <ImageView
-                    android:id="@+id/customerIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_person"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/colorPrimary" />
+                android:padding="@dimen/_10sdp">
 
                 <TextView
-                    android:id="@+id/customerName"
+                    android:id="@+id/tvBillNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Customer"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/customerIcon"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/customerPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="1234567"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/customerName"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/customerPhone1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="23456789"
-                    android:textSize="17sp"
-                    app:layout_constraintStart_toEndOf="@+id/customerIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/customerName"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/customerContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/billNumber">
-
-                <TextView
-                    android:id="@+id/billTo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bill to"
+                    android:text="Sale Bill Number"
                     android:textColor="@color/black"
                     android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints" />
 
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/searchParties"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rectangle_grey"
-                    android:drawableStart="@drawable/ic_baseline_search_24"
-                    android:drawableTint="@color/black"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:fontFamily="@font/roboto_regular"
-                    android:hint="Search for your parties"
-                    android:imeOptions="actionNone"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:singleLine="true"
+                <TextView
+                    android:id="@+id/billNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/billTo"
-                    tools:ignore="MissingConstraints" />
-
-                <ImageView
-                    android:id="@+id/addIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_add"
-                    app:layout_constraintStart_toStartOf="@+id/searchParties"
-                    app:layout_constraintTop_toBottomOf="@+id/searchParties"
-                    app:tint="@color/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/addNewParty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ADD NEW PARTY"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="17sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/addIcon"
-                    app:layout_constraintStart_toEndOf="@+id/addIcon"
-                    app:layout_constraintTop_toTopOf="@+id/addIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBillNumber"
                     tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/tvItems"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="@dimen/_25sdp"-->
-            <!--                android:text="Items"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="15sp"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/customerContainer"-->
-            <!--                tools:ignore="MissingConstraints" />-->
-
-            <!--            <androidx.appcompat.widget.AppCompatEditText-->
-            <!--                android:id="@+id/enterItem"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_35sdp"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:layout_marginTop="@dimen/_10sdp"-->
-            <!--                android:background="@drawable/rectangle_grey"-->
-            <!--                android:drawableStart="@drawable/ic_inventory"-->
-            <!--                android:drawableTint="@color/black"-->
-            <!--                android:fontFamily="@font/roboto_regular"-->
-            <!--                android:hint="Enter items from inventory"-->
-            <!--                android:imeOptions="actionNone"-->
-            <!--                android:paddingStart="@dimen/_10sdp"-->
-            <!--                android:singleLine="true"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textColorHint="@color/black"-->
-            <!--                android:textSize="@dimen/_12sdp"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/tvItems"-->
-            <!--                tools:ignore="MissingConstraints" />-->
-
-            <!--            <ImageView-->
-            <!--                android:id="@+id/addItemIcon"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:src="@drawable/ic_add"-->
-            <!--                app:layout_constraintStart_toStartOf="@+id/enterItem"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/enterItem"-->
-            <!--                app:tint="@color/colorPrimary" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/addNewItem"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="ADD NEW ITEM"-->
-            <!--                android:textColor="@color/colorPrimary"-->
-            <!--                android:textSize="17sp"-->
-            <!--                android:textStyle="bold"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@+id/addItemIcon"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/addItemIcon"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/addItemIcon"-->
-            <!--                tools:ignore="MissingConstraints" />-->
-
-            <TextView
-                android:id="@+id/saleBillAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_40sdp"
-                android:text="Sale Bill Amount"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/customerContainer"
-                tools:ignore="MissingConstraints" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/amount"
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="Enter Amount"
-                android:imeOptions="actionNone"
-                android:inputType="number"
-                android:paddingStart="@dimen/_20sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/saleBillAmount"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintStart_toEndOf="@+id/saleBillAmount"
-                app:layout_constraintTop_toTopOf="@+id/saleBillAmount"
-                tools:ignore="MissingConstraints" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/notesContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@+id/saleBillAmount"
-                tools:ignore="MissingConstraints">
 
                 <ImageView
-                    android:id="@+id/notesIcon"
+                    android:id="@+id/billNumberIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_note"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/colorPrimary" />
+                    android:layout_marginStart="6dp"
+                    android:src="@drawable/ic_edit"
+                    app:layout_constraintBottom_toBottomOf="@+id/billNumber"
+                    app:layout_constraintStart_toEndOf="@+id/billNumber"
+                    app:layout_constraintTop_toTopOf="@+id/billNumber" />
 
                 <TextView
-                    android:id="@+id/addNotesTitle"
+                    android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:text="Add Notes"
+                    android:text="Date"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_date"
+                    app:layout_constraintBottom_toBottomOf="@+id/date"
+                    app:layout_constraintEnd_toStartOf="@+id/date"
+                    app:layout_constraintTop_toTopOf="@+id/date" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11 Aug 23"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/selectedCustomer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/saleBillAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/billNumber">
+
+                    <ImageView
+                        android:id="@+id/customerIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_person"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/customerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="Customer"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/customerIcon"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/customerPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="1234567"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/customerName"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/customerPhone1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="23456789"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toEndOf="@+id/customerIcon"
+                        app:layout_constraintTop_toBottomOf="@+id/customerName"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/customerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/billNumber">
+
+                    <TextView
+                        android:id="@+id/billTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bill to"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/searchParties"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:drawableStart="@drawable/ic_baseline_search_24"
+                        android:drawableTint="@color/black"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/roboto_regular"
+                        android:hint="Search for your parties"
+                        android:imeOptions="actionNone"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/billTo"
+                        tools:ignore="MissingConstraints" />
+
+                    <ImageView
+                        android:id="@+id/addIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_add"
+                        app:layout_constraintStart_toStartOf="@+id/searchParties"
+                        app:layout_constraintTop_toBottomOf="@+id/searchParties"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/addNewParty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ADD NEW PARTY"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/addIcon"
+                        app:layout_constraintStart_toEndOf="@+id/addIcon"
+                        app:layout_constraintTop_toTopOf="@+id/addIcon"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/saleBillAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:text="Sale Bill Amount"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/notesIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/notesHere"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:text="Write notes here"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/notesIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/addNotesTitle"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/paymentMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:text="Select payment mode"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/notesContainer"
-                tools:ignore="MissingConstraints" />
-
-            <Spinner
-                android:id="@+id/paymentModeSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paymentMode" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/receivedContainer"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@+id/paymentModeSpinner">
-
-                <TextView
-                    android:id="@+id/receivedTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Received"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/balanceDueTv"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/customerContainer"
                     tools:ignore="MissingConstraints" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/receivedAmount"
+                    android:id="@+id/amount"
                     android:layout_width="@dimen/_130sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/rectangle_grey"
                     android:fontFamily="@font/roboto_regular"
-                    android:hint="Received Amount"
+                    android:hint="Enter Amount"
                     android:imeOptions="actionNone"
                     android:inputType="number"
                     android:paddingStart="@dimen/_20sdp"
@@ -432,47 +269,164 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/receivedTv"
+                    app:layout_constraintBottom_toBottomOf="@+id/saleBillAmount"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintTop_toTopOf="@+id/receivedTv"
+                    app:layout_constraintStart_toEndOf="@+id/saleBillAmount"
+                    app:layout_constraintTop_toTopOf="@+id/saleBillAmount"
                     tools:ignore="MissingConstraints" />
 
-                <TextView
-                    android:id="@+id/balanceDueTv"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/notesContainer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Balance Due"
-                    android:textAllCaps="false"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/receivedTv"
-                    tools:ignore="MissingConstraints" />
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/saleBillAmount"
+                    tools:ignore="MissingConstraints">
+
+                    <ImageView
+                        android:id="@+id/notesIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_note"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/addNotesTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:text="Add Notes"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/notesIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/notesHere"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:text="Write notes here"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/notesIcon"
+                        app:layout_constraintTop_toBottomOf="@+id/addNotesTitle"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/balanceDue"
+                    android:id="@+id/paymentMode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:text="Select payment mode"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/balanceDueTv"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/balanceDueTv"
+                    app:layout_constraintTop_toBottomOf="@+id/notesContainer"
                     tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/generateSaleBill"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/round_btn_bg"
-                android:text="Generate Sale Bill"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Spinner
+                    android:id="@+id/paymentModeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentMode" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/receivedContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentModeSpinner">
+
+                    <TextView
+                        android:id="@+id/receivedTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Received"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/balanceDueTv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/receivedAmount"
+                        android:layout_width="@dimen/_130sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/roboto_regular"
+                        android:hint="Received Amount"
+                        android:imeOptions="actionNone"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/receivedTv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintTop_toTopOf="@+id/receivedTv"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/balanceDueTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="Balance Due"
+                        android:textAllCaps="false"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/receivedTv"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/balanceDue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/balanceDueTv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/balanceDueTv"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/generateSaleBill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_btn_bg"
+            android:text="Generate Sale Bill"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

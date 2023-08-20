@@ -13,7 +13,7 @@
         />
     <item
         android:id="@+id/navigation_sales"
-        android:icon="@drawable/rupee24"
+        android:icon="@drawable/ic_inr"
         android:title="Sales"/>
 
     <item

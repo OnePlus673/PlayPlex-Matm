@@ -1,9 +1,5 @@
 package com.playplexmatm.activity.fragments
 
-import `in`.credopay.payment.sdk.CredopayPaymentConstants
-import `in`.credopay.payment.sdk.PaymentActivity
-import `in`.credopay.payment.sdk.PaymentManager
-import `in`.credopay.payment.sdk.Utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
@@ -19,19 +15,24 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.playplexmatm.R
 import com.playplexmatm.aeps.model.UserModel
 import com.playplexmatm.aeps.network_calls.AppApiCalls
+import com.playplexmatm.databinding.BsAddNotesBinding
+import com.playplexmatm.extentions.CANCEL
+import com.playplexmatm.extentions.GO_TO_SDK
 import com.playplexmatm.microatm.MATMTestActivity
 import com.playplexmatm.microatm.MatmOnboardingActivity
 import com.playplexmatm.util.AppCommonMethods
 import com.playplexmatm.util.AppConstants
 import com.playplexmatm.util.AppPrefs
 import com.playplexmatm.util.toast
+import `in`.credopay.payment.sdk.CredopayPaymentConstants
+import `in`.credopay.payment.sdk.PaymentActivity
+import `in`.credopay.payment.sdk.PaymentManager
+import `in`.credopay.payment.sdk.Utils
 import kotlinx.android.synthetic.main.activity_matmtest.*
 import kotlinx.android.synthetic.main.activity_matmtest.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -49,7 +50,6 @@ import kotlinx.android.synthetic.main.fragment_home.view.progress_bar
 import kotlinx.android.synthetic.main.fragment_home.view.rl_aeps
 import kotlinx.android.synthetic.main.fragment_home.view.rl_microatm
 import kotlinx.android.synthetic.main.fragment_home.view.rl_pos
-import kotlinx.android.synthetic.main.fragment_home.view.tvTodaySale
 import kotlinx.android.synthetic.main.layout_dialog_confirmamount.*
 import kotlinx.android.synthetic.main.layout_dialog_confirmamount.view.*
 import kotlinx.android.synthetic.main.layout_dialog_confirmpin.*
@@ -59,28 +59,19 @@ import kotlinx.android.synthetic.main.layout_dialog_confirmpin.tvDialogCancel
 import org.json.JSONObject
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRefreshLayout.OnRefreshListener {
     // TODO: Rename and change types of parameters
 
     lateinit var root : View
     lateinit var dialog: Dialog
-    var email = ""
-    var password = ""
     var amount = 0
     var transaction_type = 0
     lateinit var userModel : UserModel
+    lateinit var userModell : com.sg.swapnapay.model.UserModel
     var newaepskyc_status: String = ""
     var aeps_kyc_status: String = ""
+    var t_id: String = ""
+    var m_id: String = ""
     var credopay_merchant_onboarding_status = ""
 
     var matm_user_status = ""
@@ -94,6 +85,11 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
     var curnValue = ""
     var credopay_terminal_status = ""
     var newPassword = ""
+    private var setGoToSdk: (String) -> Unit = {}
+    companion object{
+        var email = ""
+        var password = ""
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,6 +107,7 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
         val gson = Gson()
         val json = AppPrefs.getStringPref(AppConstants.USER_MODEL, requireContext())
         userModel = gson.fromJson(json, UserModel::class.java)
+        root.tvCustomerName.text = userModel.cus_name
 //        dashboardApi(userModel.cus_mobile)
         getAepsBalanceApi(userModel.cus_mobile)
 
@@ -131,8 +128,8 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
 
 
         root.ll_Matm_CW.setOnClickListener {
-
-            confirmAmountDialog(CredopayPaymentConstants.MICROATM)
+            bsGoToPaymentSdk(CredopayPaymentConstants.MICROATM)
+//            confirmAmountDialog(CredopayPaymentConstants.MICROATM)
         }
 
         root.ll_Matm_BE.setOnClickListener {
@@ -141,15 +138,18 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
         }
 
         root.ll_POS_PURCHASE.setOnClickListener {
-            confirmAmountDialog(CredopayPaymentConstants.PURCHASE)
+            bsGoToPaymentSdk(CredopayPaymentConstants.PURCHASE)
+//            confirmAmountDialog(CredopayPaymentConstants.PURCHASE)
         }
 
         root.ll_POS_VOID.setOnClickListener {
-            confirmAmountDialog(CredopayPaymentConstants.VOID)
+            bsGoToPaymentSdk(CredopayPaymentConstants.VOID)
+//            confirmAmountDialog(CredopayPaymentConstants.VOID)
         }
 
         root.ll_POS_CASH.setOnClickListener {
-            confirmAmountDialog(CredopayPaymentConstants.CASH_AT_POS)
+            bsGoToPaymentSdk(CredopayPaymentConstants.CASH_AT_POS)
+//            confirmAmountDialog(CredopayPaymentConstants.CASH_AT_POS)
         }
 
         root.ll_AEPS_BE.setOnClickListener {
@@ -158,32 +158,13 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
         }
 
         root.ll_AEPS_CW.setOnClickListener {
-            confirmAmountDialog(CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL)
+            bsGoToPaymentSdk(CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL)
+//            confirmAmountDialog(CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL)
 
         }
 
 
         return root
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     fun confirmAmountDialog(transaction_type : Int) {
@@ -219,10 +200,11 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
     }
 
     private fun gotoSdk(login: String, password: String, amount: Int,transaction_type : Int, CRN_U : String) {
-        Log.e("email",email)
-        Log.e("password",password)
-        Log.e("amount",amount.toString())
-        Log.e("transaction",transaction_type.toString())
+        Log.wtf("ppemail",login)
+        Log.wtf("pppassword",password)
+        Log.wtf("ppamount",amount.toString())
+        Log.wtf("pptransaction",transaction_type.toString())
+        Log.wtf("ppCRN_U",CRN_U)
 
         val intent = Intent (requireContext(), PaymentActivity::class.java )
         intent.putExtra("TRANSACTION_TYPE", transaction_type)
@@ -413,10 +395,15 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
                 try
                 {
                     val cusData = jsonObject.getJSONArray("cusData")
+                    Log.wtf("chloo chloo",cusData.toString())
                     for (i in 0 until cusData.length()) {
                         val notifyObjJson = cusData.getJSONObject(i)
                         newaepskyc_status = notifyObjJson.getString("newaepskyc_status")
                         aeps_kyc_status = notifyObjJson.getString("aeps_kyc_status")
+                        m_id = notifyObjJson.getString("M_ID")
+                        t_id = notifyObjJson.getString("T_ID")
+                        root.merchantId.text=t_id
+                        root.terminalId.text=t_id
 
                         credopay_merchant_onboarding_status = notifyObjJson.getString("credopay_merchant_onboarding_status")
                         credopay_terminal_status = notifyObjJson.getString("credopay_terminal_status")
@@ -561,8 +548,8 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
                 root.progress_bar.visibility = View.GONE
                 root.tvWalletBalance.text =
                     "${getString(R.string.Rupee)} ${jsonObject.getString("AEPSBalance")}"
-                root.tvTodaySale.text =
-                    "${getString(R.string.Rupee)} ${jsonObject.getString("todaySales")}"
+//                root.tvTodaySale.text =
+//                    "${getString(R.string.Rupee)} ${jsonObject.getString("todaySales")}"
                 /* tvAepsBalance.text =
                      "${getString(R.string.Rupee)} ${jsonObject.getString(AEPSBALANCE)}"*/
 
@@ -665,6 +652,8 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
                     root.rl_pos.setBackgroundResource(R.drawable.bg_image)
                     root.rl_microatm.setBackgroundResource(R.drawable.bg_image_white)
                     root.rl_aeps.setBackgroundResource(R.drawable.bg_image_white)
+                }
+                root.rl_upi.setOnClickListener {
                 }
 
 
@@ -778,5 +767,27 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRef
         root.mSwipeRefresh.setRefreshing(false)
 
     }
-
+    private fun bsGoToPaymentSdk(transactionType:Int) {
+        val bsGoToSdk: BottomSheetDialog?
+        bsGoToSdk = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+        val binding = BsAddNotesBinding.inflate(LayoutInflater.from(requireContext()))
+        bsGoToSdk.setContentView(binding.root)
+        binding.bsTitle.text = "Confirm Amount"
+        binding.saveButton.text = "Submit"
+        binding.note.hint = "Enter amount in rupees"
+        binding.cancelButton.setOnClickListener {
+            setGoToSdk(CANCEL)
+            if (bsGoToSdk.isShowing) {
+                bsGoToSdk.dismiss()
+            }
+        }
+        binding.saveButton.setOnClickListener {
+            if (bsGoToSdk.isShowing) {
+                bsGoToSdk.dismiss()
+                val amountPayment = binding.note.text.toString().toInt() * 100
+                gotoSdk(email,password,amountPayment, transactionType,getCurn())
+            }
+        }
+        bsGoToSdk.show()
+    }
 }

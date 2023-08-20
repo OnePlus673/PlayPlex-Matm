@@ -10,31 +10,40 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.playplexmatm.R
-import com.playplexmatm.adapter.bills.CustomerAdapter
+import com.playplexmatm.activity.fragments.HomeFragment.Companion.email
+import com.playplexmatm.activity.fragments.HomeFragment.Companion.password
 import com.playplexmatm.adapter.holder.CustomerClick
 import com.playplexmatm.databinding.ActivityAddNewSaleBinding
 import com.playplexmatm.extentions.ADD_NEW_PARTY
 import com.playplexmatm.extentions.ADD_NEW_PARTY_REQUEST
+import com.playplexmatm.extentions.CANCEL
 import com.playplexmatm.extentions.CUSTOMER_NAME
 import com.playplexmatm.extentions.CUSTOMER_PHONE
+import com.playplexmatm.extentions.GO_TO_SDK
 import com.playplexmatm.extentions.beGone
 import com.playplexmatm.extentions.beInvisible
 import com.playplexmatm.extentions.beVisible
-import com.playplexmatm.extentions.generateUniqueRandom
 import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.model.bills.SaleBillRecord
-import com.playplexmatm.util.*
+import com.playplexmatm.util.toast
+import `in`.credopay.payment.sdk.CredopayPaymentConstants
+import `in`.credopay.payment.sdk.PaymentActivity
+import `in`.credopay.payment.sdk.Utils
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.Random
+
 
 class AddNewSaleActivity : BaseActivity(), CustomerClick {
     private lateinit var binding: ActivityAddNewSaleBinding
+    var curnValue = ""
 
     companion object {
         var customerClick: CustomerClick? = null
@@ -50,7 +59,7 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
         defaultDate()
         paymentMode()
         paymentDue()
-        binding.billNumber.text = generateUniqueRandom().toString()
+        generateBillNumber()
         binding.billNumberIcon.setOnClickListener {
             bsRenameBillNumber {
                 binding.billNumber.text = it
@@ -62,9 +71,6 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
             }
         }
         binding.searchParties.setOnClickListener {
-//            fetchCustomerData(
-//                onDataLoaded = { customerList ->
-
             bsShowPartiesList(this@AddNewSaleActivity) { callback ->
                 when (callback) {
                     ADD_NEW_PARTY -> {
@@ -75,11 +81,6 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                     }
                 }
             }
-//                },
-//                onError = { error ->
-//                    Log.wtf("Customer fetch error", error.toString())
-//                }
-//            )
         }
         binding.addNewParty.setOnClickListener {
             startActivityForResult(
@@ -96,6 +97,24 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
             saveSaleBillRecord()
         }
         binding.ivBack.setOnClickListener { finish() }
+    }
+
+    private fun generateBillNumber() {
+        binding.billNumber.text = getNumber().toString()
+        incrementNumber()
+    }
+
+    private fun incrementNumber() {
+        val count = 1
+        var defaultValue = getPreferences(MODE_PRIVATE).getInt("count_key", count)
+        ++defaultValue
+        getPreferences(MODE_PRIVATE).edit().putInt("count_key", defaultValue).commit()
+    }
+
+    private fun getNumber(): Int {
+        val count = getPreferences(MODE_PRIVATE).getInt("count_key", 1)
+        println("The count value is $count")
+        return count
     }
 
     private fun paymentDue() {
@@ -149,7 +168,7 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                     binding.customerPhone.text.toString().trim()
                 )
             val saleBillRecord = SaleBillRecord(
-                binding.billNumber.text.toString().trim(),
+                "Sale Bill #${binding.billNumber.text.toString().trim()}",
                 binding.date.text.toString().trim(),
                 customer,
                 binding.amount.text.toString().trim(),
@@ -161,12 +180,94 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
             newSaleBillRef.setValue(saleBillRecord)
                 .addOnSuccessListener {
                     toast("Sale Record Saved")
-                    finish()
+                    if (binding.paymentModeSpinner.selectedItem.toString() == "Debit Card") {
+                        bsGoToSdk(binding.receivedAmount.text.toString().trim()) { callBack ->
+                            when (callBack) {
+                                GO_TO_SDK -> {
+                                    finish()
+                                    goToSdk(isDebitSelected = true)
+                                }
+
+                                CANCEL -> finish()
+                            }
+                        }
+                    } else if (binding.paymentModeSpinner.selectedItem.toString() == "Credit Card") {
+                        bsGoToSdk(binding.receivedAmount.text.toString().trim()) { callBack ->
+                            when (callBack) {
+                                GO_TO_SDK -> {
+                                    finish()
+                                    goToSdk(isCreditSelected = true)
+                                }
+
+                                CANCEL -> finish()
+                            }
+                        }
+                    } else if (binding.paymentModeSpinner.selectedItem.toString() == "AEPS") {
+                        bsGoToSdk(binding.receivedAmount.text.toString().trim()) { callBack ->
+                            when (callBack) {
+                                GO_TO_SDK -> {
+                                    finish()
+                                    goToSdk(isAepsSelected = true)
+                                }
+
+                                CANCEL -> finish()
+                            }
+                        }
+                    } else {
+                        finish()
+                    }
                 }
                 .addOnFailureListener {
                     Log.wtf("Sale record error", it.message.toString())
                 }
         }
+    }
+
+    private fun goToSdk(
+        isDebitSelected: Boolean? = null,
+        isCreditSelected: Boolean? = null,
+        isAepsSelected: Boolean? = null
+    ) {
+        val amount = binding.receivedAmount.text.toString().trim().toInt() * 100
+        var transactionType = 0
+        if (isDebitSelected == true) {
+            transactionType = CredopayPaymentConstants.MICROATM
+        } else if (isCreditSelected == true) {
+            transactionType = CredopayPaymentConstants.PURCHASE
+        } else if (isAepsSelected == true) {
+            transactionType = CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL
+        }
+
+        Log.wtf("ppemail", email)
+        Log.wtf("pppassword", password)
+        Log.wtf("ppamount", amount.toString())
+        Log.wtf("pptransaction", transactionType.toString())
+        Log.wtf("ppCRN_U", getCurn())
+
+        val intent = Intent(this@AddNewSaleActivity, PaymentActivity::class.java)
+        intent.putExtra("TRANSACTION_TYPE", transactionType)
+        intent.putExtra("LOGIN_ID", email)
+        intent.putExtra("LOGIN_PASSWORD", password)
+        intent.putExtra("DEBUG_MODE", true)
+        intent.putExtra("PRODUCTION", true)
+        intent.putExtra("CRN_U", getCurn())
+        intent.putExtra("AMOUNT", amount)
+        intent.putExtra(
+            "LOGO",
+            Utils.getVariableImage(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.logo_tp
+                )
+            )
+        )
+        startActivityForResult(intent, 1)
+    }
+
+    private fun getCurn(): String {
+        val r = Random(System.currentTimeMillis())
+        curnValue = "PP" + (10000 + r.nextInt(20000)).toString()
+        return curnValue
     }
 
     private fun defaultDate() {
@@ -199,7 +300,7 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
         binding.customerName.text = customer.name
         binding.customerPhone.text = customer.phone
         binding.customerPhone1.text = customer.phone
-        toast("Customer is Selected")
+        bsShowParties.dismiss()
     }
 
     private fun paymentMode() {

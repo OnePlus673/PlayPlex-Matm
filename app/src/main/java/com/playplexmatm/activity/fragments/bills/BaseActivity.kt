@@ -25,10 +25,14 @@ import com.playplexmatm.databinding.BsAddNotesBinding
 import com.playplexmatm.databinding.BsRenameBillNoBinding
 import com.playplexmatm.databinding.BsShowPartiesBinding
 import com.playplexmatm.extentions.ADD_NEW_PARTY
+import com.playplexmatm.extentions.CANCEL
+import com.playplexmatm.extentions.GO_TO_SDK
 import com.playplexmatm.extentions.beGone
 import com.playplexmatm.extentions.beVisible
 import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.util.toast
+import kotlinx.android.synthetic.main.bs_add_notes.view.bs_title
+import kotlinx.android.synthetic.main.bs_rename_bill_no.view.etName
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -39,19 +43,21 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
     private var setShowPartiesCallBack: (String) -> Unit = {}
     private var setDateCallBack: (String) -> Unit = {}
     private var setNotesCallBack: (String) -> Unit = {}
+    private var setGoToSdk: (String) -> Unit = {}
+    lateinit var bsShowParties: BottomSheetDialog
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-    lateinit var adapter:CustomerAdapter
+    lateinit var adapter: CustomerAdapter
 
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
     }
 
     fun bsShowPartiesList(context: Context, setShowPartiesCallBack: (String) -> Unit) {
         this.setShowPartiesCallBack = setShowPartiesCallBack
-        val bsShowParties = BottomSheetDialog(this, R.style.BottomSheetDialog)
+        bsShowParties = BottomSheetDialog(this, R.style.BottomSheetDialog)
         val binding = BsShowPartiesBinding.inflate(LayoutInflater.from(this))
         bsShowParties.setContentView(binding.root)
         binding.loadingBar.beVisible()
@@ -62,7 +68,7 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
                 binding.partiesRv.layoutManager =
                     LinearLayoutManager(this, RecyclerView.VERTICAL, false)
                 binding.partiesRv.adapter = adapter
-                searchParties(binding.searchParties,customerList)
+                searchParties(binding.searchParties, customerList)
             },
             onError = { error ->
                 binding.loadingBar.beGone()
@@ -81,13 +87,13 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
         bsShowParties.show()
     }
 
-    private fun searchParties(searchParties:EditText,customerList:List<Customer>) {
+    private fun searchParties(searchParties: EditText, customerList: List<Customer>) {
         searchParties.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val query = s.toString().trim()
-                filterCustomers(query,customerList)
+                filterCustomers(query, customerList)
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -95,7 +101,8 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
             }
         })
     }
-    private fun filterCustomers(query: String,customerList:List<Customer>) {
+
+    private fun filterCustomers(query: String, customerList: List<Customer>) {
         val filteredList: ArrayList<Customer> = ArrayList()
         for (list in customerList) {
             if (list.name.toLowerCase().contains(query)) {
@@ -104,6 +111,7 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
         }
         adapter.updateList(filteredList)
     }
+
     fun bsRenameBillNumber(setRenameBillNoCallBack: (String) -> Unit) {
         this.setRenameBillNoCallBack = setRenameBillNoCallBack
         val setRingtoneBottomSheet: BottomSheetDialog?
@@ -122,6 +130,31 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
             }
         }
         setRingtoneBottomSheet.show()
+    }
+
+    fun bsGoToSdk(amount:String,setGoToSdk: (String) -> Unit) {
+        this.setGoToSdk = setGoToSdk
+        val bsGoToSdk: BottomSheetDialog?
+        bsGoToSdk = BottomSheetDialog(this, R.style.BottomSheetDialog)
+        val binding = BsAddNotesBinding.inflate(LayoutInflater.from(this))
+        bsGoToSdk.setContentView(binding.root)
+        binding.bsTitle.text = "Confirm Amount"
+        binding.saveButton.text = "Submit"
+        binding.note.hint = "Amount in rupees"
+        binding.note.setText(amount)
+        binding.cancelButton.setOnClickListener {
+            setGoToSdk(CANCEL)
+            if (bsGoToSdk.isShowing) {
+                bsGoToSdk.dismiss()
+            }
+        }
+        binding.saveButton.setOnClickListener {
+            setGoToSdk(GO_TO_SDK)
+            if (bsGoToSdk.isShowing) {
+                bsGoToSdk.dismiss()
+            }
+        }
+        bsGoToSdk.show()
     }
 
     fun bsAddNotes(setNotesCallBack: (String) -> Unit) {

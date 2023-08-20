@@ -265,6 +265,7 @@
     <string name="paymeny">Payment</string>
     <string name="ledger">Ledger</string>
     <string name="add_sale">Add Sale</string>
+    <string name="add_payment">Add Payment</string>
     <string name="add_customer">Add Customer</string>
 
 

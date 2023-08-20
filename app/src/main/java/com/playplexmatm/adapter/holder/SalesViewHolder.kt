@@ -9,7 +9,7 @@ class SalesViewHolder(val binding: SalesItemBinding, private val context: Contex
     RecyclerView.ViewHolder(binding.root) {
     fun onBind(saleBillRecord: SaleBillRecord) {
         binding.customerName.text = saleBillRecord.customer.name
-        binding.saleBillNumber.text = "Sale Bill #${saleBillRecord.saleBillNumber}"
+        binding.saleBillNumber.text = saleBillRecord.saleBillNumber
         binding.saleDate.text = saleBillRecord.date
         binding.saleAmount.text = saleBillRecord.saleBillAmount
         binding.paymentMode.text = saleBillRecord.paymentType
