@@ -8,6 +8,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -45,7 +46,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
     lateinit var mContext: LoginActivity
     lateinit var etLoginMobile: EditText
     lateinit var etLoginPassword: EditText
-    lateinit var tvLogin: TextView
+    lateinit var tvLogin: Button
     lateinit var pbLoadData: GifTextView
     lateinit var apiInterface: ApiInterface
     private lateinit var otp: String
@@ -69,7 +70,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
             etLoginMobile.setText(AppPrefs.getStringPref("email", this))
             etLoginPassword.setText(AppPrefs.getStringPref("password", this))
 
-            etLoginPassword.setTransformationMethod(PasswordTransformationMethod())
+            etLoginPassword.transformationMethod = PasswordTransformationMethod()
         }
 
 

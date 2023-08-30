@@ -72,7 +72,7 @@ class AccountFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener {
         val json = AppPrefs.getStringPref(AppConstants.USER_MODEL, requireContext())
         userModel = gson.fromJson(json, UserModel::class.java)
 
-        (activity as MATMTestActivity).custToolbar.tvTitle.setText("Profile")
+//        (activity as MATMTestActivity).custToolbar.tvTitle.setText("Profile")
 
         getProfileApi(userModel.cus_mobile)
 

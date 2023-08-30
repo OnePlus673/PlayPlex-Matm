@@ -23,6 +23,8 @@
     <color name="colorBackground">#e9edf0</color>
     <color name="colorMainLight">#7072EF</color>
     <color name="appColor">#163a63</color>
+    <color name="light_dark">#74000000</color>
+    <color name="appColorLight">#5495E0</color>
 
     <color name="material_blue_grey_500">#ff607d8b</color>
     <color name="material_green_500">#ff0f9d58</color>

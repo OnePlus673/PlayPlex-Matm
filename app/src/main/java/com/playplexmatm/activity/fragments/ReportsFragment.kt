@@ -53,7 +53,7 @@ class ReportsFragment : Fragment() {
         root =  inflater.inflate(R.layout.fragment_reports, container, false)
 
 
-        (activity as MATMTestActivity).custToolbar.tvTitle.setText("Reports")
+//        (activity as MATMTestActivity).custToolbar.tvTitle.setText("Reports")
 
 //        root.ll_aeps_ledger.setOnClickListener{
 //            val intent = Intent(requireContext(), AepsLedgerHistoryActivity::class.java)
@@ -102,6 +102,12 @@ class ReportsFragment : Fragment() {
             val intent = Intent(requireContext(), PosHistoryActivity::class.java)
             startActivity(intent)
 
+        }
+        root.ll_sales.setOnClickListener {
+            val fragmentHome = SalesFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFrame, fragmentHome)
+                .commit()
         }
 
         return root

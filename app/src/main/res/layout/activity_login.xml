@@ -20,109 +20,162 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <ImageView
-            android:id="@+id/ivImage"
-            android:layout_width="200dp"
-            android:layout_height="120dp"
-            android:padding="@dimen/_15sdp"
-            android:layout_marginTop="40dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/logo_tp" />
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="2dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@+id/ivImage"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:background="@drawable/login_screen_bg"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/logo_tp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/loginHeader"
-                android:text="Welcome Back"
-                android:layout_marginTop="@dimen/loginViewsMargin"/>
+                android:layout_below="@+id/ivImage"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                <TextView
+                    style="@style/loginHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:text="Welcome Back" />
 
-                <EditText
+                <!--            <com.google.android.material.textfield.TextInputLayout-->
+                <!--                style="@style/parent"-->
+                <!--                android:layout_marginTop="@dimen/loginViewsMargin">-->
+
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etLoginMb"-->
+                <!--                    style="@style/modifiedEditText"-->
+                <!--                    android:hint="Login Id"-->
+                <!--                    android:inputType="number"-->
+                <!--                    android:maxLines="1"/>-->
+
+                <!--            </com.google.android.material.textfield.TextInputLayout>-->
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etLoginMb"
-                    style="@style/modifiedEditText"
-                    android:hint="Login Id"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="Enter Login Id"
+                    android:imeOptions="actionNone"
                     android:inputType="number"
-                    android:maxLines="1"/>
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintTop_toBottomOf="@+id/customerContainer"
+                    tools:ignore="MissingConstraints" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/parent"
-                app:passwordToggleEnabled="true"
-                android:layout_marginTop="@dimen/loginViewsMargin">
-
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etLoginPass"
-                    style="@style/modifiedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:fontFamily="@font/roboto_regular"
                     android:hint="@string/login_password_hint"
-                    android:inputType="textPassword"
-                    android:password="true"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:imeOptions="actionNone"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintTop_toBottomOf="@+id/customerContainer"
+                    tools:ignore="MissingConstraints" />
 
-            <CheckBox
-                android:id="@+id/cbRemember"
-                style="@style/parent"
-                android:layout_marginTop="10dp"
-                android:text="Remember Credentials"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:checked="true"
-                android:visibility="visible"
-                />
+                <!--            <com.google.android.material.textfield.TextInputLayout-->
+                <!--                style="@style/parent"-->
+                <!--                app:passwordToggleEnabled="true"-->
+                <!--                android:layout_marginTop="@dimen/loginViewsMargin">-->
 
-            <TextView
-                android:id="@+id/tvLogin"
-                android:paddingHorizontal="@dimen/_40sdp"
-                style="@style/loginButton"
-                android:text="@string/str_login"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/loginViewsMargin"/>
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etLoginPass"-->
+                <!--                    style="@style/modifiedEditText"-->
+                <!--                    android:hint="@string/login_password_hint"-->
+                <!--                    android:inputType="textPassword"-->
+                <!--                    android:password="true"-->
+                <!--                    android:maxLines="1" />-->
+                <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <TextView
-                android:id="@+id/tvRegisterHere"
-                style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin"
-                android:text="@string/login_signup_hint"
-                android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:visibility="gone"/>
+                <CheckBox
+                    android:id="@+id/cbRemember"
+                    style="@style/parent"
+                    android:layout_marginTop="15dp"
+                    android:checked="true"
+                    android:text="Remember Credentials"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/tvLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/round_btn_bg"
+                    android:text="@string/str_login"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+                <!--            <TextView-->
+                <!--                android:id="@+id/tvLogin"-->
+                <!--                android:paddingHorizontal="@dimen/_40sdp"-->
+                <!--                style="@style/loginButton"-->
+                <!--                android:text="@string/str_login"-->
+                <!--                android:gravity="center"-->
+                <!--                android:layout_gravity="center"-->
+                <!--                android:layout_marginTop="@dimen/loginViewsMargin"/>-->
+
+                <TextView
+                    android:id="@+id/tvRegisterHere"
+                    style="@style/parent"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:text="@string/login_signup_hint"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </LinearLayout>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
     </ScrollView>
-
 
 
 </RelativeLayout>

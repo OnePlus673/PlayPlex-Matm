@@ -92,7 +92,9 @@ class PaymentFragment : Fragment() {
                     for (billSnapshot in snapshot.children) {
                         val saleBillRecord = billSnapshot.getValue(SaleBillRecord::class.java)
                         if (saleBillRecord != null) {
-                            saleBillRecords.add(saleBillRecord)
+                            if (saleBillRecord.saleBillNumber.startsWith("Payment in")) {
+                                saleBillRecords.add(saleBillRecord)
+                            }
                         }
                     }
                     progress.beGone()

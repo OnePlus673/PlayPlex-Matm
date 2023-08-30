@@ -74,7 +74,7 @@ class SalesFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener, SwipeRe
         val json = AppPrefs.getStringPref("userModel", requireContext())
         userModel = gson.fromJson(json, UserModel::class.java)
 
-        (activity as MATMTestActivity).custToolbar.tvTitle.setText("Sales")
+//        (activity as MATMTestActivity).custToolbar.tvTitle.setText("Sales")
 
         val date = getCurrentDateTime()
         val dateInString = date.toString("dd MMM yyyy")
