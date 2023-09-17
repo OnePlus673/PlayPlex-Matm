@@ -13,8 +13,11 @@ import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.playplexmatm.R
 import com.playplexmatm.activity.fragments.HomeFragment.Companion.email
 import com.playplexmatm.activity.fragments.HomeFragment.Companion.password
@@ -29,6 +32,8 @@ import com.playplexmatm.extentions.GO_TO_SDK
 import com.playplexmatm.extentions.beGone
 import com.playplexmatm.extentions.beInvisible
 import com.playplexmatm.extentions.beVisible
+import com.playplexmatm.extentions.extractNumber
+import com.playplexmatm.extentions.getCurrentDateTimeFormatter
 import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.model.bills.SaleBillRecord
 import com.playplexmatm.util.toast
@@ -44,7 +49,7 @@ import java.util.Random
 class AddNewSaleActivity : BaseActivity(), CustomerClick {
     private lateinit var binding: ActivityAddNewSaleBinding
     var curnValue = ""
-
+    var updatedCurrentBalance = ""
     companion object {
         var customerClick: CustomerClick? = null
     }
@@ -71,7 +76,7 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
             }
         }
         binding.searchParties.setOnClickListener {
-            bsShowPartiesList(this@AddNewSaleActivity) { callback ->
+            bsShowPartiesList(context = this@AddNewSaleActivity) { callback ->
                 when (callback) {
                     ADD_NEW_PARTY -> {
                         startActivityForResult(
@@ -125,12 +130,14 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                 val receivedAmount =
                     binding.receivedAmount.text.toString().trim().toIntOrNull() ?: 0
                 if (totalSaleAmount > 0) {
-                    if (receivedAmount <= totalSaleAmount) {
-                        val remainingAmount = totalSaleAmount - receivedAmount
-                        binding.balanceDue.text = remainingAmount.toString()
-                    } else {
-                        binding.receivedAmount.error = "Should be smaller than sale bill"
+                    if (receivedAmount > totalSaleAmount) {
+                        updatedCurrentBalance = "get${receivedAmount - totalSaleAmount}"
+                    }else if (receivedAmount < totalSaleAmount) {
+                        updatedCurrentBalance = "give${totalSaleAmount - receivedAmount}"
+                    } else if (receivedAmount == totalSaleAmount) {
+                        updatedCurrentBalance="0"
                     }
+                    binding.balanceDue.text = "₹${updatedCurrentBalance.extractNumber()}"
                 } else {
                     binding.receivedAmount.error = "Enter sale bill amount first"
                 }
@@ -173,13 +180,14 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                 customer,
                 binding.amount.text.toString().trim(),
                 binding.receivedAmount.text.toString().trim(),
-                binding.balanceDue.text.toString().trim(),
+                updatedCurrentBalance,
                 binding.paymentModeSpinner.selectedItem.toString(),
                 binding.notesHere.text.toString().trim()
             )
             newSaleBillRef.setValue(saleBillRecord)
                 .addOnSuccessListener {
                     toast("Sale Record Saved")
+                    updateCustomer(userId, database, customer)
                     if (binding.paymentModeSpinner.selectedItem.toString() == "Debit Card") {
                         bsGoToSdk(binding.receivedAmount.text.toString().trim()) { callBack ->
                             when (callBack) {
@@ -221,6 +229,40 @@ class AddNewSaleActivity : BaseActivity(), CustomerClick {
                     Log.wtf("Sale record error", it.message.toString())
                 }
         }
+    }
+
+    private fun updateCustomer(userId: String, database: FirebaseDatabase, customer: Customer) {
+        val customerRef: DatabaseReference = database.reference.child("customers").child(userId)
+        val customerNameToUpdate = customer.name
+        customerRef.orderByChild("name").equalTo(customerNameToUpdate)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (childSnapshot in snapshot.children) {
+                        val customerKeyToUpdate = childSnapshot.key
+                        if (customerKeyToUpdate != null) {
+                            // Update customer using their key
+                            val customerToUpdateRef = customerRef.child(customerKeyToUpdate)
+                            val updatedData = HashMap<String, Any>()
+                            updatedData["currentBalance"] =
+                                updatedCurrentBalance
+                            updatedData["dateTime"] =
+                                getCurrentDateTimeFormatter()
+                            customerToUpdateRef.updateChildren(updatedData)
+                                .addOnSuccessListener {
+                                    // Update successful
+                                }
+                                .addOnFailureListener {
+                                    Log.wtf("Customer update failed", it.toString())
+                                }
+                        }
+                        break
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.wtf("Customer update error", error.toString())
+                }
+            })
     }
 
     private fun goToSdk(

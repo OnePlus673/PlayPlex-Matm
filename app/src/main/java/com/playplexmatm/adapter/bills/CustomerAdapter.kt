@@ -13,16 +13,16 @@ import com.playplexmatm.model.bills.Customer
 class CustomerAdapter(
     private val context: Context,
     private var customerList: List<Customer>,
-    private val click: CustomerClick
+    private val click: CustomerClick,
+    private val isLedger: Boolean? = false
 ) :
     RecyclerView.Adapter<CustomerViewHolder>() {
-    private var filteredList: List<Customer> = customerList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder =
         createViewHolder(parent)
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
-        holder.onBind(customerList[position])
-        holder.getClickListener(click,customerList[position])
+        holder.onBind(customerList[position],isLedger?:false)
+        holder.getClickListener(click, customerList[position])
     }
 
     override fun getItemCount(): Int = customerList.size

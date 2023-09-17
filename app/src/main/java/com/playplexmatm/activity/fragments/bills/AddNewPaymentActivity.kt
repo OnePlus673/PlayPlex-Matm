@@ -2,7 +2,7 @@ package com.playplexmatm.activity.fragments.bills
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -12,8 +12,11 @@ import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.playplexmatm.R
 import com.playplexmatm.activity.fragments.HomeFragment
 import com.playplexmatm.activity.fragments.HomeFragment.Companion.email
@@ -28,6 +31,8 @@ import com.playplexmatm.extentions.CUSTOMER_PHONE
 import com.playplexmatm.extentions.GO_TO_SDK
 import com.playplexmatm.extentions.beInvisible
 import com.playplexmatm.extentions.beVisible
+import com.playplexmatm.extentions.extractNumber
+import com.playplexmatm.extentions.getCurrentDateTimeFormatter
 import com.playplexmatm.model.bills.Customer
 import com.playplexmatm.model.bills.SaleBillRecord
 import com.playplexmatm.util.toast
@@ -42,6 +47,7 @@ import java.util.Random
 class AddNewPaymentActivity : BaseActivity(), CustomerClick {
     private lateinit var binding: ActivityAddNewPaymentBinding
     var curnValue = ""
+    private var currentBalance = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_payment)
@@ -63,7 +69,7 @@ class AddNewPaymentActivity : BaseActivity(), CustomerClick {
             }
         }
         binding.customerContainer.setOnClickListener {
-            bsShowPartiesList(this@AddNewPaymentActivity) { callback ->
+            bsShowPartiesList(isFromPayment = true,context = this@AddNewPaymentActivity) { callback ->
                 when (callback) {
                     ADD_NEW_PARTY -> {
                         startActivityForResult(
@@ -113,6 +119,7 @@ class AddNewPaymentActivity : BaseActivity(), CustomerClick {
             newSaleBillRef.setValue(saleBillRecord)
                 .addOnSuccessListener {
                     toast("Payment Record Saved")
+                    updateCustomer(userId, database, customer)
                     if (binding.paymentModeSpinner.selectedItem.toString() == "Debit Card") {
                         bsGoToSdk(binding.amount.text.toString().trim()) { callBack ->
                             when (callBack) {
@@ -156,6 +163,50 @@ class AddNewPaymentActivity : BaseActivity(), CustomerClick {
         }
     }
 
+    private fun updateCustomer(userId: String, database: FirebaseDatabase, customer: Customer) {
+        val customerRef: DatabaseReference = database.reference.child("customers").child(userId)
+        val customerNameToUpdate = customer.name
+        customerRef.orderByChild("name").equalTo(customerNameToUpdate)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (childSnapshot in snapshot.children) {
+                        val customerKeyToUpdate = childSnapshot.key
+                        if (customerKeyToUpdate != null) {
+                            // Update customer using their key
+                            val customerToUpdateRef = customerRef.child(customerKeyToUpdate)
+                            val enteredAmount = binding.amount.text.toString().toInt()
+                            val updatedData = HashMap<String, Any>()
+                            var updatedCurrentBalance = ""
+                            if (currentBalance.extractNumber().toInt() > enteredAmount) {
+                                updatedCurrentBalance =
+                                    "get${currentBalance.extractNumber().toInt() - enteredAmount}"
+                            } else if (enteredAmount > currentBalance.extractNumber().toInt()) {
+                                updatedCurrentBalance =
+                                    "give${enteredAmount - currentBalance.extractNumber().toInt()}"
+                            } else if (enteredAmount == currentBalance.extractNumber().toInt()) {
+                                updatedCurrentBalance = "0"
+                            }
+                            updatedData["currentBalance"] = updatedCurrentBalance
+                            updatedData["dateTime"] =
+                                getCurrentDateTimeFormatter()
+                            customerToUpdateRef.updateChildren(updatedData)
+                                .addOnSuccessListener {
+                                    // Update successful
+                                }
+                                .addOnFailureListener {
+                                    Log.wtf("Customer update failed", it.toString())
+                                }
+                        }
+                        break
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.wtf("Customer update error", error.toString())
+                }
+            })
+    }
+
     private fun goToSdk(
         isDebitSelected: Boolean? = null,
         isCreditSelected: Boolean? = null,
@@ -170,12 +221,6 @@ class AddNewPaymentActivity : BaseActivity(), CustomerClick {
         } else if (isAepsSelected == true) {
             transactionType = CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL
         }
-
-        Log.wtf("ppemail", email)
-        Log.wtf("pppassword", password)
-        Log.wtf("ppamount", amount.toString())
-        Log.wtf("pptransaction", transactionType.toString())
-        Log.wtf("ppCRN_U", getCurn())
 
         val intent = Intent(this@AddNewPaymentActivity, PaymentActivity::class.java)
         intent.putExtra("TRANSACTION_TYPE", transactionType)
@@ -261,18 +306,24 @@ class AddNewPaymentActivity : BaseActivity(), CustomerClick {
                     binding.selectedCustomer.beVisible()
                     binding.customerName.text = customerName
                     binding.customerPhone.text = customerPhone
-                    binding.balanceDue.text = "Current Balance 0"
+                    binding.balanceDue.text = "₹0"
                 }
             }
         }
     }
 
     override fun customerClick(customer: Customer) {
+        currentBalance = customer.currentBalance
         binding.customerContainer.beInvisible()
         binding.selectedCustomer.beVisible()
         binding.customerName.text = customer.name
         binding.customerPhone.text = customer.phone
-        binding.balanceDue.text = "Current Balance 0"
+        if (currentBalance.startsWith("get")) {
+            binding.balanceDue.setTextColor(Color.RED)
+        }else if (currentBalance.startsWith("give")) {
+            binding.balanceDue.setTextColor(Color.GREEN)
+        }
+        binding.balanceDue.text = "₹${currentBalance.extractNumber().ifBlank { 0 }}"
         bsShowParties.dismiss()
     }
 }

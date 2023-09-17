@@ -102,7 +102,7 @@ class PaymentFragment : Fragment() {
                         reverseLayout = true
                         stackFromEnd = true
                     }
-                    adapter = SalesAdapter(requireContext(),saleBillRecords)
+                    adapter = SalesAdapter(requireContext(),saleBillRecords,0)
                     paymentRv.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }

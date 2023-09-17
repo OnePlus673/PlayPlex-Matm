@@ -55,12 +55,16 @@ abstract class BaseActivity : AppCompatActivity(), CustomerClick {
         setContentView(R.layout.activity_base)
     }
 
-    fun bsShowPartiesList(context: Context, setShowPartiesCallBack: (String) -> Unit) {
+    fun bsShowPartiesList(isFromPayment:Boolean?=false,context: Context, setShowPartiesCallBack: (String) -> Unit) {
         this.setShowPartiesCallBack = setShowPartiesCallBack
         bsShowParties = BottomSheetDialog(this, R.style.BottomSheetDialog)
         val binding = BsShowPartiesBinding.inflate(LayoutInflater.from(this))
         bsShowParties.setContentView(binding.root)
         binding.loadingBar.beVisible()
+        if (isFromPayment == true) {
+            binding.addNewParty.beGone()
+            binding.addIcon.beGone()
+        }
         fetchCustomerData(
             onDataLoaded = { customerList ->
                 binding.loadingBar.beGone()

@@ -8,7 +8,9 @@ data class Customer(
     val area: String = "",
     val pinCode: String = "",
     val city: String = "",
-    val state: String = ""
+    val state: String = "",
+    val currentBalance: String = "",
+    val dateTime: String = ""
 ) {
-    constructor() : this("", "","","","","","","")
+    constructor() : this("", "","","","","","","","","")
 }

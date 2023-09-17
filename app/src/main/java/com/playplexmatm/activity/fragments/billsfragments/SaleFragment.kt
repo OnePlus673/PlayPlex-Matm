@@ -102,7 +102,7 @@ class SaleFragment : Fragment() {
                         reverseLayout = true
                         stackFromEnd = true
                     }
-                    adapter = SalesAdapter(requireContext(),saleBillRecords)
+                    adapter = SalesAdapter(requireContext(),saleBillRecords,0)
                     salesRv.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }

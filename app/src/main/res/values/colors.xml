@@ -10,6 +10,7 @@
     <color name="yellow">#F7ED07</color>
     <color name="green">#44aa44</color>
     <color name="red">#FF0000</color>
+    <color name="light_gray">#DBD8D8</color>
     <color name="blue">#303F9F</color>
     <color name="dark_blue">#235977</color>
     <color name="blue_button_color">#0075e7</color>

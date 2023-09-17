@@ -161,15 +161,26 @@
                     tools:ignore="MissingConstraints" />
 
                 <TextView
+                    android:id="@+id/currentBalanceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Current Balance"
+                    android:textColor="@color/gray"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toEndOf="@+id/customerIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    tools:ignore="MissingConstraints" />
+                <TextView
                     android:id="@+id/balanceDue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="1234"
-                    android:textColor="@color/red"
+                    android:textColor="@color/gray"
                     android:textSize="17sp"
-                    app:layout_constraintStart_toEndOf="@+id/customerIcon"
+                    app:layout_constraintStart_toEndOf="@+id/currentBalanceTv"
                     app:layout_constraintTop_toBottomOf="@+id/customerName"
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>

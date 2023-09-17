@@ -62,6 +62,8 @@ class AddNewPartyActivity : BaseActivity() {
             newCustomerRef.child("pinCode").setValue(binding.pinCode.text.toString().trim())
             newCustomerRef.child("city").setValue(binding.city.text.toString().trim())
             newCustomerRef.child("state").setValue(binding.state.text.toString().trim())
+            newCustomerRef.child("currentBalance").setValue("")
+            newCustomerRef.child("dateTime").setValue("")
             toast("Customer added")
             sendCustomerData(partyName, phoneNumber)
         } else {
