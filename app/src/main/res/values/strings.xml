@@ -252,6 +252,7 @@
     <string name="change_npassword">Change Password</string>
     <string name="change_npin">Change PIn</string>
     <string name="forgot_pin">Forgot Pin</string>
+    <string name="business_profile">Business Profile</string>
     <string name="call_support">Get Support</string>
     <string name="verify_kyc">Verify Kyc</string>
     <string name="current_password">Current Password</string>

@@ -23,6 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.playplexmatm.R
+import com.playplexmatm.activity.fragments.bills.PayoutActivity
 import com.playplexmatm.adapter.bills.PaymentOptionsAdapter
 import com.playplexmatm.adapter.holder.OptionClick
 import com.playplexmatm.aeps.model.UserModel
@@ -187,6 +188,10 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
     }
 
     private fun initViews() {
+        root.payoutContainer.setOnClickListener {
+            val intent = Intent(requireContext(), PayoutActivity::class.java)
+            startActivity(intent)
+        }
         paymentRV = root.findViewById(R.id.paymentRV)
         enterAmount = root.findViewById(R.id.enterAmount)
         submitAmount = root.findViewById(R.id.submit)
@@ -242,9 +247,16 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
                     getCurn()
                 )
             }
-
             2 -> transactionType = CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL
-            3 -> transactionType = CredopayPaymentConstants.AEPS_BALANCE_ENQUIRY
+            3 -> {
+                gotoSdk(
+                    email,
+                    password,
+                    0,
+                    CredopayPaymentConstants.AEPS_BALANCE_ENQUIRY,
+                    getCurn()
+                )
+            }
             4 -> transactionType = CredopayPaymentConstants.PURCHASE
             5 -> transactionType = CredopayPaymentConstants.VOID
             6 -> transactionType = CredopayPaymentConstants.CASH_AT_POS

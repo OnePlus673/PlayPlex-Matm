@@ -83,7 +83,7 @@ object AppApiUrl : AppConstants {
     val DELETE_RECIPIENT: String =
         BASE_URL + "/dmt/deleteBeneficiary"
     val GET_CHARGE: String =
-        BASE_URL + "/dmt/getCharge"
+        BASE_URL + "/aeps/getCharge"
     val DMT_TRANSACTION: String =
         BASE_URL + "/dmt/moneyTransfer"
     val DMT_HISTORY: String =

@@ -67,7 +67,7 @@ class AddNewPartyActivity : BaseActivity() {
             toast("Customer added")
             sendCustomerData(partyName, phoneNumber)
         } else {
-            toast("user is not logged in")
+            toast("User is not logged in")
         }
     }
 

@@ -4681,7 +4681,7 @@ class AppApiCalls(
         VolleySingleton.instance?.addToRequestQueue(getRequest)
     }
 
-    fun getCharge(amount: String) {
+    fun getCharge(amount: String, cus_id : String) {
 
         val url: String = GET_CHARGE
         AppCommonMethods(mContext).LOG(0, TAG, url)
@@ -4722,6 +4722,7 @@ class AppApiCalls(
                     val jsonObject: MutableMap<String, String> =
                         HashMap()
                     jsonObject["amount"] = amount
+                    jsonObject["cus_id"] = cus_id
                     jsonObject[TOKEN] = AppPrefs.getStringPref(TOKEN, mContext).toString()
                     return jsonObject
                 }

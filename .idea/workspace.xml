@@ -11,13 +11,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb52eb13-9866-44ee-a593-d98fba7040b9" name="Changes" comment="App UI changed">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/LedgerDetailsActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/holder/LedgerViewHolder.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_person1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_reminder.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ledger_details.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/ledger_item.xml" afterDir="false" />
+    <list default="true" id="cb52eb13-9866-44ee-a593-d98fba7040b9" name="Changes" comment="UI changes">
+      <change afterPath="$PROJECT_DIR$/app/src/androidTestDebug/res/drawable/ic_payout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/androidTestDebug/res/drawable/ic_printer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/BillReceiptActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/BusinessProfileActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/PaymentReminderActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/PayoutActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/model/bills/BusinessProfile.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bill_receipt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_business_profile.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_payment_reminder.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_payout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -25,35 +30,40 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/AccountFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/AccountFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/HomeFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/AddNewPartyActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/AddNewPartyActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/AddNewPaymentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/AddNewPaymentActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/AddNewSaleActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/AddNewSaleActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/BaseActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/LedgerDetailsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/bills/LedgerDetailsActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/billsfragments/LedgerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/billsfragments/LedgerFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/billsfragments/PaymentFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/billsfragments/PaymentFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/billsfragments/SaleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/billsfragments/SaleFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/bills/CustomerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/bills/CustomerAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/bills/SalesAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/bills/SalesAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/holder/CustomerViewHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/holder/CustomerViewHolder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/holder/SalesViewHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/adapter/holder/SalesViewHolder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/extentions/Constant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/extentions/Constant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/aeps/network_calls/AppApiCalls.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/aeps/network_calls/AppApiCalls.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/aeps/network_calls/AppApiUrl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/aeps/network_calls/AppApiUrl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/extentions/String.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/extentions/String.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/model/bills/Customer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/model/bills/Customer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_payment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_payment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/customer_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customer_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/microatm/MATMTestActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/microatm/MATMTestActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ledger_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ledger_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ledger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ledger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_payment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_payment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_reports.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_reports.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_sale2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_sale2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/model/UserModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/model/UserModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/navigation_drawer_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/navigation_drawer_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/options_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/options_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/sales_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sales_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/waleed/.var/app/com.google.AndroidStudio/config/.android/avd/Nexus_9_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M42HR84F]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -65,8 +75,8 @@
         <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="resourceFile" />
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -97,10 +107,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "SHOW_ALL_PROCESSES": "false",
+    "android-custom-view/home/waleed/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.3.6/25ece06338d39da1fdc9d8488aa57b5014866918/fragment-1.3.6-sources.jar!/androidx/fragment/app/FragmentContainerView.java_SELECTED": "FragmentContainerView",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
     "last_directory_selection": "/home/waleed/AndroidStudioProjects/PlayPlexpos credopay new/app/src/main/res/drawable",
-    "last_opened_file_path": "/home/waleed/AndroidStudioProjects/PlayPlexpos credopay new/app/src/main/res/drawable",
+    "last_opened_file_path": "/home/waleed/Downloads/PlayPlex_APPSorceCode (1)/PlayPlexpos credopay new",
     "memory.settings.postsync.last.time.stamp": "1693658753088",
     "project.structure.last.edited": "SDK Location",
     "project.structure.proportion": "0.17",
@@ -116,6 +127,9 @@
       <recent name="C:\ofc satmat\payplex credopay\PlayPlexpos credopay new\app\src\main\res\drawable-v24" />
       <recent name="C:\ofc satmat\payplex credopay\PlayPlexpos credopay new\app\src\main\res\layout" />
     </key>
+    <key name="android.template.-435427441">
+      <recent name="com.playplexmatm.activity.fragments.bills" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/java/com/playplexmatm/extentions" />
     </key>
@@ -128,6 +142,9 @@
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.playplexmatm.adapter.bills" />
       <recent name="com.playplexmatm.model.bills" />
+    </key>
+    <key name="android.template.-1010156268">
+      <recent name="com.playplexmatm.activity.fragments.bills" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.playplexmatm.activity.User" />
@@ -262,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693369361172</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="UI changes">
+      <created>1694964613019</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1694964613019</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -273,7 +297,8 @@
     <MESSAGE value="sale module done" />
     <MESSAGE value="payment sdk implemented on sale and payment" />
     <MESSAGE value="App UI changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="App UI changed" />
+    <MESSAGE value="UI changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -320,17 +345,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/AccountFragment.kt</url>
-          <line>106</line>
+          <line>110</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/AccountFragment.kt</url>
-          <line>105</line>
+          <line>109</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/playplexmatm/activity/fragments/AccountFragment.kt</url>
-          <line>107</line>
+          <line>111</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>

@@ -30,7 +30,7 @@
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:drawableTint="@color/gray"
             android:fontFamily="@font/roboto_regular"
-            android:hint="Search for Sale"
+            android:hint="Search for Ledger"
             android:imeOptions="actionNone"
             android:inputType="textPersonName"
             android:paddingStart="@dimen/_10sdp"

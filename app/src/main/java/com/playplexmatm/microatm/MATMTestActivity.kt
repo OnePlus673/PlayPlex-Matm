@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
@@ -20,8 +19,9 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.playplexmatm.R
-import com.playplexmatm.activity.fragments.HomeFragment.Companion.m_id
-import com.playplexmatm.activity.fragments.HomeFragment.Companion.t_id
+import com.playplexmatm.activity.fragments.billsfragments.LedgerFragment
+import com.playplexmatm.activity.fragments.billsfragments.PaymentFragment
+import com.playplexmatm.activity.fragments.billsfragments.SaleFragment
 import com.playplexmatm.aeps.model.UserModel
 import com.playplexmatm.aeps.network_calls.AppApiCalls
 import com.playplexmatm.databinding.ActivityMatmtestBinding
@@ -32,30 +32,19 @@ import com.playplexmatm.util.hideKeyboard
 import com.playplexmatm.util.toast
 import com.squareup.picasso.Picasso
 import `in`.credopay.payment.sdk.CredopayPaymentConstants
-import `in`.credopay.payment.sdk.HomeFragment
 import `in`.credopay.payment.sdk.PaymentActivity
 import `in`.credopay.payment.sdk.PaymentManager
 import `in`.credopay.payment.sdk.Utils
-import kotlinx.android.synthetic.main.activity_balance_check_response.view.tvTerminalID
-//import kotlinx.android.synthetic.main.activity_matmtest.btnOnboardMerchant
-//import kotlinx.android.synthetic.main.activity_matmtest.ivLogout
-//import kotlinx.android.synthetic.main.activity_matmtest.llAEPS
-//import kotlinx.android.synthetic.main.activity_matmtest.llMicroAtm
-//import kotlinx.android.synthetic.main.activity_matmtest.llPOS
-//import kotlinx.android.synthetic.main.activity_matmtest.progress_bar
-//import kotlinx.android.synthetic.main.activity_matmtest.rl_aeps
-//import kotlinx.android.synthetic.main.activity_matmtest.rl_microatm
-//import kotlinx.android.synthetic.main.activity_matmtest.rl_pos
 import kotlinx.android.synthetic.main.layout_dialog_confirmpin.etPin
 import kotlinx.android.synthetic.main.layout_dialog_confirmpin.tvConfirmPin
 import kotlinx.android.synthetic.main.layout_dialog_confirmpin.tvDialogCancel
 import kotlinx.android.synthetic.main.navigation_drawer_new.view.account
-import kotlinx.android.synthetic.main.navigation_drawer_new.view.bills
+import kotlinx.android.synthetic.main.navigation_drawer_new.view.ledger
 import kotlinx.android.synthetic.main.navigation_drawer_new.view.logout
-import kotlinx.android.synthetic.main.navigation_drawer_new.view.merchantId
+import kotlinx.android.synthetic.main.navigation_drawer_new.view.paymentEntry
 import kotlinx.android.synthetic.main.navigation_drawer_new.view.payments
 import kotlinx.android.synthetic.main.navigation_drawer_new.view.report
-import kotlinx.android.synthetic.main.navigation_drawer_new.view.terminalId
+import kotlinx.android.synthetic.main.navigation_drawer_new.view.saleInvoice
 import org.json.JSONObject
 
 
@@ -205,11 +194,27 @@ class MATMTestActivity : AppCompatActivity(), AppApiCalls.OnAPICallCompleteListe
                 .commit()
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        binding.navDrawerLayout.bills.setOnClickListener {
-            binding.screenTitle.text = "Bills"
-            val fragmentBills = com.playplexmatm.activity.fragments.BillsFragment()
+        binding.navDrawerLayout.saleInvoice.setOnClickListener {
+            binding.screenTitle.text = "Sale Invoice"
+            val fragmentSales = SaleFragment()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.contentFrame, fragmentBills)
+                .replace(R.id.contentFrame, fragmentSales)
+                .commit()
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        binding.navDrawerLayout.paymentEntry.setOnClickListener {
+            binding.screenTitle.text = "Payment in"
+            val fragmentPayment = PaymentFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFrame, fragmentPayment)
+                .commit()
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        binding.navDrawerLayout.ledger.setOnClickListener {
+            binding.screenTitle.text = "Ledger"
+            val fragmentLedger = LedgerFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFrame, fragmentLedger)
                 .commit()
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         }

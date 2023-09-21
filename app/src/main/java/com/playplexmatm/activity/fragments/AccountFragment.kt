@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.playplexmatm.R
 import com.playplexmatm.activity.User.SupportActivity
+import com.playplexmatm.activity.fragments.bills.BusinessProfileActivity
 import com.playplexmatm.aeps.network_calls.AppApiCalls
 import com.playplexmatm.microatm.MATMTestActivity
 import com.playplexmatm.util.AppCommonMethods
@@ -99,6 +100,9 @@ class AccountFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener {
         root.rl_get_support.setOnClickListener {
             val intent = Intent(requireContext(), SupportActivity::class.java)
             startActivity(intent)
+        }
+        root.rl_businessProfile.setOnClickListener {
+            startActivity(Intent(requireContext(),BusinessProfileActivity::class.java))
         }
 
         root.rl_forgotpin.setOnClickListener {

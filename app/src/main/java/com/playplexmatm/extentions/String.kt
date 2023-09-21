@@ -21,3 +21,9 @@ fun String.extractString(): String {
 
     return matchResult?.groupValues?.get(1) ?: ""
 }
+
+fun getCurrentDateFormatted(): String {
+    val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+    val currentDate = Date()
+    return dateFormat.format(currentDate)
+}

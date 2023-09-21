@@ -168,7 +168,7 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:background="#FFFFFF"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
 
                         <RelativeLayout
@@ -206,7 +206,6 @@
                             android:id="@+id/divider1"
                             android:layout_width="@dimen/_1sdp"
                             android:layout_height="@dimen/_50sdp"
-
                             android:layout_gravity="center_vertical"
                             android:background="#575757" />
 
@@ -273,6 +272,43 @@
                                 android:gravity="center"
                                 android:padding="@dimen/_1sdp"
                                 android:text="@string/forgot_pin"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+                        </RelativeLayout>
+                        <View
+                            android:id="@+id/divider4"
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="#575757" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_businessProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/ivBusinessProfile"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_circle_landline"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/ic_person"
+                                app:tint="@color/white" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_below="@+id/ivBusinessProfile"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:text="@string/business_profile"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12sdp" />

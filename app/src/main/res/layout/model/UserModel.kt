@@ -19,6 +19,10 @@ data class UserModel(
     val pan_service: String,
     val motor_service: String,
     val T_ID: String,
-    val M_ID: String
+    val M_ID: String,
+    val aeps_bankIfscCode: String,
+    val aeps_AccountNumber: String,
+    val aeps_bankName: String,
+    val aeps_bankAccountName: String,
 
 )

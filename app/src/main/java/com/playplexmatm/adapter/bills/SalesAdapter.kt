@@ -30,7 +30,7 @@ class SalesAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         return when (viewIndex) {
             0 -> {
-                (holder as SalesViewHolder).onBind(data[position])
+                (holder as SalesViewHolder).onBind(context,data[position])
             }
             1 -> {
                 (holder as LedgerViewHolder).onBind(data[position])

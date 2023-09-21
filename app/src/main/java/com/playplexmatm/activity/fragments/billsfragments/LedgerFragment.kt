@@ -72,7 +72,6 @@ class LedgerFragment : Fragment(), CustomerClick {
         progress.beVisible()
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
-
         if (currentUser != null) {
             val userId = currentUser.uid
             val database: FirebaseDatabase = FirebaseDatabase.getInstance()

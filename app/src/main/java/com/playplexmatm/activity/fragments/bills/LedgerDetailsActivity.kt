@@ -1,11 +1,14 @@
 package com.playplexmatm.activity.fragments.bills
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -14,6 +17,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.playplexmatm.R
+import com.playplexmatm.activity.fragments.ReportsFragment
+import com.playplexmatm.activity.fragments.billsfragments.PaymentFragment
+import com.playplexmatm.activity.fragments.billsfragments.SaleFragment
 import com.playplexmatm.adapter.bills.SalesAdapter
 import com.playplexmatm.databinding.ActivityLedgerDetailsBinding
 import com.playplexmatm.extentions.CUSTOMER_BALANCE
@@ -22,12 +28,15 @@ import com.playplexmatm.extentions.beGone
 import com.playplexmatm.extentions.beVisible
 import com.playplexmatm.extentions.extractNumber
 import com.playplexmatm.extentions.extractString
+import com.playplexmatm.model.bills.BusinessProfile
 import com.playplexmatm.model.bills.SaleBillRecord
+import com.playplexmatm.util.toast
 
 class LedgerDetailsActivity : AppCompatActivity() {
     lateinit var binding: ActivityLedgerDetailsBinding
     private val ledgerRecords: MutableList<SaleBillRecord> = mutableListOf()
     lateinit var salesAdapter: SalesAdapter
+    var paymentToRemind = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ledger_details)
@@ -79,6 +88,7 @@ class LedgerDetailsActivity : AppCompatActivity() {
     private fun setUpViews() {
         binding.tvTitle.text = intent.getStringExtra(CUSTOMER_NAME)
         binding.getTv.text = "You will ${intent.getStringExtra(CUSTOMER_BALANCE)?.extractString()}"
+        paymentToRemind = intent.getStringExtra(CUSTOMER_BALANCE).toString()
         binding.customerBalance.text =
             "₹${intent.getStringExtra(CUSTOMER_BALANCE)?.extractNumber()}"
         if (intent.getStringExtra(CUSTOMER_BALANCE)?.startsWith("get") == true) {
@@ -89,5 +99,36 @@ class LedgerDetailsActivity : AppCompatActivity() {
             binding.customerBalance.setTextColor(Color.GRAY)
         }
         binding.ivBack.setOnClickListener { finish() }
+        binding.saleContainer.setOnClickListener {
+            val saleFragment = SaleFragment()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, saleFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        binding.paymentContainer.setOnClickListener {
+            val paymentFragment = PaymentFragment()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, paymentFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        binding.reportContainer.setOnClickListener {
+            val reportFragment = ReportsFragment()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, reportFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        binding.reminderContainer.setOnClickListener {
+            val intent = Intent(this, PaymentReminderActivity::class.java)
+            intent.putExtra("paymentToRemind",paymentToRemind)
+            startActivity(intent)
+            finish()
+        }
     }
+
 }
