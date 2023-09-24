@@ -133,7 +133,9 @@ class PayoutActivity : AppCompatActivity(),AppApiCalls.OnAPICallCompleteListener
                 binding.tvIFSCRv.setText(userModel.aeps_bankIfscCode)
 
                 binding.tvAccounNumberRv.setText(userModel.aeps_AccountNumber)
-
+                if (intent.getBooleanExtra("isAllPayout", false)) {
+                    intent.getStringExtra("amountToPayout")?.let { getCharge(it) }
+                }
 
             } else {
                 if (messageCode.equals(getString(R.string.error_expired_token))) {
@@ -153,7 +155,18 @@ class PayoutActivity : AppCompatActivity(),AppApiCalls.OnAPICallCompleteListener
             if (status.contains("true")) {
                 binding.progressBar.visibility = View.INVISIBLE
                 charge = jsonObject.getString("result")
-                showConfirmPaymentDialogPaytm()
+                if (intent.getBooleanExtra("isAllPayout",false)) {
+                    intent.getStringExtra("amountToPayout")?.let {
+                        aepsPayout(
+                            userModel.cus_id, tvBankNameRv.text.toString(),
+                            etAmount.text.toString(), tvIFSCRv.text.toString(),
+                            tvAccounHolderNameRv.text.toString(), it,
+                            charge, "payoutToBank"
+                        )
+                    }
+                } else {
+                    showConfirmPaymentDialogPaytm()
+                }
 
             } else {
                 binding.progressBar.visibility = View.INVISIBLE

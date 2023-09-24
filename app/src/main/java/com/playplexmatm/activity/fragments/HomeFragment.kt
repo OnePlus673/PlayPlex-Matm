@@ -7,6 +7,8 @@ import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.text.TextUtils
 import android.util.Log
@@ -103,6 +105,11 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
     lateinit var optionList: ArrayList<OptionModel>
     lateinit var paymentAdapter: PaymentOptionsAdapter
 
+    val MORNING_START_HOUR = 9
+    val MORNING_END_HOUR = 12
+    val EVENING_START_HOUR = 18
+    val EVENING_END_HOUR = 22
+
     companion object {
         var email = ""
         var password = ""
@@ -187,6 +194,14 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
         return root
     }
 
+    private fun shouldCallLoginFunction(): Boolean {
+        val currentTime = Calendar.getInstance()
+        val hourOfDay = currentTime.get(Calendar.HOUR_OF_DAY)
+
+        return (hourOfDay in MORNING_START_HOUR..MORNING_END_HOUR) ||
+                (hourOfDay in EVENING_START_HOUR..EVENING_END_HOUR)
+    }
+
     private fun initViews() {
         root.payoutContainer.setOnClickListener {
             val intent = Intent(requireContext(), PayoutActivity::class.java)
@@ -247,6 +262,7 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
                     getCurn()
                 )
             }
+
             2 -> transactionType = CredopayPaymentConstants.AEPS_CASH_WITHDRAWAL
             3 -> {
                 gotoSdk(
@@ -257,6 +273,7 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
                     getCurn()
                 )
             }
+
             4 -> transactionType = CredopayPaymentConstants.PURCHASE
             5 -> transactionType = CredopayPaymentConstants.VOID
             6 -> transactionType = CredopayPaymentConstants.CASH_AT_POS
@@ -658,7 +675,14 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
 //                root.progress_bar.visibility = View.GONE
 //                root.tvWalletBalance.text =
 //                "${getString(R.string.Rupee)} ${jsonObject.getString("AEPSBalance")}"
-                root.walletBalance.text="${getString(R.string.Rupee)} ${jsonObject.getString("AEPSBalance")}"
+                root.walletBalance.text =
+                    "${getString(R.string.Rupee)} ${jsonObject.getString("AEPSBalance")}"
+                if (shouldCallLoginFunction() && jsonObject.getString("AEPSBalance").substringBeforeLast(".").replace(",", "").toInt() > 0) {
+                    val intent = Intent(requireContext(), PayoutActivity::class.java)
+                    intent.putExtra("isAllPayout", true)
+                    intent.putExtra("amountToPayout", jsonObject.getString("AEPSBalance").substringBeforeLast(".").replace(",", ""))
+                    startActivity(intent)
+                }
 //                root.todaySale.text="${getString(R.string.Rupee)} ${jsonObject.getString("todaySales")}"
 //                root.tvTodaySale.text =
 //                    "${getString(R.string.Rupee)} ${jsonObject.getString("todaySales")}"
