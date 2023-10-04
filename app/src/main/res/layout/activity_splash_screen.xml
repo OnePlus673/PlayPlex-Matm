@@ -14,7 +14,7 @@
         android:layout_height="@dimen/_300sdp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:background="@drawable/splashlogo"
+        android:background="@drawable/logo_tp"
         android:contentDescription="@string/app_name"
         android:scaleType="fitCenter" />
 

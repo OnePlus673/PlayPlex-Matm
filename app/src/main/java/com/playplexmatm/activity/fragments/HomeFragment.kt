@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -101,6 +102,7 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
     lateinit var paymentRV: RecyclerView
     lateinit var enterAmount: EditText
     lateinit var submitAmount: Button
+    lateinit var mainLoading: RelativeLayout
     var transactionType: Int = 5
     lateinit var optionList: ArrayList<OptionModel>
     lateinit var paymentAdapter: PaymentOptionsAdapter
@@ -210,6 +212,7 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
         paymentRV = root.findViewById(R.id.paymentRV)
         enterAmount = root.findViewById(R.id.enterAmount)
         submitAmount = root.findViewById(R.id.submit)
+        mainLoading = root.findViewById(R.id.mainLoading)
         enterAmount.requestFocus()
         optionList = arrayListOf(
             OptionModel(R.drawable.ic_cash_withdrawal, "Cash Withdrawal", true),
@@ -677,6 +680,7 @@ class HomeFragment : Fragment(), AppApiCalls.OnAPICallCompleteListener,
 //                "${getString(R.string.Rupee)} ${jsonObject.getString("AEPSBalance")}"
                 root.walletBalance.text =
                     "${getString(R.string.Rupee)} ${jsonObject.getString("AEPSBalance")}"
+                mainLoading.visibility = View.GONE
                 if (shouldCallLoginFunction() && jsonObject.getString("AEPSBalance").substringBeforeLast(".").replace(",", "").toInt() > 0) {
                     val intent = Intent(requireContext(), PayoutActivity::class.java)
                     intent.putExtra("isAllPayout", true)

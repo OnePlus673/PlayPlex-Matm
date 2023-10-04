@@ -37,7 +37,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_height="@dimen/_130sdp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/logo_tp" />
             </LinearLayout>
